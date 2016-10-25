@@ -41,4 +41,4 @@ autoload -U compinit && compinit
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 # Only load Liquid Prompt in interactive shells, not from a script or from scp
-[[ $- = *i* ]] && source /usr/local/share/liquidprompt
+[[ $- = *i* ]] && source ~/src/github.com/nojhan/liquidprompt/liquidprompt
