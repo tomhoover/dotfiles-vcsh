@@ -2,7 +2,7 @@
 
 # keychain
 [ -z "$HOSTNAME" ] && HOSTNAME=`uname -n`
-. $HOME/.keychain/$HOSTNAME-sh
+[ -r $HOME/.keychain/$HOSTNAME-sh ] && . $HOME/.keychain/$HOSTNAME-sh
 
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
