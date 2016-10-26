@@ -2,7 +2,7 @@
 
 path=(/usr/local/bin $path)
 # start ssh-agent & load key
-eval `keychain --eval id_rsa`
+[ `which keychain`  ] && eval `keychain --eval id_rsa`
 
 typeset -U path
 path=(/usr/local/sbin $path ~/bin)
