@@ -22,4 +22,4 @@
 #fi
 
 # start ssh-agent & load key
-[ `which keychain`  ] && eval `keychain --eval id_rsa`
+[ `which keychain` ] && eval `keychain --eval id_rsa`
