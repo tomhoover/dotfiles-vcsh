@@ -27,13 +27,13 @@ fi
 alias l="ls -F ${colorflag}"
 
 # List all files colorized, including dot files
-alias la="ls -aF ${colorflag}"
+alias la="ls -AF ${colorflag}"
 
 # List all files colorized in long format
 alias ll="ls -lF ${colorflag}"
 
 # List all files colorized in long format, including dot files
-alias lla="ls -laF ${colorflag}"
+alias lla="ls -lAF ${colorflag}"
 
 # Always use color output for `ls`
 alias ls="command ls ${colorflag}"
