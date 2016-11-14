@@ -47,3 +47,11 @@ if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -
 
 # Only load Liquid Prompt in interactive shells, not from a script or from scp
 [[ $- = *i* ]] && source ~/src/github.com/nojhan/liquidprompt/liquidprompt
+
+# https://github.com/seebi/dircolors-solarized (so solarized colors are used when accessing machine with iTerm2/ssh)
+#eval `dircolors $HOME/src/github.com/seebi/dircolors-solarized/dircolors.ansi-universal`
+if [ -x /usr/bin/dircolors ]; then test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"; fi
+
+# Solarized colorscheme for macOS `ls` environment variable:
+# https://github.com/seebi/dircolors-solarized/issues/10
+export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
