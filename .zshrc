@@ -1,4 +1,5 @@
 #echo "zshrc"
+[ -r ~/.config/dotfiles/OMZ.zshrc ] && . ~/.config/dotfiles/OMZ.zshrc
 
 # keychain
 [ -z "$HOSTNAME" ] && HOSTNAME=`uname -n`
@@ -20,7 +21,6 @@ for file in ~/.config/dotfiles/`hostname -s`.{path,bash_prompt,exports,aliases,f
 done;
 unset file;
 
-[ -r ~/.config/dotfiles/OMZ.zshrc ] && . ~/.config/dotfiles/OMZ.zshrc
 [ -r ~/.config/dotfiles/`uname`.zshrc ] && . ~/.config/dotfiles/`uname`.zshrc
 [ -r ~/.config/dotfiles/`hostname -s`.zshrc ] && . ~/.config/dotfiles/`hostname -s`.zshrc
 
