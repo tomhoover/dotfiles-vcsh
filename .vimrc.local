@@ -24,3 +24,7 @@ let g:syntastic_style_warning_symbol = '∆≈'
 
 " correct 'crontab: temp file must be edited in place' error
 autocmd filetype crontab setlocal nobackup nowritebackup
+
+" set solarized colors
+let g:solarized_termcolors=16
+color solarized
