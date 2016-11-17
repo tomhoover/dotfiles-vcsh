@@ -28,3 +28,6 @@ autocmd filetype crontab setlocal nobackup nowritebackup
 " set solarized colors
 let g:solarized_termcolors=16
 color solarized
+
+" tabs (rather than spaces) must be used to prefix commands in Makefiles
+autocmd FileType make setlocal noexpandtab
