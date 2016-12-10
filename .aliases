@@ -140,9 +140,6 @@ dclean() { docker rmi -f $(docker images | grep $1 | awk '{print $3}'); }
 # docker volume rm $(docker volume ls -qf dangling=true)
 #
 
-# rename branches created by github/hub to match normal branch name convention
-alias hub_rename='git remote rename origin upstream && git remote rename tomhoover origin'
-
 alias vim_bundle_update='vim +BundleInstall! +BundleClean +q'
 
 # SSH-Agent forwarding breaks when screen is re-attached on a different host
