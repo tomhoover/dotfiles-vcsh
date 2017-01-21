@@ -22,4 +22,4 @@
 #fi
 
 # start ssh-agent & load key
-[ `which keychain 2>/dev/null` ] && eval `keychain --eval id_rsa github_rsa`
+[ `which keychain 2>/dev/null` ] && eval `keychain --quick --quiet --ignore-missing --eval id_rsa github_rsa`
