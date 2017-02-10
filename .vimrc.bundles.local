@@ -6,3 +6,5 @@
 "   [neocomplete] You should disable it or install FastFold plugin.
 " Recommended fix from https://github.com/spf13/spf13-vim/issues/924#issuecomment-222307744
 Bundle 'Konfekt/FastFold'
+
+UnBundle 'amirh/HTML-AutoCloseTag'
