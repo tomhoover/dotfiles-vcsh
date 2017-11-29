@@ -144,7 +144,7 @@ alias vim_bundle_update='vim +BundleInstall! +BundleClean +q'
 
 # SSH-Agent forwarding breaks when screen is re-attached on a different host
 # http://www.deadman.org/sshscreen.html
-alias Attach='grabssh ; screen -d -R'
+alias Attach='grabssh ; screen -d -R -h 5000'
 alias fixssh='source $HOME/bin/fixssh'
 
 ### macOS only aliases
