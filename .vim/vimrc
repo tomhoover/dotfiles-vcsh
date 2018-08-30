@@ -1,63 +1,16 @@
-" The following default .vimrc was built using:
-" https://arp242.net/my-first-vimrc/
-"
-" Vim defaults rather than vi ones. Keep at top.  Ensure that Vim won't try
-" to be compatible with the now-archaic 1970s vi. It influences a lot of Vim
-" behaviour.
-"
-" This is not strictly required when loading from ~/.vimrc or ~/.vim/vimrc – as
-" Vim will automatically set it when loading from those files – but it's not set
-" automatically when loaded as vim -u test.vim or :source test.vim.
-"
-" Most people won't load it like that, but a single line is easy enough to add
-" and will avoid *very* confusing errors down the line.
-"
-" You *must* keep this at the top, since changing the value resets many options.
-" See 'nocompatible'.
 set nocompatible
-
-" Enable filetype-specific settings.  Vim ships with support for many
-" languages, which is known as a 'filetype' in Vim jargon. A 'filetype' usually
-" comes with a syntax file to control the syntax highlighting, but may also come
-" with specific rules for indentation and may set settings specific for this
-" 'filetype'.
-"
-" The default is to *not* use any of this though. This will enable detection of
-" the filetype, which is usually done based on the filename's extension or the
-" first line, and can be manually overridden with a 'modeline'.
-"
-" You almost certainly want to keep this.
+set autoindent
 filetype plugin indent on
 
-" Enable syntax highlighting.  Enable syntax highlighting for this
-" 'filetype'. This will implicitly enable 'filetype' detection ("filetype on").
-"
-" You almost certainly want to keep this.
 syntax on
+set background=dark
+colorscheme solarized
 
 " Make the backspace behave as most applications. 
 " Vim's default behaviour when pressing the backspacing is somewhat peculiar, it
 " won’t allow you to backspace to the previous line, automatically inserted
 " indentation, or previously inserted text.
-"
-" With this value you will be able to to backspace over everything in insert
-" mode, which is how almost any other application behaves.
-"
-" Also see "Why doesn't the backspace key work in insert mode?":
-" https://vi.stackexchange.com/q/2162/51.
 set backspace=2
-
-" Use current indent for new lines.  By default Vim will always place the
-" cursor in the first column when starting a new line. When 'autoindent' is
-" enabled it will use the same indentation as the previous line, which is often
-" what you want.
-"
-" Note that there are more options to control indentation: 'cindent' and
-" 'smartindent'. You usually want to leave those alone as they *will* cause
-" confusing behaviour in many programming languages. A 'filetype' that benefits
-" from these will usually set one of those options, or use a custom
-" 'indentexpr'.
-set autoindent
 
 " Show as much of the line as will fit.  By default Vim will display only
 " "@" characters if the last line on the screen won't fit when 'wrap' is
@@ -78,7 +31,6 @@ set display=lastline
 " 'wildignore' is also a useful setting to ignore binary files such as compiler
 " output, images, etc.
 set wildmenu
-
 set wildmode=list:longest  " List all matches and complete to the longest match.
 
 " Show (partial) command in bottom-right.  Vim had many commands that
@@ -88,28 +40,9 @@ set wildmode=list:longest  " List all matches and complete to the longest match.
 " It will also show the size of the selection in |visual-mode|.
 set showcmd
 
-" Use spaces instead of tabs for indentation.  Vim will insert ‘real’ tabs
-" by default. Setting this will make it insert spaces.
-"
-" Note that some 'filetype's may set this option to match that filetype's
-" standard. See :verbose set filetype to see where it was last set. You can use
-" an 'autocmd' to override the 'filetype' settings.
-set expandtab
-
 " Backspace removes 'shiftwidth' worth of spaces.  Remove 'shiftwidth' worth
 " of spaces on backspace – like most editors – instead of just a single space.
 set smarttab
-
-" Show line numbers.  Vim won't directly show line numbers by default. This
-" will enable a column with line numbers on the left-hand side of the screen.
-"
-" You can also show the current line number in the 'statusline' by setting
-" 'ruler', or pressing |CTRL-G| or |g_CTRL-G|.
-"
-" Also see 'relativenumber' for showing line numbers as relative to the current
-" line, 'numberwidth' for controlling the width, and |hl-LineNr| for controlling
-" the colours.
-set number
 
 " Wrap long lines.  When long lines are *not* wrapped Vim will hide any text
 " that's larger than the screen and scroll horizontally.
@@ -166,7 +99,6 @@ set hlsearch
 " Searching with / is case-insensitive.  Case-insensitive searching unless
 " the pattern contains an upper case letter or if |/\C| is in the pattern.
 set ignorecase
-
 set smartcase              " Disable 'ignorecase' if the term contains upper-case.
 
 " Remove octal support from 'nrformats'.  This controls how Vim should
@@ -174,6 +106,8 @@ set smartcase              " Disable 'ignorecase' if the term contains upper-cas
 " a number. By default numbers starting with a 0 are treated as octal numbers,
 " which can be rather confusing, so remove that.
 set nrformats-=octal
+
+set expandtab
 
 " Size of a Tab character.  Number of spaces to display tab characters as.
 set tabstop=4
@@ -201,11 +135,6 @@ set scrolloff=5
 " j – Remove comment character when joining lines with |J|.
 set formatoptions+=ncroqlj
 
-" Store temporary files in ~/.vim/tmp  By default Vim will store various
-" files in the current directory. These files are useful, but storing them in
-" the current directory next to the original file usually isn’t.
-"
-" With this enabled Vim will store all these files in the user’s home directory.
 set viminfo+=n~/.vim/tmp/viminfo
 set backupdir=$HOME/.vim/tmp/backup
 set dir=$HOME/.vim/tmp/swap
@@ -300,3 +229,4 @@ augroup numbertoggle
   autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 augroup END
+
