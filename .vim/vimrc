@@ -292,3 +292,11 @@ autocmd Filetype javascript setlocal shiftwidth=2
 " If you don't want to specify by file type you can also specify the filename (or a glob to match filenames).
 " autocmd BufNewFile,BufRead rsnapshot.conf setlocal noexpandtab
 
+" https://jeffkreeftmeijer.com/vim-number/
+set number relativenumber
+
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+augroup END
