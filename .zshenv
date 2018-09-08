@@ -2,7 +2,7 @@
 
 path=(/usr/local/bin $path)
 # start ssh-agent & load key
-[ `which keychain 2>/dev/null` ] && eval `keychain --quiet --ignore-missing --eval id_rsa github_rsa`
+type keychain &>/dev/null && eval `keychain --quiet --ignore-missing --eval id_rsa github_rsa`
 
 typeset -U path
 path=(/usr/local/sbin $path ~/bin ~/.local/bin)
