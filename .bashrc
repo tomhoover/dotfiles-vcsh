@@ -46,3 +46,7 @@ if [ -x /usr/bin/dircolors ]; then test -r ~/.dircolors && eval "$(dircolors -b 
 # Solarized colorscheme for macOS `ls` environment variable:
 # https://github.com/seebi/dircolors-solarized/issues/10
 export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
+
+# enable bash-completion to work with git aliases
+# https://stackoverflow.com/questions/342969/how-do-i-get-bash-completion-to-work-with-aliases
+__git_complete g __git_main
