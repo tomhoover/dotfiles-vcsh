@@ -30,3 +30,6 @@ export GPG_TTY
 
 # for brew bump-formula-pr
 export HOMEBREW_DEVELOPER=1
+
+# restic
+export RESTIC_REPOSITORY=sftp:restic.drobo:restic
