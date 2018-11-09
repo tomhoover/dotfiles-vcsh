@@ -139,14 +139,16 @@ dclean() { docker rmi -f $(docker images | grep $1 | awk '{print $3}'); }
 # To remove dangling volumes only
 # docker volume rm $(docker volume ls -qf dangling=true)
 #
-### docker-compose
-#alias dcp='docker-compose -f /opt/docker-compose.yml '
-#alias dcpull='docker-compose -f /opt/docker-compose.yml pull --parallel'
-#alias dclogs='docker-compose -f /opt/docker-compose.yml logs -tf --tail="50" '
-#alias dtail='docker logs -tf --tail="50" "$@"'
-alias dcpull='docker-compose pull --parallel'
-alias dclogs='docker-compose logs -tf --tail="50" '
 alias dtail='docker logs -tf --tail="50" "$@"'
+
+### docker-compose aliases from https://gist.github.com/IronicBadger/362c408d1f2c27a0503cb9252b508140
+alias dcp='docker-compose -f /opt/docker-compose.yml '
+alias dcpull='docker-compose -f /opt/docker-compose.yml pull --parallel'
+alias dclogs='docker-compose -f /opt/docker-compose.yml logs -tf --tail="50" '
+
+### other misc aliases from https://gist.github.com/IronicBadger/362c408d1f2c27a0503cb9252b508140
+alias df='df -h -x aufs -x tmpfs -x udev'
+alias editle='sudo vi /opt/appdata/letsencrypt/nginx/site-confs/default'
 
 alias vim_bundle_update='vim +BundleInstall! +BundleClean +q'
 
