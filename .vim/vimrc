@@ -234,3 +234,6 @@ augroup END
 nnoremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
 set showmode
+
+" http://vim.wikia.com/wiki/Modeline_magic
+set modeline
