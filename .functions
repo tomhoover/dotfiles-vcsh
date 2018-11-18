@@ -244,3 +244,14 @@ function o() {
 function tre() {
 	tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX;
 }
+
+# add line numbers when when grep is the only command on the line;
+# otherwise, omit them when piping thru grep
+# https://unix.stackexchange.com/questions/25546/grep-alias-line-numbers-unless-its-in-a-pipeline/25549#25549
+grep() { 
+    if [ -t 1 ] && [ -t 0 ]; then 
+        command grep -n "$@"
+    else 
+        command grep "$@"
+    fi
+}
