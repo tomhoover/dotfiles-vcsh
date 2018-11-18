@@ -141,14 +141,9 @@ dclean() { docker rmi -f $(docker images | grep $1 | awk '{print $3}'); }
 #
 alias dtail='docker logs -tf --tail="50" "$@"'
 
-### docker-compose aliases from https://gist.github.com/IronicBadger/362c408d1f2c27a0503cb9252b508140
-alias dcp='docker-compose -f /opt/docker-compose.yml '
-alias dcpull='docker-compose -f /opt/docker-compose.yml pull --parallel'
-alias dclogs='docker-compose -f /opt/docker-compose.yml logs -tf --tail="50" '
-
 ### other misc aliases from https://gist.github.com/IronicBadger/362c408d1f2c27a0503cb9252b508140
-alias df='df -h -x aufs -x tmpfs -x udev'
-alias editle='sudo vi /opt/appdata/letsencrypt/nginx/site-confs/default'
+#alias df='df -h -x aufs -x tmpfs -x udev'
+#alias editle='sudo vi /mnt/cache/appdata/letsencrypt/nginx/site-confs/default'
 
 alias vim_bundle_update='vim +BundleInstall! +BundleClean +q'
 
@@ -156,6 +151,15 @@ alias vim_bundle_update='vim +BundleInstall! +BundleClean +q'
 # http://www.deadman.org/sshscreen.html
 alias Attach='grabssh ; screen -d -R -h 5000'
 alias fixssh='source $HOME/bin/fixssh'
+
+### unraid only aliases
+if [ `hostname` = unraid ] ; then
+    ### docker-compose aliases from https://gist.github.com/IronicBadger/362c408d1f2c27a0503cb9252b508140
+    alias dc='docker-compose -f /mnt/cache/appdata/docker-compose-unraid/docker-compose.yml '
+    # alias dcpull='docker-compose -f /mnt/cache/appdata/docker-compose-unraid/docker-compose.yml pull --parallel'
+    alias dclogs='docker-compose -f /mnt/cache/appdata/docker-compose-unraid/docker-compose.yml logs -tf --tail="50" '
+
+fi
 
 ### macOS only aliases
 if [ `uname` = Darwin ] ; then
