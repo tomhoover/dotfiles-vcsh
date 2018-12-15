@@ -145,6 +145,11 @@ alias dtail='docker logs -tf --tail="50" "$@"'
 #alias df='df -h -x aufs -x tmpfs -x udev'
 #alias editle='sudo vi /mnt/cache/appdata/letsencrypt/nginx/site-confs/default'
 
+# https://www.tecmint.com/ctop-monitor-docker-containers/
+alias ctop='docker run --rm -ti --name=ctop -v /var/run/docker.sock:/var/run/docker.sock quay.io/vektorlab/ctop:latest'
+# https://github.com/wagoodman/dive
+alias dive='docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock  -v $(which docker):/bin/docker wagoodman/dive:latest'
+
 alias vim_bundle_update='vim +BundleInstall! +BundleClean +q'
 
 # SSH-Agent forwarding breaks when screen is re-attached on a different host
