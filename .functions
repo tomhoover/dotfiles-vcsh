@@ -255,3 +255,8 @@ grep() {
         command grep "$@"
     fi
 }
+
+# https://howchoo.com/g/mzm3ztdhm2u/how-to-colorize-your-logs-with-ccze
+tailc () {
+    tail $@ | ccze -A
+}
