@@ -35,7 +35,7 @@ export HOMEBREW_DEVELOPER=1
 export RESTIC_REPOSITORY=sftp:restic.drobo:restic
 
 # linuxserver.io docker containers
-export PUID=99
-export PGID=100
+export PUID=1000
+export PGID=1000
 
 export TZ="America/Chicago"
