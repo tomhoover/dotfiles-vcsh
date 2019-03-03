@@ -157,14 +157,10 @@ alias vim_bundle_update='vim +BundleInstall! +BundleClean +q'
 alias Attach='grabssh ; screen -d -R -h 5000'
 alias fixssh='source $HOME/bin/fixssh'
 
-### unraid only aliases
-if [ `hostname` = unraid ] ; then
-    ### docker-compose aliases from https://gist.github.com/IronicBadger/362c408d1f2c27a0503cb9252b508140
-    alias dc='docker-compose -f /mnt/cache/appdata/docker-compose-unraid/docker-compose.yml '
-    # alias dcpull='docker-compose -f /mnt/cache/appdata/docker-compose-unraid/docker-compose.yml pull --parallel'
-    alias dclogs='docker-compose -f /mnt/cache/appdata/docker-compose-unraid/docker-compose.yml logs -tf --tail="50" '
-
-fi
+# docker-compose aliases from https://gist.github.com/IronicBadger/362c408d1f2c27a0503cb9252b508140
+alias dc='docker-compose -f ~/appdata/docker-compose-`hostname`/docker-compose.yml '
+alias dcpull='docker-compose -f ~/appdata/docker-compose-`hostname`/docker-compose.yml pull --parallel'
+alias dclogs='docker-compose -f ~/appdata/docker-compose-`hostname`/docker-compose.yml logs -tf --tail="50" '
 
 ### macOS only aliases
 if [ `uname` = Darwin ] ; then
