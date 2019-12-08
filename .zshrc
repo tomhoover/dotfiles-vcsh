@@ -41,9 +41,13 @@ autoload -U compinit && compinit
 # rbenv
 if command -v rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
-# pyenv
+# pyenv: https://github.com/pyenv/pyenv
 if command -v pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+# pyenv-virtualenv: https://github.com/pyenv/pyenv-virtualenv
 if command -v pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+
+# direnv: https://direnv.net
+if command -v direnv > /dev/null; then eval "$(direnv hook zsh)"; fi
 
 # Only load Liquid Prompt in interactive shells, not from a script or from scp
 [[ $- = *i* ]] && source ~/src/github.com/nojhan/liquidprompt/liquidprompt
