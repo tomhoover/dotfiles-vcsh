@@ -62,3 +62,6 @@ export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+# fuzzy finder
+# https://github.com/junegunn/fzf
+[ -f ~/.config/dotfiles/fzf.zsh ] && source ~/.config/dotfiles/fzf.zsh

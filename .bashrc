@@ -54,3 +54,7 @@ export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
 # enable bash-completion to work with git aliases
 # https://stackoverflow.com/questions/342969/how-do-i-get-bash-completion-to-work-with-aliases
 __git_complete g __git_main
+
+# fuzzy finder
+# https://github.com/junegunn/fzf
+[ -f ~/.config/dotfiles/fzf.bash ] && source ~/.config/dotfiles/fzf.bash

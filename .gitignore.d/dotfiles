@@ -12,6 +12,8 @@
 !/.config/dotfiles/Linux.zshenv
 !/.config/dotfiles/Linux.zshrc
 !/.config/dotfiles/OMZ.zshrc
+!/.config/dotfiles/fzf.bash
+!/.config/dotfiles/fzf.zsh
 !/.config/liquidpromptrc
 !/.config/oh-my-zsh
 !/.config/oh-my-zsh/themes
