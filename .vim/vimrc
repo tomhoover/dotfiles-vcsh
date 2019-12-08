@@ -1,28 +1,20 @@
 set nocompatible
-set autoindent
-filetype plugin indent on
 
-syntax on
+""""" Plugins """""
+" https://github.com/huntie/dotfiles/blob/f8a129f8e306c853ab52234f605b1d872b0448b1/vim/.vimrc#L72-L77
+" Install and run vim-plug on first run
+if empty(glob('~/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+so ~/.vim/plugins.vim
+
+""""""""""
+
 set background=dark
 colorscheme solarized
-
-" Make the backspace behave as most applications. 
-" Vim's default behaviour when pressing the backspacing is somewhat peculiar, it
-" won’t allow you to backspace to the previous line, automatically inserted
-" indentation, or previously inserted text.
-set backspace=2
-
-" Show as much of the line as will fit.  By default Vim will display only
-" "@" characters if the last line on the screen won't fit when 'wrap' is
-" enabled.
-"
-" If this is enabled Vim will display as much as the last line as will fit and
-" display "@@@" at the end.
-"
-" There is another useful option for 'display' that I rather like: "uhex". This
-" will make Vim show unprintable characters as &lt;xx&gt; rather than ^L (Use
-" |i_CTRL-V| in insert mode to see the difference.)
-set display=lastline
 
 " Better tab completion in the commandline.  Make commandline-completion
 " (after you type :) behave more useful and roughly like most shells do.
@@ -40,10 +32,6 @@ set wildmode=list:longest  " List all matches and complete to the longest match.
 " It will also show the size of the selection in |visual-mode|.
 set showcmd
 
-" Backspace removes 'shiftwidth' worth of spaces.  Remove 'shiftwidth' worth
-" of spaces on backspace – like most editors – instead of just a single space.
-set smarttab
-
 " Wrap long lines.  When long lines are *not* wrapped Vim will hide any text
 " that's larger than the screen and scroll horizontally.
 "
@@ -57,32 +45,8 @@ set smarttab
 " nnoremap k gk nnoremap j gj nnoremap gk nnoremap gj inoremap gj inoremap gk
 set wrap
 
-" Always show the statusline.  By default Vim will show the 'statusline'
-" only if there are two or more windows.
-"
-" The statusline displays useful information about the current buffer and cursor
-" position, so it’s useful to always show it.
-"
-" Also see 'statusline' for controlling/expanding the information shown here.
-set laststatus=2
-
-" Show the ruler in the statusline.  The ruler is shown on the right side of
-" the 'statusline' and usually contains information about the current cursor
-" position and the like.
-"
-" Also see 'laststatus' to enable displaying the statusline and 'rulerformat'
-" for configuring what’s displayed here.
-set ruler
-
 " Wrap at n characters.  Automatically break lines at *n* characters.
 set textwidth=80
-
-" Jump to search match while typing.  Jump to the first match *while* typing
-" the pattern with |/|.
-"
-" The cursor will jump back to the original position when aborting (&lt;ESC&gt;
-" or |CTRL-C|).
-set incsearch
 
 " Highlight the last used search pattern.  Highlight the last used search
 " pattern.
@@ -100,12 +64,6 @@ set hlsearch
 " the pattern contains an upper case letter or if |/\C| is in the pattern.
 set ignorecase
 set smartcase              " Disable 'ignorecase' if the term contains upper-case.
-
-" Remove octal support from 'nrformats'.  This controls how Vim should
-" interpret numbers when pressing |CTRL-A| or |CTRL-X| to increment to decrement
-" a number. By default numbers starting with a 0 are treated as octal numbers,
-" which can be rather confusing, so remove that.
-set nrformats-=octal
 
 set expandtab
 
@@ -154,14 +112,6 @@ if has('persistent_undo')
 	if !isdirectory(&undodir) | call mkdir(&undodir, 'p', 0700) | endif
 endif
 
-" Load matchit.vim plugin.  The matchit.vim plugin that comes bundled with
-" Vim expands the |%| key to work with various programming language keywords
-" (e.g. jumping between if and end in Ruby).
-" Only load if the user hasn't installed a newer version.
-if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
-	runtime! macros/matchit.vim
-endif 
-
 " Indent in visual and select mode automatically re-selects.  Selecting some
 " text in |visual-mode| and then changing the indentation with |v_>| and |v_<|
 " will make Vim lose the visual selection, which is annoying if you want to
@@ -191,7 +141,7 @@ augroup end
 " in a file?": https://vi.stackexchange.com/a/454/51.
 fun! s:trim_whitespace()
 	let l:save = winsaveview()
-	%s/\s\+$//e
+	keeppatterns %s/\s\+$//e
 	call winrestview(l:save)
 endfun
 command! TrimWhitespace call s:trim_whitespace()
@@ -237,3 +187,31 @@ set showmode
 
 " http://vim.wikia.com/wiki/Modeline_magic
 set modeline
+
+" https://thoughtbot.com/blog/vim-splits-move-faster-and-more-naturally#easier-split-navigations
+" easier split navigations
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+" more natural split opening
+set splitbelow
+set splitright
+
+
+
+""""" the following options are no longer needed, as they are included by default in the tpope/vim-sensible plugin """""
+
+"filetype plugin indent on
+"syntax on
+"set autoindent
+"set backspace=2
+"set smarttab
+"set nrformats-=octal
+"set incsearch
+"set laststatus=2
+"set ruler
+"set display=lastline
+"if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
+  "runtime! macros/matchit.vim
+"endif
