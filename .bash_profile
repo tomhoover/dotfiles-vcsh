@@ -7,6 +7,6 @@ PATH=/usr/local/sbin:$PATH:$HOME/bin:$HOME/.local/bin
 [ -r ~/.config/dotfiles/`hostname -s`.bash_profile ] && . ~/.config/dotfiles/`hostname -s`.bash_profile
 #[ -r ~/.profile ] && . ~/.profile
 if [ -z "$TMUX" ]; then
-    tmux attach -t default || tmux new -s default
+    tmux new -As default
 fi
 [ -r ~/.bashrc ] && . ~/.bashrc
