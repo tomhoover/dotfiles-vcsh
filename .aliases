@@ -201,3 +201,5 @@ if [ `uname` = Darwin ] ; then
     alias stfu="osascript -e 'set volume output muted true'"
     alias pumpitup="osascript -e 'set volume 7'"
 fi
+
+alias mux='tmuxinator'
