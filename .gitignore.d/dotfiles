@@ -11,6 +11,7 @@
 !/.config/dotfiles/Linux.bashrc
 !/.config/dotfiles/Linux.zshenv
 !/.config/dotfiles/Linux.zshrc
+!/.config/dotfiles/Linux.zprofile
 !/.config/dotfiles/OMZ.zshrc
 !/.config/dotfiles/fzf.bash
 !/.config/dotfiles/fzf.zsh
