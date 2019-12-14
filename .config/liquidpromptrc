@@ -18,7 +18,7 @@ LP_BATTERY_THRESHOLD=75
 
 # Minimal value after which the load average is displayed
 # Recommended value is 60
-LP_LOAD_THRESHOLD=60
+LP_LOAD_THRESHOLD=240
 
 # Minimal value after which the temperature is displayed (in degrees Celsius)
 # Recommended value is 60
