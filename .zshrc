@@ -46,6 +46,9 @@ if command -v pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 # pyenv-virtualenv: https://github.com/pyenv/pyenv-virtualenv
 if command -v pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 
+# insert ~/bin and ~/.local/bin before rbenv/pyenv shims
+path=(~/bin ~/.local/bin $path)
+
 # direnv: https://direnv.net
 if command -v direnv > /dev/null; then eval "$(direnv hook zsh)"; fi
 
