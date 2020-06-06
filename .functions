@@ -260,3 +260,45 @@ grep() {
 tailc () {
     tail $@ | ccze -A
 }
+
+# https://www.reddit.com/r/vim/comments/8xzpkz/you_probably_dont_need_vimwiki/e27k7qv?utm_source=share&utm_medium=web2x
+# note taking function and command completion
+export note_dir="$HOME/notes/"      # trailing slash required if this is a symlink
+_n() {
+  local lis cur
+  lis=$(find "${note_dir}" -name "*.md" | \
+    sed -e "s|${note_dir}/||" | \
+    sed -e 's/\.md$//')
+  cur=${comp_words[comp_cword]}
+  compreply=( $(compgen -w "$lis" -- "$cur") )
+}
+n() {
+  : "${note_dir:?'note_dir env var not set'}"
+  if [ $# -eq 0 ]; then
+    local file
+    file=$(find "${note_dir}" -name "*.md" | \
+      sed -e "s|${note_dir}/||" | \
+      sed -e 's/\.md$//' | \
+      fzf \
+        --multi \
+        --select-1 \
+        --exit-0 \
+        --preview="cat ${note_dir}/{}.md" \
+        --preview-window=right:70%:wrap)
+    [[ -n $file ]] && \
+      ${editor:-vim} "${note_dir}/${file}.md"
+  else
+    case "$1" in
+      "-d")
+        rm "${note_dir}"/"$2".md
+        ;;
+      i)
+        cd "${note_dir}" && ${editor:-vim} index.md
+        ;;
+      *)
+        ${editor:-vim} "${note_dir}"/"$*".md
+        ;;
+    esac
+  fi
+}
+complete -f _n n
