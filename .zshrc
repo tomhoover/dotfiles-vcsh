@@ -25,7 +25,7 @@ unset file;
 [ -r ~/.config/dotfiles/`hostname -s`.zshrc ] && . ~/.config/dotfiles/`hostname -s`.zshrc
 
 #source `brew --prefix`/etc/profile.d/z.sh
-source $HOME/src/github.com/rupa/z/z.sh
+[ -r $HOME/src/github.com/rupa/z/z.sh ] && source $HOME/src/github.com/rupa/z/z.sh
 
 #source "$HOME/.homesick/repos/homeshick/homeshick.sh"
 #homeshick --quiet refresh
