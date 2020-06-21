@@ -248,7 +248,7 @@ function tre() {
 # add line numbers when when grep is the only command on the line;
 # otherwise, omit them when piping thru grep
 # https://unix.stackexchange.com/questions/25546/grep-alias-line-numbers-unless-its-in-a-pipeline/25549#25549
-grep() { 
+function grep() { 
     if [ -t 1 ] && [ -t 0 ]; then 
         command grep -n "$@"
     else 
@@ -257,7 +257,7 @@ grep() {
 }
 
 # https://howchoo.com/g/mzm3ztdhm2u/how-to-colorize-your-logs-with-ccze
-tailc () {
+function tailc() {
     tail $@ | ccze -A
 }
 
@@ -272,7 +272,7 @@ _n() {
   cur=${comp_words[comp_cword]}
   compreply=( $(compgen -w "$lis" -- "$cur") )
 }
-n() {
+function n() {
   : "${note_dir:?'note_dir env var not set'}"
   if [ $# -eq 0 ]; then
     local file
