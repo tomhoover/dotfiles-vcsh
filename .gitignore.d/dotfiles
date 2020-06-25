@@ -1,4 +1,6 @@
 *
+!/.Xmodmap
+!/.Xresources
 !/.aliases
 !/.bash_profile
 !/.bashrc
@@ -28,6 +30,7 @@
 !/.vim/colors/solarized.vim
 !/.vim/plugins.vim
 !/.vim/vimrc
+!/.xinitrc
 !/.zprofile
 !/.zshenv
 !/.zshrc
