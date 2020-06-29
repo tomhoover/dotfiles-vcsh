@@ -14,7 +14,7 @@ so ~/.vim/plugins.vim
 """"""""""
 
 set background=dark
-colorscheme solarized
+" colorscheme solarized
 
 " Better tab completion in the commandline.  Make commandline-completion
 " (after you type :) behave more useful and roughly like most shells do.
@@ -207,7 +207,7 @@ let g:netrw_winsize = 20
 " remap <esc> key
 inoremap jk <esc>
 inoremap kj <esc>
-inoremap <esc> <nop>
+" inoremap <esc> <nop>
 
 """"" the following options are no longer needed, as they are included by default in the tpope/vim-sensible plugin """""
 
