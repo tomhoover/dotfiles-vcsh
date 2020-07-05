@@ -2,6 +2,7 @@
 !/.Xmodmap
 !/.Xresources
 !/.aliases
+!/.ansible.cfg
 !/.bash_profile
 !/.bashrc
 !/.colordiffrc
