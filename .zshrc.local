@@ -371,5 +371,9 @@ if command -v direnv > /dev/null; then eval "$(direnv hook zsh)"; fi
 # insert ~/bin and ~/.local/bin before rbenv/pyenv shims
 path=(~/bin ~/.local/bin $path)
 
+# history
+HISTSIZE=100000
+SAVEHIST=1000000
+
 # Only load Liquid Prompt in interactive shells, not from a script or from scp
 [[ $- = *i* ]] && source ~/.local/share/liquidprompt
