@@ -203,5 +203,3 @@ if [ `uname` = Darwin ] ; then
 fi
 
 alias mux='tmuxinator'
-
-alias hl='cd ~/fin/hledger/hoover && ./export.sh && hledger -f all.journal -s'

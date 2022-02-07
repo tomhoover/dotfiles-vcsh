@@ -302,3 +302,10 @@ function n() {
   fi
 }
 # complete -f _n n
+
+function hl() {
+    # cd ~/fin/hledger/hoover || return
+    # ./export.sh && [ -f "$1.journal" ] && hledger -s -f "$1.journal" "${@:2}" || echo "Syntax: hl xxx[.journal] xx xx xx"
+    cd ~/fin/hledger/hoover && ./export.sh || return
+    [ -f "$1.journal" ] && hledger -s -f "$1.journal" "${@:2}" || hledger -s -f "all.journal" "${@:1}"
+}
