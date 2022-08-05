@@ -1,3 +1,4 @@
 # GRML_DISPLAY_BATTERY=1
 
-# eval $(keychain --eval --quiet id_rsa)
+eval $(keychain --eval --quiet id_rsa)
+. $HOME/.keychain/$HOSTNAME-sh 2>/dev/null
