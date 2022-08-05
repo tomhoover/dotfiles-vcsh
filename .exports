@@ -43,3 +43,6 @@ export TZ="America/Chicago"
 # pip should only run if there is a virtualenv currently activated
 # https://news.ycombinator.com/item?id=21431046
 export PIP_REQUIRE_VIRTUALENV=true
+
+# hledger-stockquotes default ledger file
+export LEDGER_FILE=$HOME/fin/hledger/hoover/all.journal
