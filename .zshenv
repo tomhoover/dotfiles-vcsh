@@ -1,6 +1,6 @@
 #echo "zshenv"
 
-path=(/usr/local/bin $path)
+path=(/opt/homebrew/bin /usr/local/bin $path)
 # start ssh-agent & load key
 type keychain &>/dev/null && eval `keychain --quiet --ignore-missing --eval id_rsa`
 
