@@ -33,6 +33,9 @@ source $HOME/src/github.com/rupa/z/z.sh
 if command -v rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 # pyenv: https://github.com/pyenv/pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if command -v pyenv > /dev/null; then eval "$(pyenv init --path)"; fi
 if command -v pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 # pyenv-virtualenv: https://github.com/pyenv/pyenv-virtualenv
 if command -v pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
