@@ -1,13 +1,5 @@
-# # keychain
-# [ -z "$HOSTNAME" ] && HOSTNAME=`uname -n`
-# [ -r $HOME/.keychain/$HOSTNAME-sh ] && . $HOME/.keychain/$HOSTNAME-sh
+# echo " ***** Darwin.zshrc"
 
-[ -r ~/.config/dotfiles/OMZ.zshrc ] && . ~/.config/dotfiles/OMZ.zshrc
-
-#source "$HOME/.homesick/repos/homeshick/homeshick.sh"
-#homeshick --quiet refresh
-#
-#fpath=($HOME/.zsh/completions $HOME/.homesick/repos/homeshick/completions /usr/local/share/zsh/site-functions $fpath)
 fpath=($HOME/.zsh/completions /usr/local/share/zsh/site-functions $fpath)
 # zsh completion is not working -- https://github.com/andsens/homeshick/issues/89
 #compinit

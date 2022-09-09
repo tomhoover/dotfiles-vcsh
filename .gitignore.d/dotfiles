@@ -18,6 +18,7 @@
 !/.functions
 !/.gitignore.d
 !/.gitignore.d/dotfiles
+!/.profile
 !/.vim
 !/.vim/colors
 !/.vim/colors/solarized.vim

@@ -19,7 +19,7 @@ export MANPAGER='less -X';
 
 # Always enable colored `grep` output.
 # GREP_OPTIONS is deprecated from grep 2.21
-#export GREP_OPTIONS='--color=auto';
+# export GREP_OPTIONS='--color=auto';
 
 # setup Go workspace
 export GOPATH=$HOME

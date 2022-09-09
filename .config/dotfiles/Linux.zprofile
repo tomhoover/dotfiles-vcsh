@@ -1,4 +1,4 @@
-#echo "Linux.zprofile"
+# echo " ***** Linux.zprofile"
 
 # inspired by https://jpmens.net/2019/04/28/automatically-start-or-attach-tmux-in-ssh-session/
 test -n "$SSH_TTY" && {
