@@ -1,4 +1,7 @@
+# echo " ***** .zshrc.pre"
+
 # GRML_DISPLAY_BATTERY=1
 
-eval $(keychain --eval --quiet id_rsa)
-. $HOME/.keychain/$HOSTNAME-sh 2>/dev/null
+# keychain
+# [ -z "$HOSTNAME" ] && HOSTNAME=`uname -n`
+[ -r $HOME/.keychain/$HOSTNAME-sh ] && . $HOME/.keychain/$HOSTNAME-sh

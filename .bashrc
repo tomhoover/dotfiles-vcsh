@@ -1,20 +1,23 @@
+# echo " ***** .bashrc"
+
+# keychain
+# [ -z "$HOSTNAME" ] && HOSTNAME=`uname -n`
+[ -r $HOME/.keychain/$HOSTNAME-sh ] && . $HOME/.keychain/$HOSTNAME-sh
+
 # exit if non-interactive shell
 [[ $- != *i* ]] && return
 
-#echo "bashrc"
-
 # Load the shell dotfiles, and then some:
-# * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
-for file in ~/.{path,bash_prompt,exports,aliases,functions,extra,SECRETS}; do
+for file in ~/.{exports,aliases,functions,extra,SECRETS}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 
-for file in ~/.config/dotfiles/`uname`.{path,bash_prompt,exports,aliases,functions,extra}; do
+for file in ~/.config/dotfiles/`uname`.{exports,aliases,functions,extra}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 
-for file in ~/.config/dotfiles/`hostname -s`.{path,bash_prompt,exports,aliases,functions,extra}; do
+for file in ~/.config/dotfiles/`hostname -s`.{exports,aliases,functions,extra}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
@@ -41,7 +44,7 @@ if command -v pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 if command -v pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 
 # insert ~/bin and ~/.local/bin before rbenv/pyenv shims
-PATH=$HOME/bin:$HOME/.local/bin:$PATH
+export PATH=$HOME/bin:$HOME/.local/bin:$PATH
 
 # direnv: https://direnv.net
 if command -v direnv > /dev/null; then eval "$(direnv hook bash)"; fi

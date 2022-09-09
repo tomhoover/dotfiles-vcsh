@@ -338,17 +338,16 @@ fi
 ## END OF FILE #################################################################
 
 # Load the shell dotfiles, and then some:
-# * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don't want to commit.
-for file in ~/.{path,bash_prompt,exports,aliases,functions,extra,SECRETS}; do
+for file in ~/.{exports,aliases,functions,extra,SECRETS}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 
-for file in ~/.config/dotfiles/`uname`.{path,bash_prompt,exports,aliases,functions,extra}; do
+for file in ~/.config/dotfiles/`uname`.{exports,aliases,functions,extra}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 
-for file in ~/.config/dotfiles/`hostname -s`.{path,bash_prompt,exports,aliases,functions,extra}; do
+for file in ~/.config/dotfiles/`hostname -s`.{exports,aliases,functions,extra}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
@@ -376,7 +375,8 @@ if command -v pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-i
 # if command -v direnv > /dev/null; then eval "$(direnv hook zsh)"; fi
 
 # insert ~/bin and ~/.local/bin before rbenv/pyenv shims
-path=(~/bin ~/.local/bin $path)
+# path=(~/bin ~/.local/bin $path)
+export PATH=$HOME/bin:$HOME/.local/bin:$PATH
 
 # history
 HISTSIZE=100000

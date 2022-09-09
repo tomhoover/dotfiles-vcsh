@@ -1,5 +1,8 @@
+# echo " ***** theophilus.zshrc"
+
 # fuzzy finder
 # https://github.com/junegunn/fzf
+# [ -f ~/.config/dotfiles/fzf.zsh ] && source ~/.config/dotfiles/fzf.zsh
 . /usr/share/fzf/key-bindings.zsh
 . /usr/share/fzf/completion.zsh
 
