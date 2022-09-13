@@ -203,3 +203,6 @@ if [ `uname` = Darwin ] ; then
 fi
 
 alias mux='tmuxinator'
+
+# always include --stats option when running 'mr'
+alias mr='command mr --stats'
