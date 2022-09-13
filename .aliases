@@ -204,5 +204,5 @@ fi
 
 alias mux='tmuxinator'
 
-# always include --stats option when running 'mr'
-alias mr='command mr --stats'
+# always include --minimal & --stats options when running 'mr'
+alias mr='command mr --minimal --stats'
