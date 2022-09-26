@@ -25,32 +25,28 @@ unset file;
 [ -r ~/.config/dotfiles/`uname`.bashrc ] && . ~/.config/dotfiles/`uname`.bashrc
 [ -r ~/.config/dotfiles/`hostname -s`.bashrc ] && . ~/.config/dotfiles/`hostname -s`.bashrc
 
-#source `brew --prefix`/etc/profile.d/z.sh
-source $HOME/src/github.com/rupa/z/z.sh
-
-#source "$HOME/.homesick/repos/homeshick/homeshick.sh"
-#homeshick --quiet refresh
-#source "$HOME/.homesick/repos/homeshick/completions/homeshick-completion.bash"
+# rupa/z
+[ -r ~/.local/share/z.sh ] && source ~/.local/share/z.sh
 
 # rbenv
 if command -v rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 # pyenv: https://github.com/pyenv/pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-if command -v pyenv > /dev/null; then eval "$(pyenv init --path)"; fi
-if command -v pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+if command -v pyenv > /dev/null; then 
+    export PYENV_ROOT="$HOME/.pyenv"
+    export PATH="$PYENV_ROOT/bin:$PATH"
+    eval "$(pyenv init -)"
+fi
+
 # pyenv-virtualenv: https://github.com/pyenv/pyenv-virtualenv
 if command -v pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 
-# insert ~/bin and ~/.local/bin before rbenv/pyenv shims
-export PATH=$HOME/bin:$HOME/.local/bin:$PATH
-
 # direnv: https://direnv.net
-if command -v direnv > /dev/null; then eval "$(direnv hook bash)"; fi
+if command -v direnv > /dev/null; then eval "$(direnv hook zsh)"; fi
 
-# Only load Liquid Prompt in interactive shells, not from a script or from scp
-[[ $- = *i* ]] && source ~/src/github.com/nojhan/liquidprompt/liquidprompt
+# insert ~/bin and ~/.local/bin before rbenv/pyenv shims
+# path=(~/bin ~/.local/bin $path)
+export PATH=$HOME/bin:$HOME/.local/bin:$PATH
 
 # https://github.com/seebi/dircolors-solarized (so solarized colors are used when accessing machine with iTerm2/ssh)
 #eval `dircolors $HOME/src/github.com/seebi/dircolors-solarized/dircolors.ansi-universal`
@@ -67,3 +63,6 @@ __git_complete g __git_main
 # fuzzy finder
 # https://github.com/junegunn/fzf
 [ -f ~/.config/dotfiles/fzf.bash ] && source ~/.config/dotfiles/fzf.bash
+
+# Only load Liquid Prompt in interactive shells, not from a script or from scp
+[[ $- = *i* ]] && source ~/.local/share/liquidprompt
