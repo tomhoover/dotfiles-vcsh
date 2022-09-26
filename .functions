@@ -256,10 +256,11 @@ function grep() {
     fi
 }
 
-# https://howchoo.com/g/mzm3ztdhm2u/how-to-colorize-your-logs-with-ccze
-function tailc() {
-    tail $@ | ccze -A
-}
+# # homebrew: ccze has been disabled because it has an archived upstream repository
+# # https://howchoo.com/g/mzm3ztdhm2u/how-to-colorize-your-logs-with-ccze
+# function tailc() {
+#     tail $@ | ccze -A
+# }
 
 # https://www.reddit.com/r/vim/comments/8xzpkz/you_probably_dont_need_vimwiki/e27k7qv?utm_source=share&utm_medium=web2x
 # note taking function and command completion
