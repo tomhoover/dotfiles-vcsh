@@ -224,3 +224,12 @@ inoremap kj <esc>
 "if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
   "runtime! macros/matchit.vim
 "endif
+
+" https://stackoverflow.com/questions/8958357/vim-plugin-for-auto-closed-parenthesis
+ino () ()
+ino " ""<left>
+ino ' ''<left>
+ino ( ()<left>
+ino [ []<left>
+ino { {}<left>
+ino {<CR> {<CR>}<ESC>O
