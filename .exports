@@ -44,5 +44,8 @@ export TZ="America/Chicago"
 # https://news.ycombinator.com/item?id=21431046
 export PIP_REQUIRE_VIRTUALENV=true
 
+# get python deprecation warnings
+export PYTHONDEVMODE=1
+
 # hledger-stockquotes default ledger file
 export LEDGER_FILE=$HOME/fin/hledger/hoover/all.journal
