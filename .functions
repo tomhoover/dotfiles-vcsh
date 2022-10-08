@@ -310,3 +310,18 @@ function hl() {
     cd ~/fin/hledger/hoover && ./export.sh || return
     [ -f "$1.journal" ] && hledger -s -f "$1.journal" "${@:2}" || hledger -s -f "all.journal" "${@:1}"
 }
+
+function mra() {
+    cd $HOME && mr "${@:1}"
+    cd -
+}
+
+function mrs() {
+    cd $HOME/src && mr "${@:1}"
+    cd -
+}
+
+function mrg() {
+    cd $HOME/src/github.com && mr "${@:1}"
+    cd -
+}
