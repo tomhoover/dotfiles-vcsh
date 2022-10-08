@@ -204,10 +204,37 @@ let g:netrw_liststyle = 3
 " let g:netrw_browse_split = 4
 let g:netrw_winsize = 20
 
-" remap <esc> key
-inoremap jk <esc>
-inoremap kj <esc>
-" inoremap <esc> <nop>
+" " remap <esc> key
+" inoremap jk <esc>
+" inoremap kj <esc>
+" " inoremap <esc> <nop>
+
+" https://stackoverflow.com/questions/8958357/vim-plugin-for-auto-closed-parenthesis
+" escape using ^v before typing the mapped character
+ino () ()
+ino " ""<left>
+" ino ' ''<left>
+ino ( ()<left>
+ino [ []<left>
+ino { {}<left>
+" ino {<CR> {<CR>}<ESC>O
+
+" https://www.vimfromscratch.com/articles/vim-for-python
+" To toggle a fold you can press za (:help fold-commands), and I have it mapped to Space for convenience.
+nnoremap <space> za
+
+" https://github.com/tmhedberg/SimpylFold
+" Preview docstring in fold text
+let g:SimpylFold_docstring_preview = 1
+
+
+
+
+
+
+
+
+
 
 """"" the following options are no longer needed, as they are included by default in the tpope/vim-sensible plugin """""
 
@@ -224,12 +251,3 @@ inoremap kj <esc>
 "if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
   "runtime! macros/matchit.vim
 "endif
-
-" https://stackoverflow.com/questions/8958357/vim-plugin-for-auto-closed-parenthesis
-ino () ()
-ino " ""<left>
-ino ' ''<left>
-ino ( ()<left>
-ino [ []<left>
-ino { {}<left>
-ino {<CR> {<CR>}<ESC>O
