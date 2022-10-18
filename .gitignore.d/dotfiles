@@ -13,6 +13,8 @@
 !/.config/oh-my-zsh
 !/.config/oh-my-zsh/themes
 !/.config/oh-my-zsh/themes/tch.zsh-theme
+!/.config/tmux
+!/.config/tmux/*
 !/.duplicacy/filters
 !/.exports
 !/.functions
