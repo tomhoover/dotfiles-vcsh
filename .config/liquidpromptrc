@@ -203,7 +203,7 @@ LP_ENABLE_ERROR=1
 
 # Specify an array of absolute paths in which all vcs will be disabled.
 # Ex: ("/root" "/home/me/large-remove-svn-repo")
-LP_DISABLED_VCS_PATHS=()
+LP_DISABLED_VCS_PATHS=("/Users/tom/data/software/gh-backup/" "/home/tom/data/software/gh-backup/")
 
 # Use a local liquidpromptrc if it exists.
 # Can be helpful if you sync your primary config across machines, or if
