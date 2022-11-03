@@ -1,6 +1,6 @@
 set nocompatible
 
-""""" Plugins """""
+" Plugins {{{
 " https://github.com/huntie/dotfiles/blob/f8a129f8e306c853ab52234f605b1d872b0448b1/vim/.vimrc#L72-L77
 " Install and run vim-plug on first run
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -9,9 +9,35 @@ if empty(glob('~/.vim/autoload/plug.vim'))
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-so ~/.vim/plugins.vim
+" Plug 'bronson/vim-trailing-whitespace'
+" Plug 'dag/vim-fish'
+" Plug 'easymotion/vim-easymotion'
+" Plug 'editorconfig/editorconfig-vim'
+" Plug 'itchyny/lightline.vim'
+" Plug 'itchyny/vim-gitbranch'
+" Plug 'mattn/emmet-vim'
+" Plug 'morhetz/gruvbox'
+" Plug 'pangloss/vim-javascript'
+" Plug 'reedes/vim-colors-pencil'
+" Plug 'scrooloose/nerdtree'
+" Plug 'terryma/vim-multiple-cursors'
+" Plug 'tpope/vim-eunuch'
+" Plug 'w0rp/ale'
 
-""""""""""
+call plug#begin('~/.vim/plugged')
+Plug 'tpope/vim-sensible'
+Plug 'airblade/vim-gitgutter'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'davidhalter/jedi-vim'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'tmhedberg/SimpylFold'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+call plug#end()
+
+" }}}
 
 set background=dark
 " colorscheme solarized
