@@ -21,6 +21,7 @@
 !/.gitignore.d
 !/.gitignore.d/dotfiles
 !/.profile
+!/.tmuxinator.yml
 !/.vim
 !/.vim/colors
 !/.vim/colors/solarized.vim
