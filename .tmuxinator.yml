@@ -45,7 +45,7 @@ root: ~/
 # attach: false
 
 windows:
-  - theophilus:
+  - theophilus: TMUX='' tmux new -As tom \; set status-position bottom
   - blueiris: ssh blueiris
   - synology: mosh --server=/usr/local/bin/mosh-server SYNOLOGY -- /usr/local/bin/tmux new -As tom
   - synology2: ssh synology2
