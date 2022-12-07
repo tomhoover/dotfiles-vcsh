@@ -49,3 +49,6 @@ export PYTHONDEVMODE=1
 
 # hledger-stockquotes default ledger file
 export LEDGER_FILE=$HOME/fin/hledger/hoover/all.journal
+
+# fzf
+export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
