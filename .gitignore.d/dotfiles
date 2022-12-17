@@ -15,6 +15,9 @@
 !/.config/oh-my-zsh/themes/tch.zsh-theme
 !/.config/tmux
 !/.config/tmux/*
+!/.config/tmuxinator
+!/.config/tmuxinator/*
+!/.duplicacy
 !/.duplicacy/filters
 !/.exports
 !/.functions
