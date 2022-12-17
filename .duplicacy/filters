@@ -1,0 +1,149 @@
+-.local/pipx2/
+-.local/pipx-py38/
+-.stack/
+-.vim/tmp/swap/
+-Applications/
+-Backup/
+-Downloads/
+-Dropbox/
+-Mylio/
+-data/
+-rdiff-backup-2.0.5/
+-src/HugoBasicExample/
+-src/github.com/
+-tmp/
+
+-*/.sync/Archive/
+
+# Exclude permission denied
+-.config-backup/
+-.config-backup2/
+
+#### ----------------------- Generic Transients -----------------------  ####
+
+# exclude any cache files/directories with cache in the name (case insensitive)
+# e:(?i).*cache.*
+e:(?i)/\.?cache/.*$
+-.cache/
+-.atom/compile-cache/
+-.npm/_cacache/
+-*/__pycache__/
+
+# Preferences and old-school shite we don't care about - e.g .dropbox
+e:\.(Trash|SynologyDrive|ac6|oracle_jre_usage|pia_manager|stm\w*|eclipse|dropbox)/.*$
+
+# Source cobtrol - .git/.svn/.hg
+e:\.(svn|git|hg)/.*$
+
+# SQLite index files
+e:.sqlite-(shm|wal)$
+
+# Exclude junk/spam and deleted Mailboxes
+e:(Deleted Items|Junk( Email)?|Spam|Trash)\.mbox/.*$
+
+# Exclude other well-known shite
+-*$RECYCLE.BIN/
+e:.*/Envelope Index(-wal|-shm)?$
+
+#### ------------------------- Library Folder --------------------------  >>>
++Library/
+
+# Everything under Messages, Mail and Calendar
++Library/Messages/*
++Library/Mail/*
++Library/Calendars/*
+
+### -------------------- Library/Application Support -------------------- >>>
+# +Library/Application Support/
+
+# # Important apps that seem to keep user data there. Why!?
+# +Library/Application Support/1Password 4/*
+# +Library/Application Support/BBEdit/*
+# +Library/Application Support/Viscosity/*
+# +Library/Application Support/CampoSanto/*
+# +Library/Application Support/Transmit/*
+# +Library/Application Support/minecraft/
+# +Library/Application Support/minecraft/saves/*
+
+# # Nothing else from Application Support
+# -Library/Application Support/*
+
+### -------------------- Library/Application Support -------------------- <<<
+
+### --------------------------- iCloud Stuff ---------------------------- >>>
++Library/Mobile Documents/
+
+# Entire CloudDocs folder  (iCloud Drive essentially, with Desktop and stuff)
++Library/Mobile Documents/com~apple~CloudDocs/*
+
+# Other iCloud stuff. Documents subfolder only for all other apps, just in case
++Library/Mobile Documents/com~apple~*/
++Library/Mobile Documents/com~apple~*/Documents/*
+# +Library/Mobile Documents/*/
+# +Library/Mobile Documents/*/Documents/*
+
+# Nothing else from Mobile Documents
+-Library/Mobile Documents/*
+
+### --------------------------- iCloud Stuff ---------------------------  <<<
+
+### ------------------------ Library/Containers ------------------------  >>>
+# +Library/Containers/
+
+# # Relevant app state
+# +Library/Containers/com.culturedcode.ThingsMac/*
+
+# # Nothing else from containers
+# -Library/Containers/*
+
+### ------------------------ Library/Containers ------------------------  <<<
+
+# Nothing else from Library:
+-Library/*
+
+#### ------------------------- Library Folder -------------------------  <<<<
+
+#### ---------------------------- Pictures ----------------------------  >>>>
++Pictures/
+
+# Only pictures from Photo Booth
++Pictures/Photo Booth Library/
++Pictures/Photo Booth Library/Originals/*
++Pictures/Photo Booth Library/Pictures/*
+-Pictures/Photo Booth Library/*
+
+# Only masters from Photos Library
++Pictures/Photos Library.photoslibrary/
+
+# Catalina+
++Pictures/Photos Library.photoslibrary/originals/*
++Pictures/Photos Library.photoslibrary/database/*
+
+# added by tch
++Pictures/Photos Library.photoslibrary/Masters.legacy/*
+
+# Pre-Catalina
++Pictures/Photos Library.photoslibrary/Masters/*
++Pictures/Photos Library.photoslibrary/resources/
++Pictures/Photos Library.photoslibrary/resources/media/
++Pictures/Photos Library.photoslibrary/resources/media/master/*
+
+-Pictures/Photos Library.photoslibrary/*
+
+# Everything else under Pictures will be included by default.
+
+#### ---------------------------- Pictures ----------------------------  <<<<
+
+#### ------------------------- Re-obtainable --------------------------  >>>>
+
+# Explicitly Exclude other known folders
+-Music/
+-Movies/
+-Downloads/*.dmg
+-Downloads/*.pax
+-Downloads/*.download
+-Box/*
+
+#### ------------------------- Re-obtainable --------------------------  <<<<
+
+# If a match is not found - the item will be included as we have both + and - rules.
