@@ -374,6 +374,8 @@ if command -v pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-i
 # direnv: https://direnv.net
 if command -v direnv > /dev/null; then eval "$(direnv hook zsh)"; fi
 
+if command -v rg > /dev/null; then export FZF_DEFAULT_COMMAND='rg --files'; fi
+
 # insert ~/bin and ~/.local/bin before rbenv/pyenv shims
 # path=(~/bin ~/.local/bin $path)
 export PATH=$HOME/bin:$HOME/.local/bin:$PATH
