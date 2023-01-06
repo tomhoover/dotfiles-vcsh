@@ -1,3 +1,5 @@
+-.duplicacy/cache/
+-.duplicacy/logs/
 -.local/pipx2/
 -.local/pipx-py38/
 -.stack/
