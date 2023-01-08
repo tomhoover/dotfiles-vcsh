@@ -17,6 +17,10 @@ export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+# https://github.com/Homebrew/homebrew-command-not-found
+HB_CNF_HANDLER="$(brew --repository)/Library/Taps/homebrew/homebrew-command-not-found/handler.sh"
+if [ -f "$HB_CNF_HANDLER" ]; then source "$HB_CNF_HANDLER"; fi
+
 # fuzzy finder
 # https://github.com/junegunn/fzf
 [ -f ~/.config/dotfiles/fzf.zsh ] && source ~/.config/dotfiles/fzf.zsh
