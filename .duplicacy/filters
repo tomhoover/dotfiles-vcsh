@@ -1,7 +1,13 @@
 -.duplicacy/cache/
 -.duplicacy/logs/
--.local/pipx2/
+-.gnupg/S.dirmngr
+-.gnupg/S.gpg-agent
+-.gnupg/S.gpg-agent.browser
+-.gnupg/S.gpg-agent.extra
+-.gnupg/S.gpg-agent.ssh
+-.gnupg/S.scdaemon
 -.local/pipx-py38/
+-.local/pipx2/
 -.stack/
 -.vim/tmp/swap/
 -Applications/
