@@ -1,0 +1,12 @@
+directory: /Users/tom/data/music
+library:   /Users/tom/data/music/beets_library.db
+import:
+    log:   /Users/tom/data/music/beets_log.txt
+# plugins: chroma
+# plugins: bpd inline convert web fetchart ftintitle lastgenre
+# pluginpath: /Volumes/RAID10/annex/music/beets_plugins
+ui:
+    color: yes
+paths:
+    albumtype:soundtrack: Soundtracks/$album/$track $title
+

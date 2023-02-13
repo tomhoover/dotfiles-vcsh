@@ -7,6 +7,8 @@
 !/.bashrc
 !/.colordiffrc
 !/.config
+!/.config/beets
+!/.config/beets/config.yaml
 !/.config/dotfiles
 !/.config/dotfiles/*
 !/.config/liquidpromptrc
