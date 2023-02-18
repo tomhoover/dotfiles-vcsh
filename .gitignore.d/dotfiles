@@ -30,8 +30,8 @@
 !/.vim
 !/.vim/colors
 !/.vim/colors/solarized.vim
-!/.vim/plugins.vim
-!/.vim/vimrc
+!/.vim/*
+/.vim/.netrwhist
 !/.xinitrc
 !/.zprofile
 !/.zshenv
