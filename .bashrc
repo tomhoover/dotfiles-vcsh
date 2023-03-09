@@ -22,9 +22,6 @@ for file in ~/.config/dotfiles/`hostname -s`.{exports,aliases,functions,extra}; 
 done;
 unset file;
 
-[ -r ~/.config/dotfiles/`uname`.bashrc ] && . ~/.config/dotfiles/`uname`.bashrc
-[ -r ~/.config/dotfiles/`hostname -s`.bashrc ] && . ~/.config/dotfiles/`hostname -s`.bashrc
-
 # rupa/z
 [ -r ~/.local/share/z.sh ] && source ~/.local/share/z.sh
 
@@ -47,9 +44,6 @@ if command -v pyenv > /dev/null; then eval "$(pyenv init -)" && eval "$(pyenv vi
 # path=(~/bin $path)
 export PATH=$HOME/bin:$PATH
 
-# direnv: https://direnv.net
-if command -v direnv > /dev/null; then eval "$(direnv hook bash)"; fi
-
 # https://github.com/seebi/dircolors-solarized (so solarized colors are used when accessing machine with iTerm2/ssh)
 #eval `dircolors $HOME/src/github.com/seebi/dircolors-solarized/dircolors.ansi-universal`
 if [ -x /usr/bin/dircolors ]; then test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"; fi
@@ -62,9 +56,17 @@ export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
 # https://stackoverflow.com/questions/342969/how-do-i-get-bash-completion-to-work-with-aliases
 __git_complete g __git_main
 
+# direnv: https://direnv.net
+if command -v direnv > /dev/null; then eval "$(direnv hook bash)"; fi
+
 # fuzzy finder
 # https://github.com/junegunn/fzf
 [ -f ~/.config/dotfiles/fzf.bash ] && source ~/.config/dotfiles/fzf.bash
+
+if command -v rg > /dev/null; then export FZF_DEFAULT_COMMAND='rg --files'; fi
+
+[ -r ~/.config/dotfiles/`uname`.bashrc ] && . ~/.config/dotfiles/`uname`.bashrc
+[ -r ~/.config/dotfiles/`hostname -s`.bashrc ] && . ~/.config/dotfiles/`hostname -s`.bashrc
 
 # Only load Liquid Prompt in interactive shells, not from a script or from scp
 [[ $- = *i* ]] && source ~/.local/share/liquidprompt

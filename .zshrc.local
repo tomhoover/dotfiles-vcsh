@@ -337,6 +337,10 @@ fi
 
 ## END OF FILE #################################################################
 
+# history
+HISTSIZE=100000
+SAVEHIST=1000000
+
 # Load the shell dotfiles, and then some:
 # * ~/.extra can be used for other settings you don't want to commit.
 for file in ~/.{exports,aliases,functions,extra,SECRETS}; do
@@ -351,9 +355,6 @@ for file in ~/.config/dotfiles/`hostname -s`.{exports,aliases,functions,extra}; 
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
-
-[ -r ~/.config/dotfiles/`uname`.zshrc ] && . ~/.config/dotfiles/`uname`.zshrc
-[ -r ~/.config/dotfiles/`hostname -s`.zshrc ] && . ~/.config/dotfiles/`hostname -s`.zshrc
 
 # rupa/z
 [ -r ~/.local/share/z.sh ] && source ~/.local/share/z.sh
@@ -380,11 +381,14 @@ export PATH=$HOME/bin:$PATH
 # direnv: https://direnv.net
 if command -v direnv > /dev/null; then eval "$(direnv hook zsh)"; fi
 
+# fuzzy finder
+# https://github.com/junegunn/fzf
+[ -f ~/.config/dotfiles/fzf.zsh ] && source ~/.config/dotfiles/fzf.zsh
+
 if command -v rg > /dev/null; then export FZF_DEFAULT_COMMAND='rg --files'; fi
 
-# history
-HISTSIZE=100000
-SAVEHIST=1000000
+[ -r ~/.config/dotfiles/`uname`.zshrc ] && . ~/.config/dotfiles/`uname`.zshrc
+[ -r ~/.config/dotfiles/`hostname -s`.zshrc ] && . ~/.config/dotfiles/`hostname -s`.zshrc
 
 # Only load Liquid Prompt in interactive shells, not from a script or from scp
 [[ $- = *i* ]] && source ~/.local/share/liquidprompt
