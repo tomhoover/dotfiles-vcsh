@@ -253,14 +253,10 @@ nnoremap <space> za
 " Preview docstring in fold text
 let g:SimpylFold_docstring_preview = 1
 
-
-
-
-
-
-
-
-
+" enable folding on markdown headings
+let g:markdown_folding = 1
+" set nofoldenable
+" set foldlevel=99
 
 """"" the following options are no longer needed, as they are included by default in the tpope/vim-sensible plugin """""
 
