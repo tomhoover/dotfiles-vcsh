@@ -1,11 +1,11 @@
 # echo " ***** Darwin.zshrc"
 
-fpath=($HOME/.zsh/completions $(brew --prefix)/share/zsh/site-functions $fpath)
+fpath=($(brew --prefix)/share/zsh/site-functions $fpath)
 # zsh completion is not working -- https://github.com/andsens/homeshick/issues/89
 #compinit
 # sudo -s gives "insecure directories and files" error -- https://github.com/Homebrew/homebrew/issues/7801
 #compinit -u
-autoload -Uz compinit && compinit
+#autoload -Uz compinit && compinit
 
 # https://github.com/seebi/dircolors-solarized (so solarized colors are used when accessing machine with iTerm2/ssh)
 #eval `dircolors $HOME/src/github.com/seebi/dircolors-solarized/dircolors.ansi-universal`

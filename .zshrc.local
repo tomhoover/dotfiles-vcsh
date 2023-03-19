@@ -390,5 +390,8 @@ if command -v rg > /dev/null; then export FZF_DEFAULT_COMMAND='rg --files'; fi
 [ -r ~/.config/dotfiles/`uname`.zshrc ] && . ~/.config/dotfiles/`uname`.zshrc
 [ -r ~/.config/dotfiles/`hostname -s`.zshrc ] && . ~/.config/dotfiles/`hostname -s`.zshrc
 
+fpath=($HOME/.zsh/completion $fpath)
+autoload -Uz compinit && compinit
+
 # Only load Liquid Prompt in interactive shells, not from a script or from scp
 [[ $- = *i* ]] && source ~/.local/share/liquidprompt
