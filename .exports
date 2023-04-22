@@ -53,3 +53,7 @@ export LEDGER_FILE=$HOME/fin/hledger/hoover/all.journal
 # fzf
 # export FZF_DEFAULT_OPTS='-m --height 40% --layout=reverse --border'
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
+
+# arch
+export AURDEST=~/.cache/AUR
+export CUSTOMIZEPKG_CONFIG=~/.config/customizepkg
