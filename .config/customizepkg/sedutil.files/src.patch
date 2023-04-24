@@ -1,0 +1,56 @@
+diff -u src/linuxpba-arch src.new/linuxpba-arch
+--- src/linuxpba-arch	2023-04-23 11:21:57.134989837 -0500
++++ src.new/linuxpba-arch	2023-04-24 16:53:24.470360914 -0500
+@@ -77,7 +77,7 @@
+ 
+ ERRORS=0
+ 
+-for DRIVE in $(sedutil-cli --scan 2>/dev/null | awk '$1 ~ "/dev/sd" && $2 !~ "No" {print $1}')
++for DRIVE in $(sedutil-cli --scan 2>/dev/null | awk '$1 ~ /\/dev\/sd|\/dev\/nvme/ && $2 !~ "No" {print $1}')
+ do
+     [[ "x$DRIVE" = "x" ]] && continue
+     SED_STATUS $(sedutil-cli --query $DRIVE | awk 'NR==2 {name=$3; serial=$5} NR==6 {gsub(",","",$0);lock=$3; mbr=$12} END {print name,serial,lock,mbr}')
+@@ -85,6 +85,8 @@
+     then
+         echo -n "Unlocking $NAME $SERIAL ($DRIVE) ... "
+         sedutil-cli --setLockingRange 0 RW "$SED_PASSWD" "$DRIVE" &>/dev/null
++        sedutil-cli --setLockingRange 1 RW "$SED_PASSWD" "$DRIVE" &>/dev/null
++        sedutil-cli --setLockingRange 2 RW "$SED_PASSWD" "$DRIVE" &>/dev/null
+         if [[ $? -ne 0 ]]
+         then
+             echo "FAIL"
+diff -u src/linuxpba.conf.etc src.new/linuxpba.conf.etc
+--- src/linuxpba.conf.etc	2023-04-23 11:21:57.134989837 -0500
++++ src.new/linuxpba.conf.etc	2023-04-23 12:11:24.401621248 -0500
+@@ -2,7 +2,7 @@
+ # or use custom the PBA agent that supports keyfile, yubikey and
+ # password input. This will result in the smallest initramfs image.
+ # All the settings below this one only have any effect if USE_SEDUTIL_PBA=0
+-USE_SEDUTIL_PBA=1
++USE_SEDUTIL_PBA=0
+ 
+ # The challenge to send to the yubikey. The response will unlock the
+ # keyring file. Use the challenge configured here as the challenge when
+diff -u src/linuxpba.install src.new/linuxpba.install
+--- src/linuxpba.install	2023-04-23 11:21:57.134989837 -0500
++++ src.new/linuxpba.install	2023-04-24 12:40:55.929796634 -0500
+@@ -8,6 +8,7 @@
+             add_binary "linuxpba"
+             add_file "/usr/share/terminfo/l/linux"
+         else
++            add_binary "/usr/bin/efibootmgr" "/usr/bin/efibootmgr"
+             add_binary "/usr/bin/linuxpba-arch" "/usr/bin/linuxpba"
+             add_binary "getpasswd"
+             add_binary "sedutil-cli"
+diff -u src/mklinuxpba-diskimg src.new/mklinuxpba-diskimg
+--- src/mklinuxpba-diskimg	2023-04-23 11:21:57.134989837 -0500
++++ src.new/mklinuxpba-diskimg	2023-04-23 11:29:57.160023502 -0500
+@@ -3,7 +3,7 @@
+ mkdiskimg () {
+     # Prepare image file
+     cp /usr/lib/syslinux/bios/gptmbr.bin $1
+-    truncate -s 32M $1
++    truncate -s 64M $1
+     sgdisk -n 1:0:0 $1
+     sgdisk -t 1:ef00 $1
+     sgdisk -A 1:set:2 $1

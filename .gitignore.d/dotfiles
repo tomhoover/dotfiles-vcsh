@@ -9,6 +9,8 @@
 !/.config
 !/.config/beets
 !/.config/beets/config.yaml
+!/.config/customizepkg
+!/.config/customizepkg/**
 !/.config/dotfiles
 !/.config/dotfiles/*
 !/.config/liquidpromptrc
