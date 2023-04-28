@@ -17,6 +17,8 @@
 !/.config/oh-my-zsh
 !/.config/oh-my-zsh/themes
 !/.config/oh-my-zsh/themes/tch.zsh-theme
+!/.config/paru
+!/.config/paru/*
 !/.config/tmux
 !/.config/tmux/*
 !/.config/tmuxinator
