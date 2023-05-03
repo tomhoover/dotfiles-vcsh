@@ -1,0 +1,5 @@
+[Unit]
+Description=Perform duplicacy backup
+
+[Service]
+ExecStart=/home/tom/bin/duplicacy-backup.sh

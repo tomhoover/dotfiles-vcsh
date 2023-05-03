@@ -19,6 +19,9 @@
 !/.config/oh-my-zsh/themes/tch.zsh-theme
 !/.config/paru
 !/.config/paru/*
+!/.config/systemd
+!/.config/systemd/**
+/.config/systemd/user/timers.target.wants/
 !/.config/tmux
 !/.config/tmux/*
 !/.config/tmuxinator
