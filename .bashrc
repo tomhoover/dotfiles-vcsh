@@ -68,5 +68,8 @@ if command -v rg > /dev/null; then export FZF_DEFAULT_COMMAND='rg --files'; fi
 [ -r ~/.config/dotfiles/`uname`.bashrc ] && . ~/.config/dotfiles/`uname`.bashrc
 [ -r ~/.config/dotfiles/`hostname -s`.bashrc ] && . ~/.config/dotfiles/`hostname -s`.bashrc
 
+# enable pipx completion
+eval "$(register-python-argcomplete pipx)"
+
 # Only load Liquid Prompt in interactive shells, not from a script or from scp
 [[ $- = *i* ]] && source ~/.local/share/liquidprompt
