@@ -55,4 +55,5 @@ xinput set-prop "Synaptics TM3289-021" "libinput Natural Scrolling Enabled" 1
 # dunst
 # dunst -config ~/.config/dunst/dunstrc &
 
-exec systemd-inhibit --what=handle-power-key i3 
+# exec systemd-inhibit --what=handle-power-key i3 
+exec startplasma-x11
