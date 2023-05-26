@@ -1,17 +1,6 @@
---- PKGBUILD	2023-04-23 11:57:40.449045928 -0500
-+++ PKGBUILD.new	2023-04-24 12:39:24.899578245 -0500
-@@ -11,7 +11,9 @@
-             'gptfdisk: to create a bootable PBA disk image'
-             'parted: to create a bootable PBA disk image'
-             'intel-ucode: microcode update files for Intel CPUs'
--            'yubikey-personalization: for yubikey support')
-+            'yubikey-personalization: for yubikey support'
-+            'dosfstools: to create a bootable PBA disk image'
-+            'mtools: to create a bootable PBA disk image')
- backup=('etc/linuxpba/linuxpba.conf')
- install=sedutil.install
- source=("${pkgname}-${pkgver}.tar.gz::https://github.com/Drive-Trust-Alliance/${pkgname}/archive/${pkgver}.tar.gz"
-@@ -39,6 +41,16 @@
+--- PKGBUILD.original	2023-05-19 04:27:53.603564164 -0500
++++ PKGBUILD	2023-05-19 13:25:56.480844075 -0500
+@@ -41,6 +41,13 @@
  CPPFLAGS="$CPPFLAGS -O2"
  
  build() {
@@ -19,11 +8,8 @@
 +    cp ../linuxpba-arch .
 +    rm linuxpba.conf.etc
 +    cp ../linuxpba.conf.etc .
-+    rm linuxpba.install
-+    cp ../linuxpba.install .
-+    rm mklinuxpba-diskimg
-+    cp ../mklinuxpba-diskimg .
 +    patch -Np1 -i src.patch
++    patch -Np1 -i src2.patch
 +
      _release="Release_$CARCH"
      cd "${srcdir}/"
