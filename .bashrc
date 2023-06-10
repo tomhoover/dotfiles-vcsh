@@ -40,6 +40,11 @@ if command -v pyenv > /dev/null; then eval "$(pyenv init -)" && eval "$(pyenv vi
 # pyenv-virtualenv: https://github.com/pyenv/pyenv-virtualenv
 # if command -v pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 
+# asdf: https://github.com/asdf-vm/asdf
+. "$HOME/.asdf/asdf.sh"
+. "$HOME/.asdf/completions/asdf.bash"
+. "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/bashrc"
+
 # insert ~/bin in $PATH before rbenv/pyenv shims
 # path=(~/bin $path)
 export PATH=$HOME/bin:$PATH
