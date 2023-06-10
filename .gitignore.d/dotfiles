@@ -34,6 +34,7 @@
 !/.gitignore.d/dotfiles
 !/.profile
 !/.tmuxinator.yml
+!/.tool-versions
 !/.vim
 !/.vim/colors
 !/.vim/colors/solarized.vim
