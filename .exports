@@ -57,3 +57,6 @@ export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 # arch
 export AURDEST=~/.cache/AUR
 export CUSTOMIZEPKG_CONFIG=~/.config/customizepkg
+
+# asdf
+export ASDF_DIRENV_NO_TOUCH_RC_FILE=1
