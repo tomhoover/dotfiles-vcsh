@@ -3,5 +3,4 @@
 # GRML_DISPLAY_BATTERY=1
 
 # keychain
-# [ -z "$HOSTNAME" ] && HOSTNAME=`uname -n`
-[ -r $HOME/.keychain/$HOSTNAME-sh ] && . $HOME/.keychain/$HOSTNAME-sh
+[ -r "$HOME"/.keychain/"$(uname -n)"-sh ] && . "$HOME"/.keychain/"$(uname -n)"-sh

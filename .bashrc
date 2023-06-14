@@ -1,8 +1,9 @@
 # echo " ***** .bashrc"
 
+MYHOST=$(uname -n | sed 's/\..*//')     # alternative to $(hostname -s), as arch does not install 'hostname' by default
+
 # keychain
-# [ -z "$HOSTNAME" ] && HOSTNAME=`uname -n`
-[ -r $HOME/.keychain/$HOSTNAME-sh ] && . $HOME/.keychain/$HOSTNAME-sh
+[ -r "$HOME"/.keychain/"$(uname -n)"-sh ] && . "$HOME"/.keychain/"$(uname -n)"-sh
 
 # exit if non-interactive shell
 [[ $- != *i* ]] && return
@@ -13,11 +14,11 @@ for file in ~/.{exports,aliases,functions,extra,SECRETS}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 
-for file in ~/.config/dotfiles/`uname`.{exports,aliases,functions,extra}; do
+for file in ~/.config/dotfiles/$(uname).{exports,aliases,functions,extra}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 
-for file in ~/.config/dotfiles/`hostname -s`.{exports,aliases,functions,extra}; do
+for file in ~/.config/dotfiles/${MYHOST}.{exports,aliases,functions,extra}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
@@ -50,7 +51,7 @@ if command -v pyenv > /dev/null; then eval "$(pyenv init -)" && eval "$(pyenv vi
 export PATH=$HOME/bin:$PATH
 
 # https://github.com/seebi/dircolors-solarized (so solarized colors are used when accessing machine with iTerm2/ssh)
-#eval `dircolors $HOME/src/github.com/seebi/dircolors-solarized/dircolors.ansi-universal`
+#eval $(dircolors $HOME/src/github.com/seebi/dircolors-solarized/dircolors.ansi-universal)
 if [ -x /usr/bin/dircolors ]; then test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"; fi
 
 # Solarized colorscheme for macOS `ls` environment variable:
@@ -70,8 +71,8 @@ if command -v direnv > /dev/null; then eval "$(direnv hook bash)"; fi
 
 if command -v rg > /dev/null; then export FZF_DEFAULT_COMMAND='rg --files'; fi
 
-[ -r ~/.config/dotfiles/`uname`.bashrc ] && . ~/.config/dotfiles/`uname`.bashrc
-[ -r ~/.config/dotfiles/`hostname -s`.bashrc ] && . ~/.config/dotfiles/`hostname -s`.bashrc
+[ -r ~/.config/dotfiles/"$(uname)".bashrc ] && . ~/.config/dotfiles/"$(uname)".bashrc
+[ -r ~/.config/dotfiles/"${MYHOST}".bashrc ] && . ~/.config/dotfiles/"${MYHOST}".bashrc
 
 # enable pipx completion
 eval "$(register-python-argcomplete pipx)"
