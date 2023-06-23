@@ -214,4 +214,6 @@ alias mr='command mr --minimal --stats'
 #
 # To avoid them accidentally linking against a Pyenv-provided Python, add the
 # following line into your interactive shell's configuration:
-alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
+# alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
+# remove .asdf/shims, as well as .pyenv/shims
+alias brew='env PATH="${PATH//:*\/shims:/:}" brew'
