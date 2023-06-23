@@ -1,3 +1,4 @@
+-.config/op/op-daemon.sock
 -.duplicacy/cache/
 -.duplicacy/logs/
 -.gnupg/S.dirmngr
