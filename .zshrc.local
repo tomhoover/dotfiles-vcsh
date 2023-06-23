@@ -392,10 +392,13 @@ if command -v direnv > /dev/null; then eval "$(direnv hook zsh)"; fi
 # https://github.com/junegunn/fzf
 [ -f ~/.config/dotfiles/fzf.zsh ] && source ~/.config/dotfiles/fzf.zsh
 
+# acme.sh
+[ -f ~/.acme.sh/acme.sh.env ] && source ~/.acme.sh/acme.sh.env
+
 if command -v rg > /dev/null; then export FZF_DEFAULT_COMMAND='rg --files'; fi
 
-[ -r ~/.config/dotfiles/"$(uname)".zshrc ] && . ~/.config/dotfiles/"$(uname)".zshrc
-[ -r ~/.config/dotfiles/"${MYHOST}".zshrc ] && . ~/.config/dotfiles/"${MYHOST}".zshrc
+[ -r ~/.config/dotfiles/"$(uname)".zshrc ] && source ~/.config/dotfiles/"$(uname)".zshrc
+[ -r ~/.config/dotfiles/"${MYHOST}".zshrc ] && source ~/.config/dotfiles/"${MYHOST}".zshrc
 
 fpath=("$HOME"/.zsh/completion $fpath)
 # autoload -Uz compinit && compinit

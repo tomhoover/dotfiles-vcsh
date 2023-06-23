@@ -1,9 +1,10 @@
 # echo " ***** .bashrc"
+# shellcheck disable=SC1090,SC1091
 
 MYHOST=$(uname -n | sed 's/\..*//')     # alternative to $(hostname -s), as arch does not install 'hostname' by default
 
 # keychain
-[ -r "$HOME"/.keychain/"$(uname -n)"-sh ] && . "$HOME"/.keychain/"$(uname -n)"-sh
+[ -r "$HOME"/.keychain/"$(uname -n)"-sh ] && source "$HOME"/.keychain/"$(uname -n)"-sh
 
 # exit if non-interactive shell
 [[ $- != *i* ]] && return
@@ -52,6 +53,7 @@ export PATH=$HOME/bin:$PATH
 
 # https://github.com/seebi/dircolors-solarized (so solarized colors are used when accessing machine with iTerm2/ssh)
 #eval $(dircolors $HOME/src/github.com/seebi/dircolors-solarized/dircolors.ansi-universal)
+# shellcheck disable=SC2015
 if [ -x /usr/bin/dircolors ]; then test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"; fi
 
 # Solarized colorscheme for macOS `ls` environment variable:
@@ -69,10 +71,13 @@ if command -v direnv > /dev/null; then eval "$(direnv hook bash)"; fi
 # https://github.com/junegunn/fzf
 [ -f ~/.config/dotfiles/fzf.bash ] && source ~/.config/dotfiles/fzf.bash
 
+# acme.sh
+[ -f ~/.acme.sh/acme.sh.env ] && source ~/.acme.sh/acme.sh.env
+
 if command -v rg > /dev/null; then export FZF_DEFAULT_COMMAND='rg --files'; fi
 
-[ -r ~/.config/dotfiles/"$(uname)".bashrc ] && . ~/.config/dotfiles/"$(uname)".bashrc
-[ -r ~/.config/dotfiles/"${MYHOST}".bashrc ] && . ~/.config/dotfiles/"${MYHOST}".bashrc
+[ -r ~/.config/dotfiles/"$(uname)".bashrc ] && source ~/.config/dotfiles/"$(uname)".bashrc
+[ -r ~/.config/dotfiles/"${MYHOST}".bashrc ] && source ~/.config/dotfiles/"${MYHOST}".bashrc
 
 # enable pipx completion
 eval "$(register-python-argcomplete pipx)"

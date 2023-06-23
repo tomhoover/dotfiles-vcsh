@@ -3,4 +3,4 @@
 # GRML_DISPLAY_BATTERY=1
 
 # keychain
-[ -r "$HOME"/.keychain/"$(uname -n)"-sh ] && . "$HOME"/.keychain/"$(uname -n)"-sh
+[ -r "$HOME"/.keychain/"$(uname -n)"-sh ] && source "$HOME"/.keychain/"$(uname -n)"-sh
