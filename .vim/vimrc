@@ -37,6 +37,11 @@ Plug 'tmhedberg/SimpylFold'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
+Plug 'suy/vim-context-commentstring'
+Plug 'hashivim/vim-terraform'
+Plug 'vim-syntastic/syntastic'
+Plug 'juliosueiras/vim-terraform-completion'
+Plug 'ycm-core/YouCompleteMe', { 'do': './install.py' }
 call plug#end()
 
 " }}}
@@ -277,6 +282,25 @@ if MyOnBattery()
 else
   call neomake#configure#automake('nw', 1000)
 endif
+
+" https://stevelosh.com/blog/2010/09/coming-home-to-vim/#using-the-leader
+let mapleader = ","
+
+" use '#' instead of '/* */' style commenting in *.tf files
+" autocmd FileType tf setlocal commentstring=\#\ %s
+
+" https://github.com/hashivim/vim-terraform/blob/master/doc/hcl.txt
+let g:hcl_align = 1
+let g:hcl_fold_sections = 1
+
+" https://github.com/hashivim/vim-terraform/blob/master/doc/terraform.txt
+let g:terraform_align = 1
+let g:terraform_fmt_on_save = 1
+let g:terraform_fold_sections = 1
+
+let g:ycm_global_ycm_extra_conf='~/.vim/plugged/YouCompleteMe/.ycm_extra_conf.py'
+let g:ycm_confirm_extra_conf = 0
+let g:ycm_python_binary_path = 'python'
 
 """"" the following options are no longer needed, as they are included by default in the tpope/vim-sensible plugin """""
 
