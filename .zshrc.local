@@ -377,9 +377,9 @@ if command -v pyenv > /dev/null; then eval "$(pyenv init -)" && eval "$(pyenv vi
 # if command -v pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 
 # asdf: https://github.com/asdf-vm/asdf
-. "$HOME/.asdf/asdf.sh"
+[ -f ~/.asdf/asdf.sh ] && source "$HOME/.asdf/asdf.sh"
 fpath=("${ASDF_DIR}"/completions $fpath)
-. "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
+[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
 
 # insert ~/bin into $PATH before rbenv/pyenv shims
 # path=(~/bin $path)
@@ -408,7 +408,7 @@ compinit
 bashcompinit
 
 # enable pipx completion
-eval "$(register-python-argcomplete pipx)"
+if command -v register-python-argcomplete > /dev/null; then eval "$(register-python-argcomplete pipx)"; fi
 
 # Only load Liquid Prompt in interactive shells, not from a script or from scp
 [[ $- = *i* ]] && source ~/.local/share/liquidprompt
