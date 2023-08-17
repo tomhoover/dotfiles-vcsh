@@ -141,6 +141,7 @@ if !isdirectory(&viewdir)   | call mkdir(&viewdir, 'p', 0700)   | endif
 " and "Can I be notified when I'm undoing changes from the undofile?":
 " https://vi.stackexchange.com/q/2115/51.
 if has('persistent_undo')
+        " set undofile
 	set undodir=$HOME/.vim/tmp/undo
 	if !isdirectory(&undodir) | call mkdir(&undodir, 'p', 0700) | endif
 endif
