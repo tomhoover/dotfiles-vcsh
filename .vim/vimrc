@@ -42,6 +42,8 @@ Plug 'hashivim/vim-terraform'
 Plug 'vim-syntastic/syntastic'
 Plug 'juliosueiras/vim-terraform-completion'
 Plug 'ycm-core/YouCompleteMe', { 'do': './install.py' }
+Plug 'yuezk/vim-js'
+Plug 'maxmellon/vim-jsx-pretty'
 call plug#end()
 
 " }}}
@@ -197,10 +199,11 @@ set tabstop=8 shiftwidth=4 expandtab
 " And in Makefiles, space indent is a syntax error - there, I want hard tabs. You can set these things 
 " using autocmd and the filetype in question.
 autocmd Filetype make       setlocal noexpandtab
-"autocmd Filetype yaml       setlocal shiftwidth=2 softtabstop=2
-"autocmd Filetype javascript setlocal shiftwidth=2 softtabstop=2
-autocmd Filetype yaml       setlocal shiftwidth=2
-autocmd Filetype javascript setlocal shiftwidth=2
+autocmd Filetype yaml       setlocal shiftwidth=2 softtabstop=2
+autocmd Filetype javascript setlocal shiftwidth=2 softtabstop=2
+autocmd Filetype javascriptreact setlocal shiftwidth=2 softtabstop=2
+" autocmd Filetype yaml       setlocal shiftwidth=2
+" autocmd Filetype javascript setlocal shiftwidth=2
 "
 " If you don't want to specify by file type you can also specify the filename (or a glob to match filenames).
 " autocmd BufNewFile,BufRead rsnapshot.conf setlocal noexpandtab
