@@ -1,8 +1,10 @@
 direnv 2.32.3
-bats 1.9.0
+bats 1.10.0
 shellcheck 0.8.0
 shfmt 3.7.0
 python 3.11.4
-terraform 1.5.3
+terraform 1.5.6
 tflint 0.47.0
 tfsec 1.28.1
+pnpm 8.7.0-1
+nodejs 20.5.1
