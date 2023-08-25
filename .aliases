@@ -218,4 +218,5 @@ alias mr='command mr --minimal --stats'
 # remove .asdf/shims, as well as .pyenv/shims
 alias brew='env PATH="${PATH//:*\/shims:/:}" brew'
 
-alias cat='bat -A'
+alias cat='bat'
+alias cats='bat -A'
