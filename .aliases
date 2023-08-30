@@ -220,3 +220,4 @@ alias brew='env PATH="${PATH//:*\/shims:/:}" brew'
 
 alias cat='bat'
 alias cats='bat -A'
+alias catp='fzf --preview "bat --color=always --style=numbers --line-range=:500 {}"'
