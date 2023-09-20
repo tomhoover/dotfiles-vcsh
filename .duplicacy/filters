@@ -63,19 +63,21 @@ e:.*/Envelope Index(-wal|-shm)?$
 +Library/Calendars/*
 
 ### -------------------- Library/Application Support -------------------- >>>
-# +Library/Application Support/
++Library/Application Support/
 
 # # Important apps that seem to keep user data there. Why!?
-# +Library/Application Support/1Password 4/*
++Library/Application Support/1Password/*
 # +Library/Application Support/BBEdit/*
 # +Library/Application Support/Viscosity/*
 # +Library/Application Support/CampoSanto/*
 # +Library/Application Support/Transmit/*
 # +Library/Application Support/minecraft/
 # +Library/Application Support/minecraft/saves/*
+-Library/Application Support/DEVONthink 3/Abbyy/
++Library/Application Support/DEVONthink 3/*
 
 # # Nothing else from Application Support
-# -Library/Application Support/*
+-Library/Application Support/*
 
 ### -------------------- Library/Application Support -------------------- <<<
 
