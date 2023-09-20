@@ -200,6 +200,9 @@ if [ `uname` = Darwin ] ; then
     # Stuff I never really use but cannot delete either because of http://xkcd.com/530/
     alias stfu="osascript -e 'set volume output muted true'"
     alias pumpitup="osascript -e 'set volume 7'"
+
+    # tailscale
+    alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 fi
 
 alias mux='tmuxinator'
