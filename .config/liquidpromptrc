@@ -304,7 +304,6 @@ LP_DISPLAY_VALUES_AS_PERCENTS=1
 # Type: bool
 # More information: https://liquidprompt.readthedocs.io/en/stable/config.html#LP_ENABLE_RAM
 #LP_ENABLE_RAM=1
-LP_ENABLE_RAM=0
 
 # Display the currently activated RVM_ or RBENV_ virtual environment.
 # Type: bool

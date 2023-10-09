@@ -1,11 +1,25 @@
 # echo " ***** Darwin.zshrc"
 
 fpath=($(brew --prefix)/share/zsh/site-functions $fpath)
-# zsh completion is not working -- https://github.com/andsens/homeshick/issues/89
-#compinit
-# sudo -s gives "insecure directories and files" error -- https://github.com/Homebrew/homebrew/issues/7801
-#compinit -u
-#autoload -Uz compinit && compinit
+# ==> zsh-completions
+# To activate these completions, add the following to your .zshrc:
+#
+#   if type brew &>/dev/null; then
+#     FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+#
+#     autoload -Uz compinit
+#     compinit
+#   fi
+#
+# You may also need to force rebuild `zcompdump`:
+#
+#   rm -f ~/.zcompdump; compinit
+#
+# Additionally, if you receive "zsh compinit: insecure directories" warnings when attempting
+# to load these completions, you may need to run these commands:
+#
+#   chmod go-w '/opt/homebrew/share'
+#   chmod -R go-w '/opt/homebrew/share/zsh'
 
 # https://github.com/seebi/dircolors-solarized (so solarized colors are used when accessing machine with iTerm2/ssh)
 #eval `dircolors $HOME/src/github.com/seebi/dircolors-solarized/dircolors.ansi-universal`
