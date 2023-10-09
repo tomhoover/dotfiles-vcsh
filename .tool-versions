@@ -9,3 +9,4 @@ tfsec 1.28.4
 pnpm 8.7.6
 nodejs 20.7.0
 bat 0.23.0
+pipx 1.2.0
