@@ -12,15 +12,15 @@ MYHOST=$(uname -n | sed 's/\..*//')     # alternative to $(hostname -s), as arch
 # Load the shell dotfiles, and then some:
 # * ~/.extra can be used for other settings you don’t want to commit.
 for file in ~/.{exports,aliases,functions,extra,SECRETS}; do
-	[ -r "$file" ] && [ -f "$file" ] && source "$file";
+    [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 
 for file in ~/.config/dotfiles/$(uname).{exports,aliases,functions,extra}; do
-	[ -r "$file" ] && [ -f "$file" ] && source "$file";
+    [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 
 for file in ~/.config/dotfiles/${MYHOST}.{exports,aliases,functions,extra}; do
-	[ -r "$file" ] && [ -f "$file" ] && source "$file";
+    [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
 
@@ -46,6 +46,10 @@ if command -v pyenv > /dev/null; then eval "$(pyenv init -)" && eval "$(pyenv vi
 . "$HOME/.asdf/asdf.sh"
 . "$HOME/.asdf/completions/asdf.bash"
 . "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/bashrc"
+
+# # rtx: https://github.com/jdx/rtx
+# eval "$(/Users/tom/.local/share/rtx/bin/rtx activate bash)"
+# eval "$(rtx completions bash)"
 
 # insert ~/bin in $PATH before rbenv/pyenv shims
 # path=(~/bin $path)

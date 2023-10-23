@@ -346,15 +346,15 @@ SAVEHIST=1000000
 # Load the shell dotfiles, and then some:
 # * ~/.extra can be used for other settings you don't want to commit.
 for file in ~/.{exports,aliases,functions,extra,SECRETS}; do
-	[ -r "$file" ] && [ -f "$file" ] && source "$file";
+    [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 
 for file in ~/.config/dotfiles/$(uname).{exports,aliases,functions,extra}; do
-	[ -r "$file" ] && [ -f "$file" ] && source "$file";
+    [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 
 for file in ~/.config/dotfiles/${MYHOST}.{exports,aliases,functions,extra}; do
-	[ -r "$file" ] && [ -f "$file" ] && source "$file";
+    [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
 
@@ -380,6 +380,10 @@ if command -v pyenv > /dev/null; then eval "$(pyenv init -)" && eval "$(pyenv vi
 [ -f ~/.asdf/asdf.sh ] && source "$HOME/.asdf/asdf.sh"
 fpath=("${ASDF_DIR}"/completions $fpath)
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
+
+# # rtx: https://github.com/jdx/rtx
+# eval "$(/Users/tom/.local/share/rtx/bin/rtx activate zsh)"
+# eval "$(rtx completions zsh)"
 
 # insert ~/bin into $PATH before rbenv/pyenv shims
 # path=(~/bin $path)
