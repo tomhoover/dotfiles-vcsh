@@ -32,24 +32,26 @@ unset file;
 # path=(~/.local/bin $path)
 export PATH=$HOME/.local/bin:$PATH
 
-# rbenv
-if command -v rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+# # rbenv
+# if command -v rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
-# pyenv: https://github.com/pyenv/pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv > /dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-if command -v pyenv > /dev/null; then eval "$(pyenv init -)" && eval "$(pyenv virtualenv-init -)"; fi
-# pyenv-virtualenv: https://github.com/pyenv/pyenv-virtualenv
-# if command -v pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+# # pyenv: https://github.com/pyenv/pyenv
+# export PYENV_ROOT="$HOME/.pyenv"
+# command -v pyenv > /dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+# if command -v pyenv > /dev/null; then eval "$(pyenv init -)" && eval "$(pyenv virtualenv-init -)"; fi
+# # pyenv-virtualenv: https://github.com/pyenv/pyenv-virtualenv
+# # if command -v pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 
-# asdf: https://github.com/asdf-vm/asdf
-. "$HOME/.asdf/asdf.sh"
-. "$HOME/.asdf/completions/asdf.bash"
-. "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/bashrc"
+# # asdf: https://github.com/asdf-vm/asdf
+# . "$HOME/.asdf/asdf.sh"
+# . "$HOME/.asdf/completions/asdf.bash"
+# . "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/bashrc"
 
 # # rtx: https://github.com/jdx/rtx
 # eval "$(/Users/tom/.local/share/rtx/bin/rtx activate bash)"
-# eval "$(rtx completions bash)"
+#   cd ~/.local/bin && ln -sf ../share/rtx/bin/rtx
+eval "$(rtx completions bash)"
+export PATH=$HOME/.local/share/rtx/shims:$PATH
 
 # insert ~/bin in $PATH before rbenv/pyenv shims
 # path=(~/bin $path)
