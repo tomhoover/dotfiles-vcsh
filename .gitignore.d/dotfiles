@@ -19,6 +19,8 @@
 !/.config/oh-my-zsh/themes/tch.zsh-theme
 !/.config/paru
 !/.config/paru/*
+!/.config/qtile
+!/.config/qtile/*
 !/.config/systemd
 !/.config/systemd/**
 /.config/systemd/user/default.target.wants/

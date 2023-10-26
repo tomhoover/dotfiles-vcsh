@@ -27,6 +27,7 @@ fi
 
 if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  for f in /etc/X11/xinit/xinitrc.d/?*.sh ; do
+  # shellcheck source=/dev/null
   [ -x "$f" ] && . "$f"
  done
  unset f
@@ -39,7 +40,7 @@ fi
 # exec xterm -geometry 80x66+0+0 -name login
 
 # gnome-keyring
-eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcsll,secrets,ssh)
+eval "$(/usr/bin/gnome-keyring-daemon --start --components=pkcsll,secrets,ssh)"
 export SSH_AUTH_SOCK
 
 # touchpad settings
@@ -56,4 +57,5 @@ xinput set-prop "Synaptics TM3289-021" "libinput Natural Scrolling Enabled" 1
 # dunst -config ~/.config/dunst/dunstrc &
 
 # exec systemd-inhibit --what=handle-power-key i3 
-exec startplasma-x11
+# exec startplasma-x11
+exec qtile start
