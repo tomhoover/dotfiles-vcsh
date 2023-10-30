@@ -197,7 +197,25 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status
+        # status_command i3status -c ~/.config/i3status/i3status.conf
+        status_command i3blocks
+	i3bar_command i3bar --transparency
+	# tray_output none
+	font pango:monospace 13
+	strip_workspace_numbers yes
+	position top
+	colors {
+		background $barcolor
+        	separator #282828
+        	# statusline #ffffff
+
+		#			border		background	text
+        	focused_workspace  	$fws		$fws	$textcolor
+        	inactive_workspace 	$ibgcolor	$ibgcolor	$itextcolor
+        	urgent_workspace   	$ubgcolor	$ubgcolor	$textcolor
+        	# active_workspace   #333333 #5f676a #ffffff
+        	# binding_mode       #2f343a #900000 #ffffff
+	}
 }
 
 # Disable window titlebars entirely
