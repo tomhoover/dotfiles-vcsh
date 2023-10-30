@@ -275,3 +275,18 @@ mode "$mode_gaps_outer" {
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
+
+# window colors
+set $bgcolor #00897b33
+set $ibgcolor #363636
+set $fws #00897b80
+set $barcolor #00897b0d
+set $textcolor #ffffff
+set $itextcolor #969696
+set $ubgcolor #ff0000
+
+# 			border		background	text		indicator
+client.focused		$bgcolor	$bgcolor	$textcolor	$bgcolor
+client.unfocused	$ibgcolor	$ibgcolor	$itextcolor	$ibgcolor
+client.focused_inactive	$ibgcolor	$ibgcolor	$itextcolor	$ibgcolor
+client.urgent		$ubgcolor	$ubgcolor	$textcolor	$ubgcolor
