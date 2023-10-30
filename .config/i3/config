@@ -290,3 +290,7 @@ client.focused		$bgcolor	$bgcolor	$textcolor	$bgcolor
 client.unfocused	$ibgcolor	$ibgcolor	$itextcolor	$ibgcolor
 client.focused_inactive	$ibgcolor	$ibgcolor	$itextcolor	$ibgcolor
 client.urgent		$ubgcolor	$ubgcolor	$textcolor	$ubgcolor
+
+# screen brightness controls
+bindsym XF86MonBrightnessUp exec "xbacklight -inc 5; notify-send 'brightness up'"
+bindsym XF86MonBrightnessDown exec "xbacklight -dec 5; notify-send 'brightness down'"
