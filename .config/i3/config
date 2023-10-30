@@ -294,3 +294,6 @@ client.urgent		$ubgcolor	$ubgcolor	$textcolor	$ubgcolor
 # screen brightness controls
 bindsym XF86MonBrightnessUp exec "xbacklight -inc 5; notify-send 'brightness up'"
 bindsym XF86MonBrightnessDown exec "xbacklight -dec 5; notify-send 'brightness down'"
+
+# display wallpaper
+exec_always feh --bg-fill ~/.config/i3/wallpaper.jpg
