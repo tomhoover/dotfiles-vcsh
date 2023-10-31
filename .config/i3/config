@@ -297,3 +297,8 @@ bindsym XF86MonBrightnessDown exec "xbacklight -dec 5; notify-send 'brightness d
 
 # display wallpaper
 exec_always feh --bg-fill ~/.config/i3/wallpaper.jpg
+
+# assign programs to workspaces ('xprop' to determine class names)
+for_window [class="Spotify"] move to workspace $ws5
+for_window [class="Brave-browser"] move to workspace $ws8
+for_window [class="firefox"] move to workspace $ws9
