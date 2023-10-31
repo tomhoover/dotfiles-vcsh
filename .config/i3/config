@@ -305,3 +305,6 @@ for_window [class="firefox"] move to workspace $ws9
 
 # window compositor
 exec_always picom -f
+
+# keybinding for i3lock
+bindsym $mod+x exec i3lock
