@@ -308,3 +308,26 @@ exec_always picom -f
 
 # keybinding for i3lock
 bindsym $mod+x exec i3lock
+
+##### power button
+set $Locker i3lock && sleep 1
+
+# set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+set $mode_system PowerButton Menu: [L]ock, reload [C]onfig, [R]estart i3, [E]xit (logout), [S]uspend, [H]ibernate
+
+mode "$mode_system" {
+    bindsym l exec --no-startup-id $Locker, mode "default"
+    # reload the configuration file
+    bindsym c exec --no-startup-id reload, mode "default"
+    # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+    bindsym r exec --no-startup-id restart, mode "default"
+    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+    bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
+    bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym XF86PowerOff mode "$mode_system"
