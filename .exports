@@ -63,3 +63,6 @@ export ASDF_DIRENV_NO_TOUCH_RC_FILE=1
 
 # https://cookiecutter.readthedocs.io/en/stable/advanced/user_config.html
 export COOKIECUTTER_CONFIG=~/.config/cookiecutterrc
+
+# https://github.com/mkb79/audible-cli
+export AUDIBLE_CONFIG_DIR=~/.config/audible-cli
