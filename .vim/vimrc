@@ -1,6 +1,9 @@
+" vim: set fdm=marker:
+
 set nocompatible
 
 " Plugins {{{
+
 " https://github.com/huntie/dotfiles/blob/f8a129f8e306c853ab52234f605b1d872b0448b1/vim/.vimrc#L72-L77
 " Install and run vim-plug on first run
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -44,12 +47,14 @@ Plug 'juliosueiras/vim-terraform-completion'
 Plug 'ycm-core/YouCompleteMe', { 'do': './install.py' }
 Plug 'yuezk/vim-js'
 Plug 'maxmellon/vim-jsx-pretty'
+Plug 'dracula/vim', { 'as': 'dracula' }
 call plug#end()
 
 " }}}
 
 set background=dark
 " colorscheme solarized
+colorscheme dracula
 
 " Better tab completion in the commandline.  Make commandline-completion
 " (after you type :) behave more useful and roughly like most shells do.
