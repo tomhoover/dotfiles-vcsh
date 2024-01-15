@@ -221,8 +221,8 @@ alias mr='command mr --minimal --stats'
 # remove .asdf/shims, as well as .pyenv/shims
 alias brew='env PATH="${PATH//:*\/shims:/:}" brew'
 
-alias cat='bat'
-alias cats='bat -A'
-alias catp='fzf --preview "bat --color=always --style=numbers --line-range=:500 {}"'
+type bat >/dev/null 2>&1 && alias cat='bat'
+type bat >/dev/null 2>&1 && alias cats='bat -A'
+type bat >/dev/null 2>&1 && alias catp='fzf --preview "bat --color=always --style=numbers --line-range=:500 {}"'
 
 alias cc='cookiecutter'
