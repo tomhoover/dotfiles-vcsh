@@ -203,23 +203,23 @@ if [ `uname` = Darwin ] ; then
 
     # tailscale
     alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
+
+    # If you're going to build Homebrew formulae from source that link against
+    # Python like Tkinter or NumPy (This is only generally the case if you are a
+    # developer of such a formula, or if you have an EOL version of MacOS for which
+    # prebuilt bottles are no longer provided and you are using such a formula).
+    #
+    # To avoid them accidentally linking against a Pyenv-provided Python, add the
+    # following line into your interactive shell's configuration:
+    # alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
+    # remove .asdf/shims, as well as .pyenv/shims
+    alias brew='env PATH="${PATH//:*\/shims:/:}" brew'
 fi
 
 alias mux='tmuxinator'
 
 # always include --minimal & --stats options when running 'mr'
 alias mr='command mr --minimal --stats'
-
-# If you're going to build Homebrew formulae from source that link against
-# Python like Tkinter or NumPy (This is only generally the case if you are a
-# developer of such a formula, or if you have an EOL version of MacOS for which
-# prebuilt bottles are no longer provided and you are using such a formula).
-#
-# To avoid them accidentally linking against a Pyenv-provided Python, add the
-# following line into your interactive shell's configuration:
-# alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
-# remove .asdf/shims, as well as .pyenv/shims
-alias brew='env PATH="${PATH//:*\/shims:/:}" brew'
 
 type bat >/dev/null 2>&1 && alias cat='bat'
 type bat >/dev/null 2>&1 && alias cats='bat -A'
