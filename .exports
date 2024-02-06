@@ -67,3 +67,6 @@ export COOKIECUTTER_CONFIG=~/.config/cookiecutterrc
 
 # https://github.com/mkb79/audible-cli
 export AUDIBLE_CONFIG_DIR=~/.config/audible-cli
+
+# https://gramps-project.org/wiki/index.php/Gramps_5.1_Wiki_Manual_-_Command_Line#GRAMPSHOME
+export GRAMPSHOME=~/Genealogy/Gramps
