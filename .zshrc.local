@@ -381,11 +381,10 @@ export PATH=$HOME/.local/bin:$PATH
 # fpath=("${ASDF_DIR}"/completions $fpath)
 # [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
 
-# rtx: https://github.com/jdx/rtx
-# eval "$(/Users/tom/.local/share/rtx/bin/rtx activate zsh)"
-#   cd ~/.local/bin && ln -sf ../share/rtx/bin/rtx
-eval "$(rtx completions zsh)"
-export PATH=$HOME/.local/share/rtx/shims:$PATH
+# mise: https://github.com/jdx/mise
+# eval "$(~/.local/bin/mise activate zsh)"
+eval "$(mise completions zsh)"
+export PATH=$HOME/.local/share/mise/shims:$PATH
 
 # insert ~/bin into $PATH before rbenv/pyenv shims
 # path=(~/bin $path)

@@ -47,11 +47,10 @@ export PATH=$HOME/.local/bin:$PATH
 # . "$HOME/.asdf/completions/asdf.bash"
 # . "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/bashrc"
 
-# # rtx: https://github.com/jdx/rtx
-# eval "$(/Users/tom/.local/share/rtx/bin/rtx activate bash)"
-#   cd ~/.local/bin && ln -sf ../share/rtx/bin/rtx
-eval "$(rtx completions bash)"
-export PATH=$HOME/.local/share/rtx/shims:$PATH
+# # mise: https://github.com/jdx/mise
+# eval "$(~/.local/bin/mise activate bash)"
+eval "$(mise completions bash)"
+export PATH=$HOME/.local/share/mise/shims:$PATH
 
 # insert ~/bin in $PATH before rbenv/pyenv shims
 # path=(~/bin $path)
