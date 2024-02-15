@@ -1,3 +1,4 @@
+*
 /.SECRETS
 /.ansible/
 /.boto
@@ -90,6 +91,9 @@
 !/.config/beets/config.yaml
 !/.config/customizepkg
 !/.config/customizepkg/**
+!/.config/direnv
+!/.config/direnv/lib
+!/.config/direnv/lib/*
 !/.config/dotfiles
 !/.config/dotfiles/*
 !/.config/i3
