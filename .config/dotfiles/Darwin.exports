@@ -3,6 +3,10 @@
 # Link Homebrew casks in `/Applications` rather than `~/Applications`
 export HOMEBREW_CASK_OPTS='--appdir=/Applications';
 
+# instruct Homebrew to return to pre-4.0.0 behaviour by cloning the Homebrew/homebrew-core tap during installation
+# https://docs.brew.sh/Installation
+export HOMEBREW_NO_INSTALL_FROM_API=1
+
 # MacPorts
 export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 export MANPATH="/opt/local/share/man:$MANPATH"

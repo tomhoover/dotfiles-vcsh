@@ -201,8 +201,10 @@ if [ `uname` = Darwin ] ; then
     alias stfu="osascript -e 'set volume output muted true'"
     alias pumpitup="osascript -e 'set volume 7'"
 
+    # homebrew automatically installs tailscale cli in /opt/homebrew/bin/tailscale,
+    #   so this alias is no longer needed
     # tailscale
-    alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
+    # alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 
     # If you're going to build Homebrew formulae from source that link against
     # Python like Tkinter or NumPy (This is only generally the case if you are a
@@ -214,6 +216,7 @@ if [ `uname` = Darwin ] ; then
     # alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
     # remove .asdf/shims, as well as .pyenv/shims
     alias brew='env PATH="${PATH//:*\/shims:/:}" brew'
+    # alias brew='env PATH="${PATH//:*\\/shims:/:}" brew'
 fi
 
 alias mux='tmuxinator'
