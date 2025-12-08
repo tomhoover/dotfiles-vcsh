@@ -89,6 +89,8 @@
 !/.config
 !/.config/beets
 !/.config/beets/config.yaml
+!/.config/containers
+!/.config/containers/containers.conf
 !/.config/customizepkg
 !/.config/customizepkg/**
 !/.config/direnv
