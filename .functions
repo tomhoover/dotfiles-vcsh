@@ -331,3 +331,7 @@ function mrg() {
 # function gi() { curl -sL https://www.toptal.com/developers/gitignore/api/$@ ;}
 # zsh:
 function gi() { curl -sLw "\n" https://www.toptal.com/developers/gitignore/api/$@ ;}
+
+# local docker registry query
+function drlist() { curl -sX GET http://bethel:5001/v2/_catalog | jq ;}
+function drtags() { curl -sX GET http://bethel:5001/v2/$1/tags/list | jq ;}
