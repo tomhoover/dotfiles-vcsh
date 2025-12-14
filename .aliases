@@ -117,18 +117,32 @@ alias reload="exec $SHELL -l"
 
 alias diff=colordiff
 
+alias vim_bundle_update='vim +BundleInstall! +BundleClean +q'
+
+# SSH-Agent forwarding breaks when screen is re-attached on a different host
+# http://www.deadman.org/sshscreen.html
+alias Attach='grabssh ; screen -d -R -h 5000'
+alias fixssh='source $HOME/bin/fixssh'
+
+# docker-compose aliases from https://gist.github.com/IronicBadger/362c408d1f2c27a0503cb9252b508140
+# alias dc='docker-compose -f ~/appdata/docker-compose-`hostname`/docker-compose.yml '
+# alias dcpull='docker-compose -f ~/appdata/docker-compose-`hostname`/docker-compose.yml pull --parallel'
+# alias dclogs='docker-compose -f ~/appdata/docker-compose-`hostname`/docker-compose.yml logs -tf --tail="50" '
+
 ### docker
+
 ## containers
 alias dps='docker ps'
 alias dpsa='docker ps -a'
 # force kill and remove all docker containers
 alias drmf='docker rm -f $(docker ps -aq)'
+
 ## images
 # 'dclean "<none>"' to remove all images with a name and/or a tag of <none>. use 'docker images' to list all
 dclean() { docker rmi -f $(docker images | grep $1 | awk '{print $3}'); }
 # delete untagged (dangling) images (i.e. <none>)
 #docker rmi $(docker images -f "dangling=true" -q)
-#
+
 ## volumes
 # If we want to remove all orphaned containers at once we can use this command:
 # docker volume rm $(docker volume ls | awk '{print $2}')
@@ -139,7 +153,7 @@ dclean() { docker rmi -f $(docker images | grep $1 | awk '{print $3}'); }
 # To remove dangling volumes only
 # docker volume rm $(docker volume ls -qf dangling=true)
 #
-alias dtail='docker logs -tf --tail="50" "$@"'
+# alias dtail='docker logs -tf --tail="50" "$@"'
 
 ### other misc aliases from https://gist.github.com/IronicBadger/362c408d1f2c27a0503cb9252b508140
 #alias df='df -h -x aufs -x tmpfs -x udev'
@@ -150,17 +164,14 @@ alias ctop='docker run --rm -ti --name=ctop -v /var/run/docker.sock:/var/run/doc
 # https://github.com/wagoodman/dive
 alias dive='docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock  -v $(which docker):/bin/docker wagoodman/dive:latest'
 
-alias vim_bundle_update='vim +BundleInstall! +BundleClean +q'
-
-# SSH-Agent forwarding breaks when screen is re-attached on a different host
-# http://www.deadman.org/sshscreen.html
-alias Attach='grabssh ; screen -d -R -h 5000'
-alias fixssh='source $HOME/bin/fixssh'
-
-# docker-compose aliases from https://gist.github.com/IronicBadger/362c408d1f2c27a0503cb9252b508140
-alias dc='docker-compose -f ~/appdata/docker-compose-`hostname`/docker-compose.yml '
-alias dcpull='docker-compose -f ~/appdata/docker-compose-`hostname`/docker-compose.yml pull --parallel'
-alias dclogs='docker-compose -f ~/appdata/docker-compose-`hostname`/docker-compose.yml logs -tf --tail="50" '
+# export COMPOSE_FILE=~/docker/$(uname -n)/docker-compose.yml
+alias dc='docker compose'
+alias dcd='docker compose down'
+# alias dcl='docker compose logs -f'
+alias dcl='docker compose logs -ft --tail="50" "$@"'
+# alias dcp='docker compose pull'
+alias dcp='docker compose pull --parallel'
+alias dcu='docker compose up -d'
 
 ### macOS only aliases
 if [ `uname` = Darwin ] ; then
