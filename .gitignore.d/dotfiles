@@ -105,6 +105,8 @@
 !/.config/i3status
 !/.config/i3status/*
 !/.config/liquidpromptrc
+!/.config/mise
+!/.config/mise/config.toml
 !/.config/oh-my-zsh
 !/.config/oh-my-zsh/themes
 !/.config/oh-my-zsh/themes/tch.zsh-theme
