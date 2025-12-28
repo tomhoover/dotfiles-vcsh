@@ -169,8 +169,7 @@ alias dc='docker compose'
 alias dcd='docker compose down'
 # alias dcl='docker compose logs -f'
 alias dcl='docker compose logs -ft --tail="50" "$@"'
-# alias dcp='docker compose pull'
-alias dcp='docker compose pull --parallel'
+alias dcp='docker compose pull'
 alias dcu='docker compose up -d'
 
 ### macOS only aliases
