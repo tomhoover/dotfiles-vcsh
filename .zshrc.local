@@ -361,8 +361,7 @@ unset file;
 # rupa/z
 [ -r ~/.local/share/z.sh ] && source ~/.local/share/z.sh
 
-# ensure ~/.local/bin follows rbenv/pyenv shims in $PATH (i.e. pipx installed
-#   packages are secondary to pyenv shims)
+# ensure ~/.local/bin follows rbenv/pyenv/asdf/mise shims in $PATH (i.e. pipx installed packages are secondary to shims)
 # path=(~/.local/bin $path)
 export PATH=$HOME/.local/bin:$PATH
 
@@ -386,7 +385,7 @@ export PATH=$HOME/.local/bin:$PATH
 eval "$(mise completions zsh)"
 export PATH=$HOME/.local/share/mise/shims:$PATH
 
-# insert ~/bin into $PATH before rbenv/pyenv shims
+# insert ~/bin into $PATH before rbenv/pyenv/asdf/mise shims
 # path=(~/bin $path)
 export PATH=$HOME/bin:$PATH
 
