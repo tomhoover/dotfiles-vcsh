@@ -47,9 +47,9 @@ export PATH=$HOME/.local/bin:$PATH
 # . "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/bashrc"
 
 # # mise: https://github.com/jdx/mise
-# eval "$(~/.local/bin/mise activate bash)"
+eval "$(mise activate bash)"                        # this sets up interactive sessions
 eval "$(mise completions bash)"
-export PATH=$HOME/.local/share/mise/shims:$PATH
+# export PATH=$HOME/.local/share/mise/shims:$PATH   # add mise shims to PATH in .profile, instead of .bashrc and .zshrc:
 
 # insert ~/bin into $PATH before rbenv/pyenv/asdf/mise shims
 # path=(~/bin $path)
