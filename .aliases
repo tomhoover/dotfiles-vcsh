@@ -239,3 +239,10 @@ type bat >/dev/null 2>&1 && alias cats='bat -A'
 type bat >/dev/null 2>&1 && alias catp='fzf --preview "bat --color=always --style=numbers --line-range=:500 {}"'
 
 alias cc='cookiecutter'
+
+# edit all files containg 'TODO' within current directory (including sub-directories)
+if command -v rg2 > /dev/null 2>&1; then # ripgrep installed
+    alias t="vim -c 'cwindow' -q <(rg --vimgrep 'TODO')"
+else
+    alias t="vim -c 'cwindow' -q <(grep -nr 'TODO' ./*)"
+fi
