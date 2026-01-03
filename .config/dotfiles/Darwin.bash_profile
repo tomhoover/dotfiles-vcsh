@@ -1,4 +1,4 @@
-# echo " ***** Darwin.bash_profile"
+export DARWIN_BASH_PROFILE_LOADED=1
 
 # Case-insensitive globbing (used in pathname expansion)
 shopt -s nocaseglob;

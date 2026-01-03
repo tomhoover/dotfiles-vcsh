@@ -1,4 +1,4 @@
-# echo " ***** .zshrc.local"
+export ZSHRC_LOCAL_LOADED=1
 
 # Filename:      /etc/skel/.zshrc
 # Purpose:       config file for zsh (z shell)

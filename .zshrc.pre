@@ -1,4 +1,4 @@
-# echo " ***** .zshrc.pre"
+export ZSHRC_PRE_LOADED=1
 
 # GRML_DISPLAY_BATTERY=1
 

@@ -1,4 +1,4 @@
-# echo " ***** .bash_profile"
+export BASH_PROFILE_LOADED=1
 
 MYHOST=$(uname -n | sed 's/\..*//')     # alternative to $(hostname -s), as arch does not install 'hostname' by default
 

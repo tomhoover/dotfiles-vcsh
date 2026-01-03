@@ -1,3 +1,5 @@
+export FZF_BASH_LOADED=1
+
 if [[ -e /opt/homebrew/opt/fzf/bin/fzf ]]; then
     # Setup fzf
     # ---------

@@ -1,4 +1,4 @@
-# echo " ***** theophilus.zshrc"
+export THEOPHILUS_ZSHRC_LOADED=1
 
 # fuzzy finder
 # https://github.com/junegunn/fzf

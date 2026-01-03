@@ -1,5 +1,5 @@
-# echo " ***** .profile"
 # shellcheck source=/dev/null
+export PROFILE_LOADED=1
 
 export PATH=/usr/local/sbin:"$PATH"
 MYHOST=$(uname -n | sed 's/\..*//')     # alternative to $(hostname -s), as arch does not install 'hostname' by default

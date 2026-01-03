@@ -1,3 +1,5 @@
+export EXPORTS_LOADED=1
+
 # Make vim the default editor.
 export EDITOR='vim';
 

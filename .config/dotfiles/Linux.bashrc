@@ -1,4 +1,4 @@
-# echo " ***** Linux.bashrc"
+export LINUX_BASHRC_LOADED=1
 
 # If not running interactively, don't do anything
 case $- in

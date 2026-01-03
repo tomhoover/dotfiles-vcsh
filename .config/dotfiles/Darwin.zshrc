@@ -1,4 +1,4 @@
-# echo " ***** Darwin.zshrc"
+export DARWIN_ZSHRC_LOADED=1
 
 fpath=($(brew --prefix)/share/zsh/site-functions $fpath)
 # ==> zsh-completions
