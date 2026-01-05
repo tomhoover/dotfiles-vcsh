@@ -1,3 +1,5 @@
+echo "$PATH" >> /tmp/shell-init.txt
+echo "$(date '+%Y-%m-%d %H:%M') :: :: DARWIN_BASH_PROFILE_LOADED" >> /tmp/shell-init.txt
 export DARWIN_BASH_PROFILE_LOADED=1
 
 # Case-insensitive globbing (used in pathname expansion)
@@ -45,3 +47,5 @@ complete -W "NSGlobalDomain" defaults;
 
 # Add `killall` tab completion for common apps
 complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal Twitter" killall;
+
+echo "$(date '+%Y-%m-%d %H:%M') :: :: DARWIN_BASH_PROFILE_ENDED" >> /tmp/shell-init.txt

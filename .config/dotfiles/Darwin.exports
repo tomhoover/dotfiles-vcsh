@@ -1,3 +1,5 @@
+echo "$PATH" >> /tmp/shell-init.txt
+echo "$(date '+%Y-%m-%d %H:%M') :: :: DARWIN_EXPORTS_LOADED" >> /tmp/shell-init.txt
 export DARWIN_EXPORTS_LOADED=1
 
 # Link Homebrew casks in `/Applications` rather than `~/Applications`
@@ -10,3 +12,5 @@ export HOMEBREW_NO_INSTALL_FROM_API=1
 # MacPorts
 export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 export MANPATH="/opt/local/share/man:$MANPATH"
+
+echo "$(date '+%Y-%m-%d %H:%M') :: :: DARWIN_EXPORTS_ENDED" >> /tmp/shell-init.txt

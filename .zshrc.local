@@ -1,3 +1,5 @@
+echo "$PATH" >> /tmp/shell-init.txt
+echo "$(date '+%Y-%m-%d %H:%M') :: ZSHRC_LOCAL_LOADED" >> /tmp/shell-init.txt
 export ZSHRC_LOCAL_LOADED=1
 
 # Filename:      /etc/skel/.zshrc
@@ -415,3 +417,6 @@ if command -v register-python-argcomplete > /dev/null; then eval "$(register-pyt
 
 # Only load Liquid Prompt in interactive shells, not from a script or from scp
 [[ $- = *i* ]] && source ~/.local/share/liquidprompt
+
+echo "$PATH" >> /tmp/shell-init.txt
+echo "$(date '+%Y-%m-%d %H:%M') :: ZSHRC_LOCAL_ENDED" >> /tmp/shell-init.txt

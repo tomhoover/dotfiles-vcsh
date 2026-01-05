@@ -1,3 +1,5 @@
+echo "$PATH" >> /tmp/shell-init.txt
+echo "$(date '+%Y-%m-%d %H:%M') :: ZSHRC_LOADED" >> /tmp/shell-init.txt
 export ZSHRC_LOADED=1
 # Filename:      /etc/zsh/zshrc
 # Purpose:       config file for zsh (z shell)

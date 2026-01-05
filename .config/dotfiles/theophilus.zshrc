@@ -1,3 +1,5 @@
+echo "$PATH" >> /tmp/shell-init.txt
+echo "$(date '+%Y-%m-%d %H:%M') :: :: THEOPHILUS_ZSHRC_LOADED" >> /tmp/shell-init.txt
 export THEOPHILUS_ZSHRC_LOADED=1
 
 # fuzzy finder
@@ -11,3 +13,5 @@ alias pmsearch="pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -ro
 
 # If you want to add package file list in preview - may be a bit slower updating preview window (make sure you run pacman -Fy at least once before invocation to sync the pacman file database):
 # alias pmfiles="pacman -Slq | fzf --multi --preview 'cat <(pacman -Si {1}) <(pacman -Fl {1} | awk "{print \$2}")' | xargs -ro sudo pacman -S"
+
+echo "$(date '+%Y-%m-%d %H:%M') :: :: THEOPHILUS_ZSHRC_ENDED" >> /tmp/shell-init.txt

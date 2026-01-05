@@ -1,4 +1,6 @@
 # shellcheck disable=SC1090,SC1091
+echo "$PATH" >> /tmp/shell-init.txt
+echo "$(date '+%Y-%m-%d %H:%M') :: BASHRC_LOADED" >> /tmp/shell-init.txt
 export BASHRC_LOADED=1
 
 MYHOST=$(uname -n | sed 's/\..*//')     # alternative to $(hostname -s), as arch does not install 'hostname' by default

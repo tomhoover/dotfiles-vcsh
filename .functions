@@ -1,3 +1,5 @@
+echo "$PATH" >> /tmp/shell-init.txt
+echo "$(date '+%Y-%m-%d %H:%M') :: :: FUNCTIONS_LOADED" >> /tmp/shell-init.txt
 export FUNCTIONS_LOADED=1
 
 # Simple calculator

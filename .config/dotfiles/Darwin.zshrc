@@ -1,3 +1,5 @@
+echo "$PATH" >> /tmp/shell-init.txt
+echo "$(date '+%Y-%m-%d %H:%M') :: :: DARWIN_ZSHRC_LOADED" >> /tmp/shell-init.txt
 export DARWIN_ZSHRC_LOADED=1
 
 fpath=($(brew --prefix)/share/zsh/site-functions $fpath)
@@ -29,6 +31,7 @@ if [ -x /usr/bin/dircolors ]; then test -r ~/.dircolors && eval "$(dircolors -b 
 # https://github.com/seebi/dircolors-solarized/issues/10
 export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
 
+# iTerm2
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 # # https://github.com/Homebrew/homebrew-command-not-found
@@ -44,4 +47,7 @@ if [ -f "$HOMEBREW_COMMAND_NOT_FOUND_HANDLER" ]; then
   source "$HOMEBREW_COMMAND_NOT_FOUND_HANDLER";
 fi
 
-export PATH="$HOME/bin:$HOME/.local/share/mise/shims:/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+# export PATH="$HOME/bin:$HOME/.local/share/mise/shims:/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+# export PATH="$HOME/bin:/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+
+echo "$(date '+%Y-%m-%d %H:%M') :: :: DARWIN_ZSHRC_ENDED" >> /tmp/shell-init.txt

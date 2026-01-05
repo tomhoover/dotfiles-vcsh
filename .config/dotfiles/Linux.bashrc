@@ -1,3 +1,5 @@
+echo "$PATH" >> /tmp/shell-init.txt
+echo "$(date '+%Y-%m-%d %H:%M') :: :: LINUX_BASHRC_LOADED" >> /tmp/shell-init.txt
 export LINUX_BASHRC_LOADED=1
 
 # If not running interactively, don't do anything
@@ -113,3 +115,5 @@ fi
 
 # Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
 [ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2 | tr ' ' '\n')" scp sftp ssh;
+
+echo "$(date '+%Y-%m-%d %H:%M') :: :: LINUX_BASHRC_ENDED" >> /tmp/shell-init.txt
