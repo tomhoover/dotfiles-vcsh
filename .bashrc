@@ -11,15 +11,15 @@ MYHOST=$(uname -n | sed 's/\..*//')     # alternative to $(hostname -s), as arch
 
 # Load the shell dotfiles, and then some:
 # * ~/.extra can be used for other settings you don’t want to commit.
-for file in ~/.{aliases,functions}; do
+for file in ~/.{aliases,exports,functions,extra,SECRETS}; do
     [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 
-for file in ~/.config/dotfiles/$(uname).{aliases,functions}; do
+for file in ~/.config/dotfiles/$(uname).{aliases,exports,functions,extra}; do
     [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 
-for file in ~/.config/dotfiles/${MYHOST}.{aliases,functions}; do
+for file in ~/.config/dotfiles/${MYHOST}.{aliases,exports,functions,extra}; do
     [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
@@ -28,7 +28,6 @@ unset file;
 [ -r ~/.local/share/z.sh ] && source ~/.local/share/z.sh
 
 # ensure ~/.local/bin follows rbenv/pyenv/asdf/mise shims in $PATH (i.e. pipx installed packages are secondary to shims)
-# path=(~/.local/bin $path)
 export PATH=$HOME/.local/bin:$PATH
 
 # # rbenv
