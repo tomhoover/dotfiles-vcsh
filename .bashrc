@@ -11,6 +11,15 @@ MYHOST=$(uname -n | sed 's/\..*//')     # alternative to $(hostname -s), as arch
 # exit if non-interactive shell
 [[ $- != *i* ]] && return
 
+# https://github.com/seebi/dircolors-solarized (so solarized colors are used when accessing machine with iTerm2/ssh)
+#eval $(dircolors $HOME/src/github.com/seebi/dircolors-solarized/dircolors.ansi-universal)
+# shellcheck disable=SC2015
+if [ -x /usr/bin/dircolors ]; then test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"; fi
+
+# enable bash-completion to work with git aliases
+# https://stackoverflow.com/questions/342969/how-do-i-get-bash-completion-to-work-with-aliases
+__git_complete g __git_main
+
 # Load the shell dotfiles, and then some:
 # * ~/.extra can be used for other settings you don’t want to commit.
 for file in ~/.{aliases,exports,functions,extra,SECRETS}; do
@@ -56,22 +65,6 @@ eval "$(mise completions bash)"
 # path=(~/bin $path)
 export PATH=$HOME/bin:$PATH
 
-# https://github.com/seebi/dircolors-solarized (so solarized colors are used when accessing machine with iTerm2/ssh)
-#eval $(dircolors $HOME/src/github.com/seebi/dircolors-solarized/dircolors.ansi-universal)
-# shellcheck disable=SC2015
-if [ -x /usr/bin/dircolors ]; then test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"; fi
-
-# Solarized colorscheme for macOS `ls` environment variable:
-# https://github.com/seebi/dircolors-solarized/issues/10
-export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
-
-# enable bash-completion to work with git aliases
-# https://stackoverflow.com/questions/342969/how-do-i-get-bash-completion-to-work-with-aliases
-__git_complete g __git_main
-
-# direnv: https://direnv.net
-if command -v direnv > /dev/null; then eval "$(direnv hook bash)"; fi
-
 # fuzzy finder
 # https://github.com/junegunn/fzf
 [ -f ~/.config/dotfiles/fzf.bash ] && source ~/.config/dotfiles/fzf.bash
@@ -85,7 +78,10 @@ if command -v rg > /dev/null; then export FZF_DEFAULT_COMMAND='rg --files'; fi
 [ -r ~/.config/dotfiles/"${MYHOST}".bashrc ] && source ~/.config/dotfiles/"${MYHOST}".bashrc
 
 # enable pipx completion
-eval "$(register-python-argcomplete pipx)"
+if command -v register-python-argcomplete > /dev/null; then eval "$(register-python-argcomplete pipx)"; fi
+
+# direnv: https://direnv.net
+if command -v direnv > /dev/null; then eval "$(direnv hook bash)"; fi
 
 # Only load Liquid Prompt in interactive shells, not from a script or from scp
 [[ $- = *i* ]] && source ~/.local/share/liquidprompt

@@ -2,7 +2,6 @@ echo "$PATH" >> /tmp/shell-init.txt
 echo "$(date '+%Y-%m-%d %H:%M') :: :: DARWIN_ZSHRC_LOADED" >> /tmp/shell-init.txt
 export DARWIN_ZSHRC_LOADED=1
 
-fpath=($(brew --prefix)/share/zsh/site-functions $fpath)
 # ==> zsh-completions
 # To activate these completions, add the following to your .zshrc:
 #
@@ -22,6 +21,7 @@ fpath=($(brew --prefix)/share/zsh/site-functions $fpath)
 #
 #   chmod go-w '/opt/homebrew/share'
 #   chmod -R go-w '/opt/homebrew/share/zsh'
+fpath=($(brew --prefix)/share/zsh/site-functions $fpath)
 
 # https://github.com/seebi/dircolors-solarized (so solarized colors are used when accessing machine with iTerm2/ssh)
 #eval `dircolors $HOME/src/github.com/seebi/dircolors-solarized/dircolors.ansi-universal`
@@ -41,7 +41,6 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 # Homebrew
 # To enable command-not-found
 # Add the following lines to ~/.zshrc
-
 HOMEBREW_COMMAND_NOT_FOUND_HANDLER="$(brew --repository)/Library/Homebrew/command-not-found/handler.sh"
 if [ -f "$HOMEBREW_COMMAND_NOT_FOUND_HANDLER" ]; then
   source "$HOMEBREW_COMMAND_NOT_FOUND_HANDLER";

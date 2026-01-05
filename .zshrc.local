@@ -345,6 +345,13 @@ MYHOST=$(uname -n | sed 's/\..*//')     # alternative to $(hostname -s), as arch
 HISTSIZE=100000
 SAVEHIST=1000000
 
+fpath=("$HOME"/.zsh/completion $fpath)
+# autoload -Uz compinit && compinit
+# https://stackoverflow.com/questions/67136714/how-to-properly-call-compinit-and-bashcompinit-in-zsh
+autoload -Uz compinit bashcompinit
+compinit
+bashcompinit
+
 # Load the shell dotfiles, and then some:
 # * ~/.extra can be used for other settings you don't want to commit.
 for file in ~/.{aliases,exports,functions,extra,SECRETS}; do
@@ -390,9 +397,6 @@ eval "$(mise completions zsh)"
 # path=(~/bin $path)
 export PATH=$HOME/bin:$PATH
 
-# direnv: https://direnv.net
-if command -v direnv > /dev/null; then eval "$(direnv hook zsh)"; fi
-
 # fuzzy finder
 # https://github.com/junegunn/fzf
 [ -f ~/.config/dotfiles/fzf.zsh ] && source ~/.config/dotfiles/fzf.zsh
@@ -402,18 +406,14 @@ if command -v direnv > /dev/null; then eval "$(direnv hook zsh)"; fi
 
 if command -v rg > /dev/null; then export FZF_DEFAULT_COMMAND='rg --files'; fi
 
+# enable pipx completion
+if command -v register-python-argcomplete > /dev/null; then eval "$(register-python-argcomplete pipx)"; fi
+
 [ -r ~/.config/dotfiles/"$(uname)".zshrc ] && source ~/.config/dotfiles/"$(uname)".zshrc
 [ -r ~/.config/dotfiles/"${MYHOST}".zshrc ] && source ~/.config/dotfiles/"${MYHOST}".zshrc
 
-fpath=("$HOME"/.zsh/completion $fpath)
-# autoload -Uz compinit && compinit
-# https://stackoverflow.com/questions/67136714/how-to-properly-call-compinit-and-bashcompinit-in-zsh
-autoload -Uz compinit bashcompinit
-compinit
-bashcompinit
-
-# enable pipx completion
-if command -v register-python-argcomplete > /dev/null; then eval "$(register-python-argcomplete pipx)"; fi
+# direnv: https://direnv.net
+if command -v direnv > /dev/null; then eval "$(direnv hook zsh)"; fi
 
 # Only load Liquid Prompt in interactive shells, not from a script or from scp
 [[ $- = *i* ]] && source ~/.local/share/liquidprompt

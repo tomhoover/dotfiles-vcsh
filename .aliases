@@ -7,14 +7,14 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
-alias ~="cd ~" # `cd` is probably faster to type though
-alias -- -="cd -"
+# alias ~="cd ~" # `cd` is probably faster to type though
+# alias -- -="cd -"
 
 # Shortcuts
-alias d="cd ~/Documents/Dropbox"
-alias dl="cd ~/Downloads"
-alias dt="cd ~/Desktop"
-alias p="cd ~/projects"
+# alias d="cd ~/Documents/Dropbox"
+# alias dl="cd ~/Downloads"
+# alias dt="cd ~/Desktop"
+# alias p="cd ~/projects"
 alias g="git"
 #alias gg='git log --oneline --abbrev-commit --all --graph --decorate --color'
 alias h="history"
@@ -40,7 +40,7 @@ alias ll="LC_ALL=C /bin/ls -lF ${colorflag}"
 alias lla="LC_ALL=C /bin/ls -lAF ${colorflag}"
 
 # Always use color output for `ls`
-alias ls="LC_ALL=C command /bin/ls ${colorflag}"
+# alias ls="LC_ALL=C command /bin/ls ${colorflag}"
 
 # List only directories
 alias lsd="LC_ALL=C /bin/ls -lF ${colorflag} | grep --color=never '^d'"
@@ -49,10 +49,10 @@ alias lsd="LC_ALL=C /bin/ls -lF ${colorflag} | grep --color=never '^d'"
 alias sudo='sudo '
 
 # Get week number
-alias week='date +%V'
+# alias week='date +%V'
 
 # Stopwatch
-alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
+# alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
 
 # IP addresses
 # alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
@@ -65,12 +65,6 @@ alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET
 
 # Canonical hex dump; some systems have this symlinked
 command -v hd > /dev/null || alias hd="hexdump -C"
-
-# OS X has no `md5sum`, so use `md5` as a fallback
-command -v md5sum > /dev/null || alias md5sum="md5"
-
-# OS X has no `sha1sum`, so use `shasum` as a fallback
-command -v sha1sum > /dev/null || alias sha1sum="shasum"
 
 # JavaScriptCore REPL
 jscbin="/System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Resources/jsc";
@@ -242,7 +236,7 @@ type bat >/dev/null 2>&1 && alias catp='fzf --preview "bat --color=always --styl
 alias cc='cookiecutter'
 
 # edit all files containg 'TODO' within current directory (including sub-directories)
-if command -v rg2 > /dev/null 2>&1; then # ripgrep installed
+if command -v rg > /dev/null 2>&1; then # ripgrep installed
     alias t="vim -c 'cwindow' -q <(rg --vimgrep 'TODO')"
 else
     alias t="vim -c 'cwindow' -q <(grep -nr 'TODO' ./*)"
