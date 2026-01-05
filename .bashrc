@@ -58,7 +58,7 @@ export PATH=$HOME/.local/bin:$PATH
 
 # # mise: https://github.com/jdx/mise
 eval "$(mise activate bash)"                        # this sets up interactive sessions
-eval "$(mise completions bash)"
+# eval "$(mise completion bash)"
 # export PATH=$HOME/.local/share/mise/shims:$PATH   # add mise shims to PATH in .profile, instead of .bashrc and .zshrc:
 
 # insert ~/bin into $PATH before rbenv/pyenv/asdf/mise shims

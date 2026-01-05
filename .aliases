@@ -241,3 +241,6 @@ if command -v rg > /dev/null 2>&1; then # ripgrep installed
 else
     alias t="vim -c 'cwindow' -q <(grep -nr 'TODO' ./*)"
 fi
+
+# mise x|exec
+alias x="mise x --"
