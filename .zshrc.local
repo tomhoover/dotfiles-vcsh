@@ -393,6 +393,10 @@ eval "$(mise activate zsh)"                         # this sets up interactive s
 # eval "$(mise completion zsh)"
 # export PATH=$HOME/.local/share/mise/shims:$PATH   # add mise shims to PATH in .profile, instead of .bashrc and .zshrc:
 
+# uv/uvx shell autocompletion
+eval "$(uv generate-shell-completion zsh)"
+eval "$(uvx --generate-shell-completion zsh)"
+
 # insert ~/bin into $PATH before rbenv/pyenv/asdf/mise shims
 # path=(~/bin $path)
 export PATH=$HOME/bin:$PATH

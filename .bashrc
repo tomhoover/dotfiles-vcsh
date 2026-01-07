@@ -56,10 +56,14 @@ export PATH=$HOME/.local/bin:$PATH
 # . "$HOME/.asdf/completions/asdf.bash"
 # . "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/bashrc"
 
-# # mise: https://github.com/jdx/mise
+# mise: https://github.com/jdx/mise
 eval "$(mise activate bash)"                        # this sets up interactive sessions
 # eval "$(mise completion bash)"
 # export PATH=$HOME/.local/share/mise/shims:$PATH   # add mise shims to PATH in .profile, instead of .bashrc and .zshrc:
+
+# uv/uvx shell autocompletion
+eval "$(uv generate-shell-completion bash)"
+eval "$(uvx --generate-shell-completion bash)"
 
 # insert ~/bin into $PATH before rbenv/pyenv/asdf/mise shims
 # path=(~/bin $path)
