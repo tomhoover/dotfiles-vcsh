@@ -1,6 +1,38 @@
++data/
++data/archive/*
+-data/*
+
+-*/.direnv/
+-*/.sync/Archive/
+
++.config/
++.config/vcsh/
++.config/vcsh/repo.d/
++.config/vcsh/repo.d/OrcaSlicer.git/*
++.config/vcsh/repo.d/QIDIStudio.git/*
++.config/vcsh/repo.d/crontab.git/*
++.config/vcsh/repo.d/dotfiles.git/*
++.config/vcsh/repo.d/git.git/*
++.config/vcsh/repo.d/mr.git/*
++.config/vcsh/repo.d/private.git/*
++.config/vcsh/repo.d/vault.git/*
++git/
++src/
+
+-.CloudStationBackup/
+-.ansible_async/
+-.cocoapods/
+-.config/iterm2/sockets/secrets
 -.config/op/op-daemon.sock
+-.config/tmux/plugins/
+-.docker/
+-.duplicacy-backups/
+-.duplicacy-web/
 -.duplicacy/cache/
 -.duplicacy/logs/
+-.duplicacy2/
+-.duplicacy3/
+-.gem/
 -.gnupg/S.dirmngr
 -.gnupg/S.gpg-agent
 -.gnupg/S.gpg-agent.browser
@@ -8,25 +40,61 @@
 -.gnupg/S.gpg-agent.ssh
 -.gnupg/S.scdaemon
 -.local/pipx-py38/
+-.local/pipx.old/
+-.local/pipx.old2/
+-.local/pipx.old3/
+-.local/pipx/py/
+-.local/pipx/shared/
+-.local/pipx/shared/lib/
+-.local/pipx/venvs/
 -.local/pipx2/
+-.local/share/containers/podman/machine/applehv/podman-machine-default-ignition.sock
+-.local/share/direnv/allow/
+-.local/share/mise/downloads/
+-.local/share/mise/installs/
+-.local/share/mise/shims/
+-.local/share/nvim/
+-.local/share/uv/
+-.macports/history
+-.shiv/
+-.stack.old/
 -.stack/
+-.vim/plugged/
 -.vim/tmp/swap/
+-.virtualenvs/
+-.vscode/extensions/
 -Applications/
 -Backup/
--Downloads/
--Dropbox/
+-GNS3/
 -Mylio/
--data/
+-OneDrive/
+-RIL/
+-ResilioSync/
+-Sync/
+-Syncthing/
+-Syno-Shared/
+-Syno-dl/
+-Syno-doc/
+-Synology/
+-VirtualBox VMs/
+-Work_Documents/
+-pkg/
 -rdiff-backup-2.0.5/
+-src.orig/
 -src/HugoBasicExample/
 -src/github.com/
+-src2/
 -tmp/
-
--*/.sync/Archive/
 
 # Exclude permission denied
 -.config-backup/
 -.config-backup2/
+-git/.Spotlight-V100/
+-git/.Trashes/
+-git/.fseventsd/
+-src/.Spotlight-V100/
+-src/.Trashes/
+-src/.fseventsd/
 
 #### ----------------------- Generic Transients -----------------------  ####
 
@@ -41,8 +109,11 @@ e:(?i)/\.?cache/.*$
 # Preferences and old-school shite we don't care about - e.g .dropbox
 e:\.(Trash|SynologyDrive|ac6|oracle_jre_usage|pia_manager|stm\w*|eclipse|dropbox)/.*$
 
-# Source cobtrol - .git/.svn/.hg
+# Source control - .git/.svn/.hg
 e:\.(svn|git|hg)/.*$
+
+# Resilio Sync placeholder files
+e:\.(rsls|rslsa|rslsd|rslsf|rslsi|rslsp|rslss|rslsv|rslsz)$
 
 # SQLite index files
 e:.sqlite-(shm|wal)$
@@ -67,14 +138,14 @@ e:.*/Envelope Index(-wal|-shm)?$
 
 # # Important apps that seem to keep user data there. Why!?
 +Library/Application Support/1Password/*
+-Library/Application Support/DEVONthink 3/Abbyy/
++Library/Application Support/DEVONthink 3/*
 # +Library/Application Support/BBEdit/*
 # +Library/Application Support/Viscosity/*
 # +Library/Application Support/CampoSanto/*
 # +Library/Application Support/Transmit/*
 # +Library/Application Support/minecraft/
 # +Library/Application Support/minecraft/saves/*
--Library/Application Support/DEVONthink 3/Abbyy/
-+Library/Application Support/DEVONthink 3/*
 
 # # Nothing else from Application Support
 -Library/Application Support/*
@@ -129,7 +200,6 @@ e:.*/Envelope Index(-wal|-shm)?$
 # Catalina+
 +Pictures/Photos Library.photoslibrary/originals/*
 +Pictures/Photos Library.photoslibrary/database/*
-
 # added by tch
 +Pictures/Photos Library.photoslibrary/Masters.legacy/*
 
@@ -156,5 +226,17 @@ e:.*/Envelope Index(-wal|-shm)?$
 -Box/*
 
 #### ------------------------- Re-obtainable --------------------------  <<<<
+
+#### -------------------------- external zfs --------------------------  <<<<
+
++/Volumes/external/
++/Volumes/external/Databases/*
++/Volumes/external/docker/*
++/Volumes/external/git/*
++/Volumes/external/podman/*
++/Volumes/external/src/*
+-/Volumes/external/*
+
+#### -------------------------- external zfs --------------------------  >>>>
 
 # If a match is not found - the item will be included as we have both + and - rules.
