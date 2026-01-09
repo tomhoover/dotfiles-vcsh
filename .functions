@@ -281,7 +281,7 @@ function n() {
   : "${note_dir:?'note_dir env var not set'}"
   if [ $# -eq 0 ]; then
     local file
-    file=$(find "${note_dir}" -name "*.md" | \
+    file=$(find -L "${note_dir}" -name "*.md" | \
       sed -e "s|${note_dir}/||" | \
       sed -e 's/\.md$//' | \
       fzf \
@@ -339,3 +339,12 @@ function gi() { curl -sLw "\n" https://www.toptal.com/developers/gitignore/api/$
 # local docker registry query
 function drlist() { curl -sX GET http://bethel:5001/v2/_catalog | jq ;}
 function drtags() { curl -sX GET http://bethel:5001/v2/$1/tags/list | jq ;}
+
+# grep mrconfig
+function gmr() {
+    grep -in "$@" ~/.mrconfig ~/src/.mrconfig ~/src/gh/.mrconfig ~/src/3dPrinting/.mrconfig ~/.config/mr/*
+}
+# grep dotfiles
+function gdot() {
+    grep -in "$@" ~/.profile ~/.bash_profile ~/.bashrc ~/.zshenv ~/.zprofile ~/.zshrc.pre ~/.zshrc ~/.zshrc.local ~/.config/dotfiles/* ~/.SECRETS ~/.aliases ~/.exports ~/.extra ~/.functions
+}
