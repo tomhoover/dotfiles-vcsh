@@ -39,6 +39,12 @@ alias ll="LC_ALL=C /bin/ls -lF ${colorflag}"
 # List all files colorized in long format, including dot files
 alias lla="LC_ALL=C /bin/ls -lAF ${colorflag}"
 
+# List all files colorized in long format, reverse sorted by date (newest at bottom)
+alias ltr="LC_ALL=C /bin/ls -ltrF ${colorflag}"
+
+# List all files colorized in long format, reverse sorted by date (newest at bottom), including dot files
+alias ltra="LC_ALL=C /bin/ls -ltrAF ${colorflag}"
+
 # Always use color output for `ls`
 # alias ls="LC_ALL=C command /bin/ls ${colorflag}"
 
