@@ -309,6 +309,23 @@ function n() {
 }
 # complete -f _n n
 
+# journal entry
+function j() {
+    : "${NOTE_DIR:?'NOTE_DIR env var not set'}"
+    local note_file="${NOTE_DIR}/$(date '+%Y').md"
+    local date_time="$(date '+%Y-%m-%d %H:%M')"
+    printf "\n[%s]\n\n" "${date_time}" >> "${note_file}"
+    if [ "$#" -eq 0 ]; then
+        if [ -p "/dev/stdin" ]; then
+            (cat; printf "\n\n") >> "${note_file}"
+        else
+            ${EDITOR:-vim} +10000 "${note_file}"
+        fi
+    else
+        printf "%s\n\n" "$*" >> "${note_file}"
+    fi
+}
+
 function hl() {
     # cd ~/fin/hledger/hoover || return
     # ./export.sh && [ -f "$1.journal" ] && hledger -s -f "$1.journal" "${@:2}" || echo "Syntax: hl xxx[.journal] xx xx xx"
