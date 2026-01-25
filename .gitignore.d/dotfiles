@@ -114,6 +114,8 @@
 !/.config/paru/*
 !/.config/qtile
 !/.config/qtile/*
+!/.config/sanoid
+!/.config/sanoid/*
 !/.config/systemd
 !/.config/systemd/**
 /.config/systemd/user/default.target.wants/
