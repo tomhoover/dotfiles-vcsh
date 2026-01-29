@@ -1,26 +1,26 @@
-[$HOME/.config/vcsh/repo.d/crontab.git]
-checkout = vcsh clone 'https://github.com/tomhoover/crontab-vcsh.git' 'crontab'
-update = check origin && vcsh run "$MR_REPO" git pull "$@"
-skip = root
-fetch = vcsh crontab fetch --all --prune
-push =
-    check origin    && vcsh crontab push origin master   || true
-    check gitolite  && vcsh crontab push --all gitolite  || true
-    check localhost && vcsh crontab push --all localhost || true
-fixups =
-    chmod -R go= $HOME/.config
-    cd "$MR_REPO"
-    grep -q '\[remote "bethel"\]'    config && vcsh crontab remote remove bethel    || true
-    grep -q '\[remote "gitea"\]'     config && vcsh crontab remote remove gitea     || true
-    grep -q '\[remote "gitolite1"\]' config && vcsh crontab remote remove gitolite1 || true
-    grep -q '\[remote "gitolite2"\]' config && vcsh crontab remote remove gitolite2 || true
-    grep -q '\[remote "gitolite"\]'  config ||   vcsh crontab remote add gitolite  gitolite:pub/crontab-vcsh.git
-    grep -q '\[remote "localhost"\]' config || ( vcsh crontab remote add localhost $HOME/git/crontab-vcsh.git && git init --bare $HOME/git/crontab-vcsh.git )
-    cd
-    [ .config/crontab/$hostname.crontab -nt /etc/crontab ] && echo "" && echo "be sure to '`tput setaf 1`sudo cp $HOME/.config/crontab/$hostname.crontab /etc/crontab`tput sgr0`'" || true
-    [ -f .config/crontab/$hostname-crond ] && [ ! -f /etc/cron.d/$hostname-crond ] && echo "" && echo "be sure to '`tput setaf 1`sudo cp $HOME/.config/crontab/$hostname-crond /etc/cron.d`tput sgr0`'" || true
-    [ .config/crontab/$hostname-crond -nt /etc/cron.d/$hostname-crond ]            && echo "" && echo "be sure to '`tput setaf 1`sudo cp $HOME/.config/crontab/$hostname-crond /etc/cron.d`tput sgr0`'" || true
-    [ -f .config/crontab/$hostname.$whoami.crontab ] && crontab .config/crontab/$hostname.$whoami.crontab || true
+# [$HOME/.config/vcsh/repo.d/crontab.git]
+# checkout = vcsh clone 'https://github.com/tomhoover/crontab-vcsh.git' 'crontab'
+# update = check origin && vcsh run "$MR_REPO" git pull "$@"
+# skip = root
+# fetch = vcsh crontab fetch --all --prune
+# push =
+#     check origin    && vcsh crontab push origin master   || true
+#     check gitolite  && vcsh crontab push --all gitolite  || true
+#     check localhost && vcsh crontab push --all localhost || true
+# fixups =
+#     chmod -R go= $HOME/.config
+#     cd "$MR_REPO"
+#     grep -q '\[remote "bethel"\]'    config && vcsh crontab remote remove bethel    || true
+#     grep -q '\[remote "gitea"\]'     config && vcsh crontab remote remove gitea     || true
+#     grep -q '\[remote "gitolite1"\]' config && vcsh crontab remote remove gitolite1 || true
+#     grep -q '\[remote "gitolite2"\]' config && vcsh crontab remote remove gitolite2 || true
+#     grep -q '\[remote "gitolite"\]'  config ||   vcsh crontab remote add gitolite  gitolite:pub/crontab-vcsh.git
+#     grep -q '\[remote "localhost"\]' config || ( vcsh crontab remote add localhost $HOME/git/crontab-vcsh.git && git init --bare $HOME/git/crontab-vcsh.git )
+#     cd "$HOME"
+#     [ .config/crontab/$hostname.crontab -nt /etc/crontab ] && echo "" && echo "be sure to '`tput setaf 1`sudo cp $HOME/.config/crontab/$hostname.crontab /etc/crontab`tput sgr0`'" || true
+#     [ -f .config/crontab/$hostname-crond ] && [ ! -f /etc/cron.d/$hostname-crond ] && echo "" && echo "be sure to '`tput setaf 1`sudo cp $HOME/.config/crontab/$hostname-crond /etc/cron.d`tput sgr0`'" || true
+#     [ .config/crontab/$hostname-crond -nt /etc/cron.d/$hostname-crond ]            && echo "" && echo "be sure to '`tput setaf 1`sudo cp $HOME/.config/crontab/$hostname-crond /etc/cron.d`tput sgr0`'" || true
+#     [ -f .config/crontab/$hostname.$whoami.crontab ] && crontab .config/crontab/$hostname.$whoami.crontab || true
 
 [$HOME/.config/vcsh/repo.d/dotfiles.git]
 checkout = vcsh clone 'https://github.com/tomhoover/dotfiles-vcsh.git' 'dotfiles'
@@ -39,6 +39,12 @@ fixups =
     grep -q '\[remote "gitolite2"\]' config && vcsh dotfiles remote remove gitolite2 || true
     grep -q '\[remote "gitolite"\]'  config ||   vcsh dotfiles remote add gitolite  gitolite:pub/dotfiles-vcsh.git
     grep -q '\[remote "localhost"\]' config || ( vcsh dotfiles remote add localhost $HOME/git/dotfiles-vcsh.git && git init --bare $HOME/git/dotfiles-vcsh.git )
+    # crontabs
+    cd "$HOME"
+    [ .config/crontab/$hostname.crontab -nt /etc/crontab ] && echo "" && echo "be sure to '`tput setaf 1`sudo cp $HOME/.config/crontab/$hostname.crontab /etc/crontab`tput sgr0`'" || true
+    [ -f .config/crontab/$hostname-crond ] && [ ! -f /etc/cron.d/$hostname-crond ] && echo "" && echo "be sure to '`tput setaf 1`sudo cp $HOME/.config/crontab/$hostname-crond /etc/cron.d`tput sgr0`'" || true
+    [ .config/crontab/$hostname-crond -nt /etc/cron.d/$hostname-crond ]            && echo "" && echo "be sure to '`tput setaf 1`sudo cp $HOME/.config/crontab/$hostname-crond /etc/cron.d`tput sgr0`'" || true
+    [ -f .config/crontab/$hostname.$whoami.crontab ] && crontab .config/crontab/$hostname.$whoami.crontab || true
 
 # [$HOME/.config/vcsh/repo.d/git.git]
 # checkout = vcsh clone 'https://github.com/tomhoover/git-vcsh.git' 'git'

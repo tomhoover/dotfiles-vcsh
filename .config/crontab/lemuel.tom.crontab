@@ -1,0 +1,10 @@
+SHELL=/bin/bash
+PATH=/usr/local/bin:/bin:/usr/bin
+
+# min  hr  dom  mon  dow   command
+# * * * * * env > /tmp/env.output
+
+@weekly $HOME/bin/,update-git-mirrors
+@weekly dpkg --get-selections > $HOME/.config/apt/$HOSTNAME.package-selections
+@weekly rsync -qcltz --block-size=8192 --partial --progress --exclude=emeritus-* --exclude=removed-* keyring.debian.org::keyrings/keyrings/* $HOME/.debian-keyring
+

@@ -11,6 +11,8 @@
 !/.config/beets/config.yaml
 !/.config/containers
 !/.config/containers/containers.conf
+!/.config/crontab
+!/.config/crontab/*
 !/.config/customizepkg
 !/.config/customizepkg/**
 !/.config/direnv

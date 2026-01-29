@@ -1,0 +1,15 @@
+#LC_ALL=en_US.UTF-8
+#PATH=/mnt/cache/appdata/home/tom/git-annex.linux:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin:/mnt/cache/appdata/home/tom/bin
+
+# min  hr  dom  mon  dow     command
+# * * * * * env > /tmp/env.output
+
+#  5    0   *    *    0,2,4   PATH=/mnt/cache/appdata/home/tom/git-annex.linux:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin:/mnt/cache/appdata/home/tom/bin $HOME/bin/sync-annex.sh content && $HOME/bin/sync-annex.sh fsck
+#  5    0   *    *    1,3,5   PATH=/mnt/cache/appdata/home/tom/git-annex.linux:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin:/mnt/cache/appdata/home/tom/bin $HOME/bin/sync-annex.sh content && $HOME/bin/sync-annex.sh fsck remotes fast
+#  5    0   *    *    6       PATH=/mnt/cache/appdata/home/tom/git-annex.linux:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin:/mnt/cache/appdata/home/tom/bin $HOME/bin/sync-annex.sh all
+#  0    6   *    *    *       for dir in $HOME/annex/*/ ; do cd "${dir}" && git annex list > "${dir%/}.txt" ; done
+#  0    23  *    *    *       PATH=/mnt/cache/appdata/home/tom/git-annex.linux:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin:/mnt/cache/appdata/home/tom/bin $HOME/bin/sync-annex.sh all git annex assistant --autostart
+
+# 5   1  *   6,12     1,4   $HOME/bin/sync-annex.sh fsck remotes
+# 5   1  *   6,12     2,6   $HOME/bin/sync-annex.sh fsck remotes
+

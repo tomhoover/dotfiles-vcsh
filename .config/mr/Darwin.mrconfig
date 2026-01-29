@@ -20,7 +20,7 @@ fixups =
 #     cd "$MR_REPO"
 #     grep -q '\[remote "gitolite"\]'  .git/config || git remote add gitolite  gitolite:tom/Check-RAID.git
 #     grep -q '\[remote "upstream"\]'  .git/config || git remote add upstream  https://github.com/Arko/Check-RAID.git
-#     cd
+#     cd "$HOME"
 #     chmod +x "$MR_REPO/check-raid" || true
 # #   sudo ln -sf "$MR_REPO/check-raid" /etc/periodic/daily/410.status-appleraid || true
 # #    [ -f "$MR_REPO/check-raid" ] && [ ! -L /etc/periodic/daily/410.status-appleraid ] && echo "" && echo "be sure to '`tput setaf 1`sudo ln -sf $MR_REPO/check-raid /etc/periodic/daily/410.status-appleraid`tput sgr0`'" || true

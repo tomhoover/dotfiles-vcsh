@@ -1,0 +1,69 @@
+SHELL=/bin/bash
+LC_ALL=en_US.UTF-8
+PATH=/Users/tom/bin:/Users/tom/.local/share/mise/shims:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/tom/.local/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin
+
+# min hr dom mon dow command
+
+0 0 * * *           echo > $HOME/tmp/crontab.log 2>&1
+# * * * * *           echo "$PATH" >> $HOME/tmp/crontab.log 2>&1
+# * * * * *           $HOME/bin/,backup-podman >> $HOME/tmp/crontab.log 2>&1
+5 * * * *           tailscale status || tailscale up
+* * * * *           [ $HOME/dl/fund-price-history.csv -nt $HOME/dl/shareprices.csv ] && head -1 $HOME/dl/fund-price-history.csv | grep '^Date,L Income' >/dev/null 2>&1 && head -260 $HOME/dl/fund-price-history.csv > $HOME/dl/shareprices.csv
+
+0-59/5 * * * *      $HOME/bin/,vault                                               && curl -fs -o /dev/null http://healthchecks.t0m.us:8000/ping/f03f449b-b539-4932-ba19-3d6dcf712efb
+
+0 7 * * *           /bin/ls $HOME/.ansible/TODO.* 2> /dev/null && cd $HOME/.ansible/ && ls -x TODO.* | $HOME/bin/,pushover
+
+30 */4    * * 1-6   $HOME/bin/,duplicacy-backup > /dev/null 2>&1 && curl -fsS --retry 5 -o /dev/null http://healthchecks.t0m.us:8000/ping/5c547045-02e1-4e9e-bbe2-4795714f5b69
+30 0-16/4 * * Sun   $HOME/bin/,duplicacy-backup > /dev/null 2>&1 && curl -fsS --retry 5 -o /dev/null http://healthchecks.t0m.us:8000/ping/5c547045-02e1-4e9e-bbe2-4795714f5b69
+30 20     * * Sun   $HOME/bin/,duplicacy-backup                  && curl -fsS --retry 5 -o /dev/null http://healthchecks.t0m.us:8000/ping/5c547045-02e1-4e9e-bbe2-4795714f5b69
+
+@daily              find $HOME/.ansible/inventory -name '*.tmp' -type f -mtime +7 -delete
+@daily              find $HOME/.ssh/config.d      -name '*.tmp' -type f -mtime +7 -delete
+@daily              $HOME/bin/,backup-docker
+@daily              $HOME/bin/,backup-podman
+@daily              $HOME/bin/,find-git-repos && curl -fsS --retry 5 -o /dev/null http://healthchecks.t0m.us:8000/ping/a45000b8-3d90-45a8-8a94-6434ff9e6daf
+@daily              $HOME/bin/,rsync-backup                               && curl -fsS --retry 5 -o /dev/null http://healthchecks.t0m.us:8000/ping/dd051a2d-243c-4180-ae43-81daf885b04d
+
+0  0      * * Sun   $HOME/bin/,homebrewBackup_weekly                      && curl -fsS --retry 5 -o /dev/null http://healthchecks.t0m.us:8000/ping/743f04e0-08c4-4e42-87d5-be9ea8a0b077
+@weekly             rsync -qcltz --block-size=8192 --partial --progress --exclude=emeritus-* --exclude=removed-* keyring.debian.org::keyrings/keyrings/* $HOME/.debian-keyring                                                                                     && curl -fsS --retry 5 -o /dev/null http://healthchecks.t0m.us:8000/ping/e0b91afd-bb20-47bd-981c-367b5f939fb9
+@weekly             cat $HOME/.ssh/id_rsa.pub $HOME/.ssh/id_rsa_arch.pub $HOME/.ssh/id_rsa_ariel.pub $HOME/.ssh/id_rsa_bethel.pub $HOME/.ssh/id_rsa_theophilus.pub $HOME/.ssh/ansible_rsa.pub $HOME/.ssh/terraform_rsa.pub > $HOME/.ssh/authorized_keys.lxc        && curl -fsS --retry 5 -o /dev/null http://healthchecks.t0m.us:8000/ping/55824bd5-fc83-4066-a700-fd4a1aabccb9
+@weekly             $HOME/.ansible/roles/user-config/files/get-grml-files.sh
+
+
+##### old #####
+
+# * * * * * env >     /tmp/env.output
+# */5 * * * *         /usr/sbin/diskutil list | grep -e '.*RAID10.*' | sed 's/.*\(disk[0-9].*\)/\1/' | xargs -I{} /usr/sbin/diskutil mount {}
+# */5 * * * *         diskutil mount RAID10 > /dev/null 2>&1
+# */5 * * * *         touch /Volumes/RAID10/.nosleep > /dev/null 2>&1
+# 0 0 * * Mon,Wed,Fri cd ~/data/software/python-github-backup && github-backup tomhoover --throttle-limit 100 --output-directory /Users/tom/data/software/python-github-backup/tomhoover --incremental --all --gists --starred-gists --private --prefer-ssh --keychain-name python-github-backup --keychain-account tomhoover
+# 0 0 * * Tue,Thu,Sat cd ~/data/software/python-github-backup && github-backup tomhoover --throttle-limit 100 --output-directory /Users/tom/data/software/python-github-backup/tomhoover --incremental --all-starred --repositories --fork --prefer-ssh --keychain-name python-github-backup --keychain-account tomhoover
+# 0 5 * * *           ~/fin/hledger/hoover/bin/prices.sh
+# 19 */6 * * *        ,duplicacy-backup
+# 5 0 * * 0,2,4       ~/bin/sync-annex.sh content && ~/bin/sync-annex.sh fsck
+# 5 0 * * 1,3,5       ~/bin/sync-annex.sh content && ~/bin/sync-annex.sh fsck remotes
+# 5 0 * * 6           ~/bin/sync-annex.sh all
+# @daily              for dir in $HOME/Documents/FileThis\ Fetch/*/ ; do rmdir "${dir}" ; done
+# @daily              for dir in $HOME/annex/*/ ; do cd "${dir}" && git annex list > "${dir%/}.txt" ; done
+# @daily              for dir in $HOME/annex/*/ ; do cd "${dir}" && git annex watch ; done
+# @daily              for dir in /Volumes/RAID10/annex/*/ ; do cd "${dir}" && git annex watch ; done
+# @daily              getMovieList.sh
+# @daily              restic-backup.sh
+# @daily              updateHostsFile.sh runfromcron
+# @daily              ~/bin/rsyncBackup_daily
+# @daily              ~/src/backup_network_devices/backup-mikrotik.sh
+# @weekly             ansible APT -m apt -a update-cache=yes >/dev/null 2>&1 ; ansible APT -m shell -a "apt list --upgradeable"
+# @weekly             ~/bin/rsyncBackup_weekly
+
+## ZFS snapshots
+# */15 * * * *        zfsnap.sh snapshot -rsSvz -p 15min-   -a 3d tank      > /dev/null 2>&1
+# @daily              zfsnap.sh snapshot -rsSvz -p daily-   -a 3w tank      > /dev/null 2>&1
+# @weekly             zfsnap.sh snapshot -rsSvz -p weekly-  -a 3m tank      > /dev/null 2>&1
+# @reboot             zfsnap.sh snapshot -rsSvz -p reboot-  -a 3m tank      > /dev/null 2>&1
+# @monthly            zfsnap.sh snapshot -rsSvz -p monthly- -a forever tank > /dev/null 2>&1
+# @daily              python3 ~/.ansible/roles/proxmox/files/zfs-verify.py
+
+#
+30	01	*	*	0	/Users/tom/Library/Application\ Support/SuperDuper\!/Scheduled\ Copies/SDUtil -i || /Users/tom/Library/Application\ Support/SuperDuper\!/Scheduled\ Copies/sdautomatedcopycontroller file:///Users/tom/Library/Application\%20Support/SuperDuper\!/Scheduled\%20Copies/Smart\%20Update\%20SD\%20backup\%20from\%20a.sdsp
+
