@@ -1,0 +1,173 @@
+[DEFAULT]
+# jobs = 5
+jobs = 1
+
+skip = ! mylaptop || ([ "$1" = update ] && ! hours_since "$1" 12)
+
+git_gc = git gc "$@"
+git_dum = git diff --name-status upstream/master 2>/dev/null || true
+git_update = check $(git branch -avv | grep -E '^[* ]*master.*\[|^[* ]*main.*\[' | sed -e 's/^.*\[//' -e 's/\/.*//') && git pull "$@"
+
+# Show verbose output about branches, remotes or tags
+git_branches = git branch -a
+git_remotes = git remote -v
+git_tags = git tag -l
+
+# include 'lib' functions:
+include = cat $HOME/.config/mr/LIB.mrconfig || true
+
+##### common repos
+
+[$HOME/.dotfiles]
+checkout = git clone 'https://github.com/tomhoover/dotfiles.git' '.dotfiles'
+fetch = fetchOrigin; fetchGitolite; fetchLocalhost
+push = pushOriginMaster; pushAllGitolite; pushAllLocalhost
+fixups =
+    cd "$MR_REPO"
+    grep -q '\[remote "bethel"\]'    .git/config && git remote remove bethel    || true
+    grep -q '\[remote "gitea"\]'     .git/config && git remote remove gitea     || true
+    grep -q '\[remote "gitolite1"\]' .git/config && git remote remove gitolite1 || true
+    grep -q '\[remote "gitolite2"\]' .git/config && git remote remove gitolite2 || true
+    grep -q '\[remote "gitolite"\]'  .git/config || git remote add gitolite    gitolite:tom/dotfiles.git
+    grep -q '\[remote "localhost"\]' .git/config || ( git remote add localhost $HOME/git/dotfiles.git && git init --bare $HOME/git/dotfiles.git )
+
+[$HOME/bin]
+checkout = git clone 'https://github.com/tomhoover/bin.git' 'bin'
+fetch = fetchOrigin; fetchGitolite; fetchLocalhost
+push = pushOriginMaster; pushAllGitolite; pushAllLocalhost
+fixups =
+    chmod 755 $HOME/bin
+    cd "$MR_REPO"
+    grep -q '\[remote "bethel"\]'    .git/config && git remote remove bethel    || true
+    grep -q '\[remote "gitea"\]'     .git/config && git remote remove gitea     || true
+    grep -q '\[remote "gitolite1"\]' .git/config && git remote remove gitolite1 || true
+    grep -q '\[remote "gitolite2"\]' .git/config && git remote remove gitolite2 || true
+    grep -q '\[remote "gitolite"\]'  .git/config || git remote add gitolite    gitolite:tom/bin.git
+    grep -q '\[remote "localhost"\]' .git/config || ( git remote add localhost $HOME/git/bin.git && git init --bare $HOME/git/bin.git )
+
+##### private repos
+
+[$HOME/.ansible]
+checkout = git clone 'gitolite:ansible.git' '.ansible'
+fetch = fetchOrigin; fetchGitea; fetchLocalhost
+push  = pushAllOrigin; pushAllGitea; pushAllLocalhost
+fixups =
+    cd "$MR_REPO"
+    #TODO
+    git config remote.gitea.skipFetchAll true
+    grep -q '\[remote "bethel"\]'    .git/config && git remote remove bethel || true
+    grep -q '\[remote "gitolite1"\]' .git/config && git remote remove gitolite1 || true
+    grep -q '\[remote "gitolite2"\]' .git/config && git remote remove gitolite2 || true
+    grep -q '\[remote "gitolite"\]'  .git/config && git remote rename gitolite origin || true
+    grep -q '\[remote "gitea"\]'     .git/config || git remote add gitea gitea:tom/ansible.git
+    grep -q '\[remote "localhost"\]' .git/config || ( git remote add localhost $HOME/git/ansible.git && git init --bare $HOME/git/ansible.git )
+
+[$HOME/.gnupg]
+checkout = git clone 'gitolite:gnupg.git' '.gnupg'
+skip = ! mycomputer
+fetch = fetchOrigin; fetchGitea; fetchLocalhost
+push  = pushAllOrigin; pushAllGitea; pushAllLocalhost
+fixups =
+    chmod -R go= $HOME/.gnupg
+    cd "$MR_REPO"
+    #TODO
+    git config remote.gitea.skipFetchAll true
+    grep -q '\[remote "bethel"\]'    .git/config && git remote remove bethel || true
+    grep -q '\[remote "gitolite1"\]' .git/config && git remote remove gitolite1 || true
+    grep -q '\[remote "gitolite2"\]' .git/config && git remote remove gitolite2 || true
+    grep -q '\[remote "gitolite"\]'  .git/config && git remote rename gitolite origin || true
+    grep -q '\[remote "gitea"\]'     .git/config || git remote add gitea   gitea:tom/gnupg.git
+    grep -q '\[remote "ironkey"\]'   .git/config || git remote add ironkey /Volumes/IRONKEY64/git/gnupg.git
+    grep -q '\[remote "localhost"\]' .git/config || ( git remote add localhost $HOME/git/gnupg.git && git init --bare $HOME/git/gnupg.git )
+
+[$HOME/fin]
+checkout = git clone 'gitolite:fin.git' 'fin'
+fetch = fetchOrigin; fetchGitea; fetchLocalhost
+push = git commit -am "$(date '+%Y-%m-%d %H:%M')" && ( pushAllOrigin; pushAllGitea; pushAllLocalhost ) || true
+fixups =
+    cd "$MR_REPO"
+    #TODO
+    git config remote.gitea.skipFetchAll true
+    grep -q '\[remote "bethel"\]'    .git/config && git remote remove bethel || true
+    grep -q '\[remote "gitolite1"\]' .git/config && git remote remove gitolite1 || true
+    grep -q '\[remote "gitolite2"\]' .git/config && git remote remove gitolite2 || true
+    grep -q '\[remote "gitolite"\]'  .git/config && git remote rename gitolite origin || true
+    grep -q '\[remote "gitea"\]'     .git/config || git remote add gitea gitea:tom/fin.git
+    grep -q '\[remote "localhost"\]' .git/config || ( git remote add localhost $HOME/git/fin.git && git init --bare $HOME/git/fin.git )
+
+##### read-only repos
+
+[$HOME/src/github.com/dracula/kitty]
+checkout = git clone 'https://github.com/dracula/kitty.git' 'kitty'
+skip = ([ "$1" = update ] && ! hours_since "$1" 12)
+push = :
+fixups =
+    chmod 755 $HOME/src
+    # ln -nsf "$HOME/src/github.com" "$HOME/src/gh"
+    mkdir -p $HOME/.config/kitty
+    ln -sf "$MR_REPO/diff.conf" $HOME/.config/kitty/diff.conf
+    ln -sf "$MR_REPO/dracula.conf" $HOME/.config/kitty/dracula.conf
+    grep -q "include dracula.conf" ~/.config/kitty/kitty.conf || echo "include dracula.conf" >> ~/.config/kitty/kitty.conf
+
+[$HOME/src/github.com/dracula/midnight-commander]
+checkout = git clone 'https://github.com/dracula/midnight-commander.git' 'midnight-commander'
+skip = ([ "$1" = update ] && ! hours_since "$1" 12)
+push = :
+fixups =
+    chmod 755 $HOME/src
+    # ln -nsf "$HOME/src/github.com" "$HOME/src/gh"
+    mkdir -p $HOME/.local/share/mc/skins
+    ln -sf "$MR_REPO/skins/dracula.ini" $HOME/.local/share/mc/skins/dracula.ini
+    ln -sf "$MR_REPO/skins/dracula256.ini" $HOME/.local/share/mc/skins/dracula256.ini
+    chmod go= $HOME/.local && chmod go= $HOME/.local/share
+    sed -i-$(date "+%Y%m%d-%H%M%S").bak -e 's/^skin=.*$/skin=dracula/' ~/.config/mc/ini
+
+[$HOME/src/github.com/nojhan/liquidprompt]
+checkout = git clone 'https://github.com/nojhan/liquidprompt.git' 'liquidprompt'
+skip = ([ "$1" = update ] && ! hours_since "$1" 12)
+push = :
+fixups =
+    chmod 755 $HOME/src
+    ln -nsf "$HOME/src/github.com" "$HOME/src/gh"
+    mkdir -p $HOME/.local/share
+    ln -sf "$MR_REPO/liquidprompt" $HOME/.local/share/liquidprompt
+    chmod go= $HOME/.local && chmod go= $HOME/.local/share
+
+[$HOME/src/github.com/rupa/z]
+checkout = git clone 'https://github.com/rupa/z.git' 'z'
+skip = ([ "$1" = update ] && ! hours_since "$1" 12)
+push = :
+fixups =
+    chmod 755 $HOME/src
+    mkdir -p $HOME/.local/share
+    ln -sf "$MR_REPO/z.sh" $HOME/.local/share/z.sh
+    chmod go= $HOME/.local && chmod go= $HOME/.local/share
+
+##### zfs stuff
+
+[$HOME/src/github.com/jimsalterjrs/sanoid]
+checkout = git clone 'https://github.com/jimsalterjrs/sanoid.git' 'sanoid'
+skip = ! zfs || ([ "$1" = update ] && ! hours_since "$1" 12)
+push = :
+fixups =
+    chmod 755 $HOME/src
+    ! on tom@theophilus && ln -sf "$MR_REPO/sanoid" /usr/local/sbin/sanoid
+    ! on tom@theophilus && ln -sf "$MR_REPO/syncoid" /usr/local/sbin/syncoid
+    ! on tom@theophilus && ln -sf "$MR_REPO/findoid" /usr/local/sbin/findoid
+    ! on tom@theophilus && [ ! -d /var/cache/sanoid ] && echo "" && echo "be sure to '`tput setaf 1`sudo mkdir -p /var/cache/sanoid`tput sgr0`'" || true
+    ! on tom@theophilus && [ ! -d /var/run/sanoid ]   && echo "" && echo "be sure to '`tput setaf 1`sudo mkdir -p /var/run/sanoid`tput sgr0`'" || true
+    ! on tom@theophilus && [ sanoid.defaults.conf -nt /etc/sanoid/sanoid.defaults.conf ] && echo "" && echo "be sure to '`tput setaf 1`sudo mkdir -p /etc/sanoid && sudo cp $HOME/src/github.com/jimsalterjrs/sanoid/sanoid.defaults.conf /etc/sanoid`tput sgr0`'" || true
+    [ -f "$HOME/.config/sanoid/$hostname.sanoid.conf" ] && [ ! -L /etc/sanoid/sanoid.conf ] && echo "" && echo "be sure to '`tput setaf 1`sudo ln -sf $HOME/.config/sanoid/$hostname.sanoid.conf /etc/sanoid/sanoid.conf`tput sgr0`'" || true
+    [ -f "$HOME/.config/sanoid/$hostname.sanoid.conf" ] && [ ! -e /etc/sanoid/sanoid.conf ] && echo "" && echo "be sure to '`tput setaf 1`sudo ln -sf $HOME/.config/sanoid/$hostname.sanoid.conf /etc/sanoid/sanoid.conf`tput sgr0`'" || true
+
+##### included repos
+
+# include = cat $HOME/.config/mr/$(uname).mrconfig || true
+include = cat $HOME/.config/mr/$(uname).mrconfig
+# As arch does not install 'hostname' by default, replaced '$(hostname -s)' with '$(uname -n | sed 's/\..*//')':
+include = cat $HOME/.config/mr/$(uname -n | sed 's/\..*//').mrconfig
+include = cat $HOME/.config/mr/home_automation.mrconfig
+include = cat $HOME/.config/mr/vcsh.mrconfig
+# include = [ "$(pwd)" = "$HOME" ] && cat $HOME/src/.mrconfig || true
+# include = [ "$(pwd)" = "$HOME" ] && cat $HOME/src/3dPrinting/.mrconfig || true
+# include = [ "$(pwd)" = "$HOME" ] && cat $HOME/src/github.com/.mrconfig || true

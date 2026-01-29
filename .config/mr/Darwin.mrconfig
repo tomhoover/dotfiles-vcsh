@@ -1,0 +1,80 @@
+[$HOME/.homebrew-brewfile]
+checkout = git clone 'https://github.com/tomhoover/homebrew-brewfile.git' '.homebrew-brewfile'
+skip = ([ "$1" = update ] && ! hours_since "$1" 12)
+fetch = fetchOrigin; fetchGitolite; fetchLocalhost
+push  = pushOriginMaster; pushAllGitolite; pushAllLocalhost
+fixups =
+    cd "$MR_REPO"
+    grep -q '\[remote "gitolite"\]'  .git/config || git remote add gitolite  gitolite:tom/homebrew-brewfile.git
+    grep -q '\[remote "localhost"\]' .git/config || ( git remote add localhost $HOME/git/homebrew-brewfile.git && git init --bare $HOME/git/homebrew-brewfile.git )
+
+##### active github forks
+
+# removed from local machine -- only lives on github/gitolite
+# [$HOME/src/github.com/tomhoover/Check-RAID]
+# checkout = git clone 'https://github.com/tomhoover/Check-RAID.git' 'Check-RAID'
+# skip = lazy || ([ "$1" = update ] && ! hours_since "$1" 12)
+# fetch = fetchOrigin; fetchGitolite; fetchUpstream
+# push  = pushOriginMaster; pushAllGitolite
+# fixups =
+#     cd "$MR_REPO"
+#     grep -q '\[remote "gitolite"\]'  .git/config || git remote add gitolite  gitolite:tom/Check-RAID.git
+#     grep -q '\[remote "upstream"\]'  .git/config || git remote add upstream  https://github.com/Arko/Check-RAID.git
+#     cd
+#     chmod +x "$MR_REPO/check-raid" || true
+# #   sudo ln -sf "$MR_REPO/check-raid" /etc/periodic/daily/410.status-appleraid || true
+# #    [ -f "$MR_REPO/check-raid" ] && [ ! -L /etc/periodic/daily/410.status-appleraid ] && echo "" && echo "be sure to '`tput setaf 1`sudo ln -sf $MR_REPO/check-raid /etc/periodic/daily/410.status-appleraid`tput sgr0`'" || true
+
+[$HOME/src/github.com/glushchenko/fsnotes]
+checkout = git clone 'https://github.com/glushchenko/fsnotes.git' 'fsnotes'
+fetch = fetchOrigin; fetchGitolite; fetchUpstream
+push  = pushOriginMaster; pushAllGitolite
+fixups =
+    cd "$MR_REPO"
+    grep -q '\[remote "gitolite"\]' .git/config || git remote add gitolite gitolite:tom/fsnotes.git
+    # forked
+    grep -q '\[remote "upstream"\]' .git/config || git remote rename origin upstream
+    grep -q '\[remote "origin"\]'   .git/config || ( git remote add origin https://github.com/tomhoover/fsnotes.git && git fetch origin && git branch master --set-upstream-to origin/master )
+    ln -nsf "$HOME/src/github.com/glushchenko/fsnotes" "$HOME/src/github.com/tomhoover/fsnotes"
+
+##### read-only repos
+
+[$HOME/src/github.com/boxofsnoo/Fairmount]
+checkout = git clone 'https://github.com/BoxOfSnoo/Fairmount.git' 'Fairmount'
+skip = ! mydesktop || ([ "$1" = update ] && ! hours_since "$1" 12)
+push = :
+
+[$HOME/src/github.com/dhess/applescripts]
+checkout = git clone 'https://github.com/dhess/applescripts.git' 'applescripts'
+skip = ! mydesktop || ([ "$1" = update ] && ! hours_since "$1" 12)
+push = :
+
+[$HOME/src/github.com/donmelton/video_transcoding]
+checkout = git clone 'https://github.com/donmelton/video_transcoding.git' 'video_transcoding'
+skip = ! mydesktop || ([ "$1" = update ] && ! hours_since "$1" 12)
+push = :
+
+[$HOME/src/github.com/dracula/alfred]
+checkout = git clone 'https://github.com/dracula/alfred.git' 'alfred'
+skip = ([ "$1" = update ] && ! hours_since "$1" 12)
+push = :
+
+[$HOME/src/github.com/dracula/iterm]
+checkout = git clone 'https://github.com/dracula/iterm.git' 'iterm'
+skip = ([ "$1" = update ] && ! hours_since "$1" 12)
+push = :
+
+[$HOME/src/github.com/dracula/terminal-app]
+checkout = git clone 'https://github.com/dracula/terminal-app.git' 'terminal-app'
+skip = ([ "$1" = update ] && ! hours_since "$1" 12)
+push = :
+
+[$HOME/src/github.com/mathiasbynens/dotfiles]
+checkout = git clone 'https://github.com/mathiasbynens/dotfiles.git' 'dotfiles'
+skip = ([ "$1" = update ] && ! hours_since "$1" 12)
+push = :
+
+[$HOME/src/github.com/mikemcquaid/strap]
+checkout = git clone 'https://github.com/MikeMcQuaid/strap.git' 'strap'
+skip = ([ "$1" = update ] && ! hours_since "$1" 12)
+push = :

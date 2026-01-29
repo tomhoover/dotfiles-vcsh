@@ -1,0 +1,23 @@
+[$HOME/appdata/hass]
+checkout = git clone 'https://github.com/tomhoover/home-assistant_config.git' 'hass'
+skip = root || ([ "$1" = update ] && ! hours_since "$1" 12)
+
+[$HOME/appdata/letsencrypt]
+checkout = git clone 'https://github.com/tomhoover/letsencrypt_config.git' 'letsencrypt'
+skip = root || ([ "$1" = update ] && ! hours_since "$1" 12)
+
+[$HOME/appdata/docker-compose-gabriel]
+checkout = git clone 'https://github.com/tomhoover/docker-compose-gabriel.git' 'docker-compose-gabriel'
+skip = root || ([ "$1" = update ] && ! hours_since "$1" 12)
+
+##### read-only repos
+
+[$HOME/src/github.com/DrWhax/truecrypt-archive]
+checkout = git clone 'https://github.com/DrWhax/truecrypt-archive.git' 'truecrypt-archive'
+skip = root || ([ "$1" = update ] && ! hours_since "$1" 12)
+push = :
+
+[$HOME/src/github.com/sreitshamer/arq_restore]
+checkout = git clone 'https://github.com/sreitshamer/arq_restore.git' 'arq_restore'
+skip = root || ([ "$1" = update ] && ! hours_since "$1" 12)
+push = :

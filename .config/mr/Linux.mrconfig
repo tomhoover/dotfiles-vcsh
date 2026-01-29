@@ -1,0 +1,36 @@
+[$HOME/.config/vcsh/repo.d/apt.git]
+checkout = vcsh clone 'https://github.com/tomhoover/apt-vcsh.git' 'apt'
+update = check origin && vcsh run "$MR_REPO" git pull "$@"
+skip = ! apt || ([ "$1" = update ] && ! hours_since "$1" 12)
+fetch = vcsh apt fetch --all --prune
+push =
+    check origin    && vcsh apt push origin master   || true
+    check gitolite  && vcsh apt push --all gitolite  || true
+    check localhost && vcsh apt push --all localhost || true
+fixups =
+    chmod -R go= $HOME/.config
+    cd "$MR_REPO"
+    grep -q '\[remote "bethel"\]'    config && vcsh apt remote remove bethel    || true
+    grep -q '\[remote "gitea"\]'     config && vcsh apt remote remove gitea     || true
+    grep -q '\[remote "gitolite1"\]' config && vcsh apt remote remove gitolite1 || true
+    grep -q '\[remote "gitolite2"\]' config && vcsh apt remote remove gitolite2 || true
+    grep -q '\[remote "gitolite"\]'  config || vcsh apt remote add gitolite  gitolite:pub/apt-vcsh.git
+    grep -q '\[remote "localhost"\]' config || ( vcsh apt remote add localhost $HOME/git/apt-vcsh.git && git init --bare $HOME/git/apt-vcsh.git )
+
+##### read-only repos
+
+[$HOME/src/github.com/seebi/dircolors-solarized]
+checkout = git clone 'https://github.com/seebi/dircolors-solarized.git' 'dircolors-solarized'
+skip = ([ "$1" = update ] && ! hours_since "$1" 12)
+push = :
+fixups = ln -sf "$MR_REPO/dircolors.ansi-universal" "$HOME/.dircolors"
+
+[$HOME/src/github.com/so-fancy/diff-so-fancy]
+checkout = git clone 'https://github.com/so-fancy/diff-so-fancy.git' 'diff-so-fancy'
+skip = ! apt || ([ "$1" = update ] && ! hours_since "$1" 12)
+push = :
+fixups =
+    chmod 755 $HOME/src
+    mkdir -p $HOME/.local/bin
+    chmod go= $HOME/.local && chmod 755 $HOME/.local/bin
+    ln -sf "$MR_REPO/diff-so-fancy" "$HOME/.local/bin/diff-so-fancy"

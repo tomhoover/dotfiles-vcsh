@@ -1,0 +1,180 @@
+##### my Home Assistant config
+
+# no longer available on github
+# [$HOME/src/docker-compose-ha]
+# checkout = git clone 'https://github.com/tomhoover/docker-compose-ha.git' 'docker-compose-ha'
+# fetch = fetchOrigin; fetchGitolite
+# push  = pushOriginMaster; pushAllGitolite
+# fixups =
+#     cd "$MR_REPO"
+    # grep -q '\[remote "bethel"\]'    .git/config && git remote remove bethel || true
+    # grep -q '\[remote "gitea"\]'     .git/config && git remote remove gitea || true
+    # grep -q '\[remote "gitolite1"\]' .git/config && git remote remove gitolite1 || true
+    # grep -q '\[remote "gitolite2"\]' .git/config && git remote remove gitolite2 || true
+#     grep -q '\[remote "gitolite"\]'  .git/config || git remote add gitolite  gitolite:tom/docker-compose-ha.git
+
+[$HOME/src/hass]
+checkout = git clone 'https://github.com/tomhoover/home-assistant_config.git' 'hass'
+fetch = fetchOrigin; fetchGitolite; fetchLocalhost
+push  = pushOriginMaster; pushAllGitolite; pushAllLocalhost
+fixups =
+    cd "$MR_REPO"
+    grep -q '\[remote "bethel"\]'    .git/config && git remote remove bethel    || true
+    grep -q '\[remote "gitea"\]'     .git/config && git remote remove gitea     || true
+    grep -q '\[remote "gitolite1"\]' .git/config && git remote remove gitolite1 || true
+    grep -q '\[remote "gitolite2"\]' .git/config && git remote remove gitolite2 || true
+    grep -q '\[remote "gitolite"\]'  .git/config || git remote add gitolite  gitolite:tom/home-assistant_config.git
+    grep -q '\[remote "localhost"\]' .git/config || ( git remote add localhost $HOME/git/home-assistant_config.git && git init --bare $HOME/git/home-assistant_config.git )
+
+[$HOME/src/mqttwarn]
+checkout = git clone 'https://github.com/tomhoover/mqttwarn.git' 'mqttwarn'
+fetch = fetchOrigin; fetchGitolite; fetchLocalhost
+push  = pushOriginMaster; pushAllGitolite; pushAllLocalhost
+fixups =
+    cd "$MR_REPO"
+    grep -q '\[remote "bethel"\]'    .git/config && git remote remove bethel    || true
+    grep -q '\[remote "gitea"\]'     .git/config && git remote remove gitea     || true
+    grep -q '\[remote "gitolite1"\]' .git/config && git remote remove gitolite1 || true
+    grep -q '\[remote "gitolite2"\]' .git/config && git remote remove gitolite2 || true
+    grep -q '\[remote "gitolite"\]'  .git/config || git remote add gitolite  gitolite:tom/mqttwarn.git
+    grep -q '\[remote "localhost"\]' .git/config || ( git remote add localhost $HOME/git/mqttwarn.git && git init --bare $HOME/git/mqttwarn.git )
+
+##### read-only repos
+
+#[$HOME/src/github.com/andrewjfreyer/monitor]
+#checkout = git clone 'https://github.com/andrewjfreyer/monitor.git' 'monitor'
+#skip = ! mydesktop || ([ "$1" = update ] && ! hours_since "$1" 12)
+#push = :
+
+#[$HOME/src/github.com/arendst/Sonoff-Tasmota]
+#checkout = git clone 'https://github.com/arendst/Sonoff-Tasmota.git' 'Sonoff-Tasmota'
+#skip = ! mydesktop || ([ "$1" = update ] && ! hours_since "$1" 12)
+#push = :
+
+#[$HOME/src/github.com/keatontaylor/custom_components]
+#checkout = git clone 'https://github.com/keatontaylor/custom_components.git' 'custom_components'
+#skip = ! mydesktop || ([ "$1" = update ] && ! hours_since "$1" 12)
+#push = :
+
+#[$HOME/src/github.com/pkozul/ha-floorplan]
+#checkout = git clone 'https://github.com/pkozul/ha-floorplan.git' 'ha-floorplan'
+#skip = ! mydesktop || ([ "$1" = update ] && ! hours_since "$1" 12)
+#push = :
+
+#[$HOME/src/github.com/resoai/TileBoard]
+#checkout = git clone 'https://github.com/resoai/TileBoard.git' 'TileBoard'
+#skip = ! mydesktop || ([ "$1" = update ] && ! hours_since "$1" 12)
+#push = :
+
+##### example Home Assistant configs
+
+#[$HOME/src/github.com/CCOSTAN/Home-AssistantConfig]
+#checkout = git clone 'https://github.com/CCOSTAN/Home-AssistantConfig.git' 'Home-AssistantConfig'
+#skip = ! hass || ([ "$1" = update ] && ! hours_since "$1" 12)
+#push = :
+#fixups =
+#    REPO_NAME=$(basename "$MR_REPO")
+#    USER_NAME=$(basename "$(dirname "$MR_REPO")")
+#    mkdir -p "$HOME/src/home-assistant_examples/@$USER_NAME"
+#    ln -sf "$MR_REPO" "$HOME/src/home-assistant_examples/@$USER_NAME"
+
+#[$HOME/src/github.com/DubhAd/Home-AssistantConfig]
+#checkout = git clone 'https://github.com/DubhAd/Home-AssistantConfig.git' 'Home-AssistantConfig'
+#skip = ! hass || ([ "$1" = update ] && ! hours_since "$1" 12)
+#push = :
+#fixups =
+#    REPO_NAME=$(basename "$MR_REPO")
+#    USER_NAME=$(basename "$(dirname "$MR_REPO")")
+#    mkdir -p "$HOME/src/home-assistant_examples/@$USER_NAME"
+#    ln -sf "$MR_REPO" "$HOME/src/home-assistant_examples/@$USER_NAME"
+
+#[$HOME/src/github.com/Snipercaine/DrZzs-HA]
+#checkout = git clone 'https://github.com/Snipercaine/DrZzs-HA.git' 'DrZzs-HA'
+#skip = ! hass || ([ "$1" = update ] && ! hours_since "$1" 12)
+#push = :
+#fixups =
+#    REPO_NAME=$(basename "$MR_REPO")
+#    USER_NAME=$(basename "$(dirname "$MR_REPO")")
+#    mkdir -p "$HOME/src/home-assistant_examples/@$USER_NAME"
+#    ln -sf "$MR_REPO" "$HOME/src/home-assistant_examples/@$USER_NAME"
+
+#[$HOME/src/github.com/bachya/smart-home]
+#checkout = git clone 'https://github.com/bachya/smart-home.git' 'smart-home'
+#skip = ! hass || ([ "$1" = update ] && ! hours_since "$1" 12)
+#push = :
+#fixups =
+#    REPO_NAME=$(basename "$MR_REPO")
+#    USER_NAME=$(basename "$(dirname "$MR_REPO")")
+#    mkdir -p "$HOME/src/home-assistant_examples/@$USER_NAME"
+#    ln -sf "$MR_REPO" "$HOME/src/home-assistant_examples/@$USER_NAME"
+
+#[$HOME/src/github.com/dale3h/homeassistant-config]
+#checkout = git clone 'https://github.com/dale3h/homeassistant-config.git' 'homeassistant-config'
+#skip = ! hass || ([ "$1" = update ] && ! hours_since "$1" 12)
+#push = :
+#fixups =
+#    REPO_NAME=$(basename "$MR_REPO")
+#    USER_NAME=$(basename "$(dirname "$MR_REPO")")
+#    mkdir -p "$HOME/src/home-assistant_examples/@$USER_NAME"
+#    ln -sf "$MR_REPO" "$HOME/src/home-assistant_examples/@$USER_NAME"
+
+#[$HOME/src/github.com/fronzbot/githass]
+#checkout = git clone 'https://github.com/fronzbot/githass.git' 'githass'
+#skip = ! hass || ([ "$1" = update ] && ! hours_since "$1" 12)
+#push = :
+#fixups =
+#    REPO_NAME=$(basename "$MR_REPO")
+#    USER_NAME=$(basename "$(dirname "$MR_REPO")")
+#    mkdir -p "$HOME/src/home-assistant_examples/@$USER_NAME"
+#    ln -sf "$MR_REPO" "$HOME/src/home-assistant_examples/@$USER_NAME"
+
+#[$HOME/src/github.com/jawilson/Home-Assistant-Config]
+#checkout = git clone 'https://github.com/jawilson/Home-Assistant-Config.git' 'Home-Assistant-Config'
+#skip = ! hass || ([ "$1" = update ] && ! hours_since "$1" 12)
+#push = :
+#fixups =
+#    REPO_NAME=$(basename "$MR_REPO")
+#    USER_NAME=$(basename "$(dirname "$MR_REPO")")
+#    mkdir -p "$HOME/src/home-assistant_examples/@$USER_NAME"
+#    ln -sf "$MR_REPO" "$HOME/src/home-assistant_examples/@$USER_NAME"
+
+#[$HOME/src/github.com/mf-social/Home-Assistant]
+#checkout = git clone 'https://github.com/mf-social/Home-Assistant.git' 'Home-Assistant'
+#skip = ! hass || ([ "$1" = update ] && ! hours_since "$1" 12)
+#push = :
+#fixups =
+#    REPO_NAME=$(basename "$MR_REPO")
+#    USER_NAME=$(basename "$(dirname "$MR_REPO")")
+#    mkdir -p "$HOME/src/home-assistant_examples/@$USER_NAME"
+#    ln -sf "$MR_REPO" "$HOME/src/home-assistant_examples/@$USER_NAME"
+
+#[$HOME/src/github.com/notoriousbdg/Home-AssistantConfig]
+#checkout = git clone 'https://github.com/notoriousbdg/Home-AssistantConfig.git' 'Home-AssistantConfig'
+#skip = ! hass || ([ "$1" = update ] && ! hours_since "$1" 12)
+#push = :
+#fixups =
+#    REPO_NAME=$(basename "$MR_REPO")
+#    USER_NAME=$(basename "$(dirname "$MR_REPO")")
+#    mkdir -p "$HOME/src/home-assistant_examples/@$USER_NAME"
+#    ln -sf "$MR_REPO" "$HOME/src/home-assistant_examples/@$USER_NAME"
+
+#[$HOME/src/github.com/riemers/home-assistant-config]
+#checkout = git clone 'https://github.com/riemers/home-assistant-config.git' 'home-assistant-config'
+#skip = ! hass || ([ "$1" = update ] && ! hours_since "$1" 12)
+#push = :
+#fixups =
+#    REPO_NAME=$(basename "$MR_REPO")
+#    USER_NAME=$(basename "$(dirname "$MR_REPO")")
+#    mkdir -p "$HOME/src/home-assistant_examples/@$USER_NAME"
+#    ln -sf "$MR_REPO" "$HOME/src/home-assistant_examples/@$USER_NAME"
+
+## had to change the following from 'https://github.com/skalavala/smarthome.git' to 'https://github.com/skalavala/mysmarthome.git', due to DMCA takedown?
+#[$HOME/src/github.com/skalavala/mysmarthome]
+#checkout = git clone 'https://github.com/skalavala/mysmarthome.git' 'mysmarthome'
+#skip = ! hass || ([ "$1" = update ] && ! hours_since "$1" 12)
+#push = :
+#fixups =
+#    REPO_NAME=$(basename "$MR_REPO")
+#    USER_NAME=$(basename "$(dirname "$MR_REPO")")
+#    mkdir -p "$HOME/src/home-assistant_examples/@$USER_NAME"
+#    ln -sf "$MR_REPO" "$HOME/src/home-assistant_examples/@$USER_NAME"

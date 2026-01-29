@@ -1,0 +1,144 @@
+# Tests used below.
+# - anon checks whether this is an anonymous checkout, by testing what url
+#   $HOME uses
+# - full checks whether I probably want a full checkout (quite large),
+#   if not, the checkout is minimal
+# - on checks whether the given host basename is one of the listed
+#   values. A value can also have a username in it, ie "joey@dodo".
+# - mylaptop only succeeds if it's on my main development laptop, which
+#   gets lots of extra cruft
+lib =
+    # hostname="$(hostname -s)"
+    command -v hostnamectl >/dev/null && hostname="$(hostnamectl hostname)" || hostname="$(hostname -s)"
+    whoami="$(whoami)"
+    anon() {
+        ( GIT_CONFIG=$HOME/.git/config git config remote.origin.url || cat .git/remotes/origin ) | grep -q 'git://'
+    }
+    full() {
+        test "$whoami" = joey && ! anon
+    }
+    on() {
+        for host in $@; do
+            if [ "${host%@*}" != "${host#*@}" ]; then
+                if [ "$whoami" != "${host%@*}" ]; then
+                    continue
+                fi
+                host="${host#*@}"
+            fi
+            if [ "$hostname" = "$host" ]; then
+                return 0
+            fi
+        done
+        return 1
+    }
+    mycomputer() {
+        mydesktop || mylaptop
+    }
+    mydesktop() {
+        on tom@bethel
+    }
+    mylaptop() {
+        on tom@ariel || on tom@theophilus
+    }
+    hass() {
+        mylaptop || on tom@ha
+    }
+    private() {
+        if [ -f $HOME/.config/vcsh/repo.d/private.git/config ]; then
+            return 0
+        else
+            return 1
+        fi
+    }
+    root() {
+        test "$whoami" = root
+    }
+    apt() {
+        command -v apt-get >/dev/null 2>&1
+    }
+    zfs() {
+        command -v zpool >/dev/null 2>&1 && command -v zfs >/dev/null 2>&1
+    }
+    check() {
+        if timeout 2 git ls-remote $@ >/dev/null 2>&1; then
+            # echo "\033[0;36m $@:\033[0m"
+            echo "`tput setaf 6` $@:`tput sgr0`"
+            return 0
+        else
+            # echo "\033[0;31m $@ not responding\033[0m"
+            echo "`tput setaf 1` $@ not responding`tput sgr0`"
+            return 1
+        fi
+    }
+    fetchOrigin() {
+        check origin && git fetch --prune "$@" || true
+    }
+    fetchGitea() {
+        return 0
+        check gitea && git fetch --prune "$@" || true
+    }
+    fetchGitolite() {
+        check gitolite && git fetch --prune "$@" || true
+    }
+    fetchGitolite1() {
+        return 0
+        check gitolite1 && git fetch --prune "$@" || true
+    }
+    fetchGitolite2() {
+        return 0
+        check gitolite2 && git fetch --prune "$@" || true
+    }
+    fetchLocalhost() {
+        check localhost && git fetch --prune "$@" || true
+    }
+    fetchUpstream() {
+        check upstream && git fetch --prune "$@" || true
+    }
+    pushOriginMaster() {
+        check origin && git push origin master || true
+    }
+    pushOrigin() {
+        check origin && git push origin || true
+    }
+    pushGitea() {
+        return 0
+        check gitea && git push gitea || true
+    }
+    pushGitolite() {
+        check gitolite && git push gitolite || true
+    }
+    pushGitolite1() {
+        return 0
+        check gitolite1 && git push gitolite1 || true
+    }
+    pushGitolite2() {
+        return 0
+        check gitolite2 && git push gitolite2 || true
+    }
+    pushLocalhost() {
+        check localhost && git push localhost || true
+    }
+    pushAllOrigin() {
+        check origin && git push --all origin || true
+    }
+    pushAllGitea() {
+        return 0
+        check gitea && git push --all gitea || true
+    }
+    pushAllGitolite() {
+        check gitolite && git push --all gitolite || true
+    }
+    pushAllLocalhost() {
+        check localhost && git push --all localhost || true
+    }
+#     checkOrigin() {
+#         if timeout 1 git ls-remote origin >/dev/null 2>&1; then
+#             # echo "\033[0;36m origin:\033[0m"
+#             echo "\`tput setaf 6` origin:`tput sgr0`"
+#             return 0
+#         else
+#             # echo "\033[0;31m origin not responding\033[0m"
+#             echo "`tput setaf 1` origin not responding`tput sgr0`"
+#             return 1
+#         fi
+#     }

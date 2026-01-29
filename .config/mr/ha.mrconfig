@@ -1,0 +1,32 @@
+# no longer available on github
+# [$HOME/appdata/docker-compose-ha]
+# checkout = git clone 'https://github.com/tomhoover/docker-compose-ha.git' 'docker-compose-ha'
+# skip = root
+# fetch = fetchOrigin; fetchGitolite
+# push  = pushOriginMaster; pushAllGitolite
+# fixups =
+#     cd "$MR_REPO"
+    # grep -q '\[remote "bethel"\]'    .git/config && git remote remove bethel || true
+    # grep -q '\[remote "gitea"\]'     .git/config && git remote remove gitea || true
+    # grep -q '\[remote "gitolite1"\]' .git/config && git remote remove gitolite1 || true
+    # grep -q '\[remote "gitolite2"\]' .git/config && git remote remove gitolite2 || true
+#     grep -q '\[remote "gitolite"\]'  .git/config || git remote add gitolite  gitolite:tom/docker-compose-ha.git
+
+[$HOME/appdata/hass]
+checkout = git clone 'https://github.com/tomhoover/home-assistant_config.git' 'hass'
+skip = root || ([ "$1" = update ] && ! hours_since "$1" 12)
+fetch = fetchOrigin; fetchGitolite
+push  = pushOriginMaster; pushAllGitolite
+fixups =
+    cd "$MR_REPO"
+    grep -q '\[remote "bethel"\]'    .git/config && git remote remove bethel    || true
+    grep -q '\[remote "gitea"\]'     .git/config && git remote remove gitea     || true
+    grep -q '\[remote "gitolite1"\]' .git/config && git remote remove gitolite1 || true
+    grep -q '\[remote "gitolite2"\]' .git/config && git remote remove gitolite2 || true
+    grep -q '\[remote "gitolite"\]'  .git/config || git remote add gitolite  gitolite:tom/home-assistant_config.git
+
+# 2delete
+
+[$HOME/appdata/docker-compose-bethel]
+checkout = git clone 'https://github.com/tomhoover/docker-compose-bethel.git' 'docker-compose-bethel'
+skip = root || ([ "$1" = update ] && ! hours_since "$1" 12)
