@@ -18,6 +18,15 @@
 !/.config/direnv/lib/*
 !/.config/dotfiles
 !/.config/dotfiles/*
+!/.config/git
+!/.config/git/attributes
+!/.config/git/config
+!/.config/git/ignore
+# !/.config/git/sample-hooks
+# !/.config/git/sample-hooks/*
+!/.config/git/template
+!/.config/git/template/hooks
+!/.config/git/template/hooks/*
 !/.config/i3
 !/.config/i3/*
 !/.config/i3blocks
