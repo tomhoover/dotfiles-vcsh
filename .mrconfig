@@ -53,14 +53,14 @@ fetch = fetchOrigin; fetchGitea; fetchLocalhost
 push  = pushAllOrigin; pushAllGitea; pushAllLocalhost
 fixups =
     cd "$MR_REPO"
-    #TODO
-    git config remote.gitea.skipFetchAll true
     grep -q '\[remote "bethel"\]'    .git/config && git remote remove bethel || true
     grep -q '\[remote "gitolite1"\]' .git/config && git remote remove gitolite1 || true
     grep -q '\[remote "gitolite2"\]' .git/config && git remote remove gitolite2 || true
     grep -q '\[remote "gitolite"\]'  .git/config && git remote rename gitolite origin || true
     grep -q '\[remote "gitea"\]'     .git/config || git remote add gitea gitea:tom/ansible.git
     grep -q '\[remote "localhost"\]' .git/config || ( git remote add localhost $HOME/git/ansible.git && git init --bare $HOME/git/ansible.git )
+    #TODO
+    git config remote.gitea.skipFetchAll true
 
 [$HOME/.gnupg]
 checkout = git clone 'gitolite:gnupg.git' '.gnupg'
@@ -70,8 +70,6 @@ push  = pushAllOrigin; pushAllGitea; pushAllLocalhost
 fixups =
     chmod -R go= $HOME/.gnupg
     cd "$MR_REPO"
-    #TODO
-    git config remote.gitea.skipFetchAll true
     grep -q '\[remote "bethel"\]'    .git/config && git remote remove bethel || true
     grep -q '\[remote "gitolite1"\]' .git/config && git remote remove gitolite1 || true
     grep -q '\[remote "gitolite2"\]' .git/config && git remote remove gitolite2 || true
@@ -79,6 +77,24 @@ fixups =
     grep -q '\[remote "gitea"\]'     .git/config || git remote add gitea   gitea:tom/gnupg.git
     grep -q '\[remote "ironkey"\]'   .git/config || git remote add ironkey /Volumes/IRONKEY64/git/gnupg.git
     grep -q '\[remote "localhost"\]' .git/config || ( git remote add localhost $HOME/git/gnupg.git && git init --bare $HOME/git/gnupg.git )
+    #TODO
+    git config remote.gitea.skipFetchAll true
+    git config remote.ironkey.skipFetchAll true
+
+[$HOME/.ssh]
+checkout = git clone 'gitolite:ssh.git' '.ssh'
+skip = ! mycomputer
+fetch = fetchOrigin; fetchGitea; fetchLocalhost
+push  = pushAllOrigin; pushAllGitea; pushAllLocalhost
+fixups =
+    chmod -R go= $HOME/.ssh
+    cd "$MR_REPO"
+    grep -q '\[remote "gitea"\]'     .git/config || git remote add gitea   gitea:tom/ssh.git
+    grep -q '\[remote "ironkey"\]'   .git/config || git remote add ironkey /Volumes/IRONKEY64/git/ssh.git
+    grep -q '\[remote "localhost"\]' .git/config || ( git remote add localhost $HOME/git/ssh.git && git init --bare $HOME/git/ssh.git )
+    #TODO
+    git config remote.gitea.skipFetchAll true
+    git config remote.ironkey.skipFetchAll true
 
 [$HOME/fin]
 checkout = git clone 'gitolite:fin.git' 'fin'
@@ -86,14 +102,14 @@ fetch = fetchOrigin; fetchGitea; fetchLocalhost
 push = git commit -am "$(date '+%Y-%m-%d %H:%M')" && ( pushAllOrigin; pushAllGitea; pushAllLocalhost ) || true
 fixups =
     cd "$MR_REPO"
-    #TODO
-    git config remote.gitea.skipFetchAll true
     grep -q '\[remote "bethel"\]'    .git/config && git remote remove bethel || true
     grep -q '\[remote "gitolite1"\]' .git/config && git remote remove gitolite1 || true
     grep -q '\[remote "gitolite2"\]' .git/config && git remote remove gitolite2 || true
     grep -q '\[remote "gitolite"\]'  .git/config && git remote rename gitolite origin || true
     grep -q '\[remote "gitea"\]'     .git/config || git remote add gitea gitea:tom/fin.git
     grep -q '\[remote "localhost"\]' .git/config || ( git remote add localhost $HOME/git/fin.git && git init --bare $HOME/git/fin.git )
+    #TODO
+    git config remote.gitea.skipFetchAll true
 
 ##### read-only repos
 
