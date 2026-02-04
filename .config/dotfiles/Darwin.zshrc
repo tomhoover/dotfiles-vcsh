@@ -46,7 +46,9 @@ if [ -f "$HOMEBREW_COMMAND_NOT_FOUND_HANDLER" ]; then
   source "$HOMEBREW_COMMAND_NOT_FOUND_HANDLER";
 fi
 
-# export PATH="$HOME/bin:$HOME/.local/share/mise/shims:/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
-# export PATH="$HOME/bin:/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+# The following PATH definition is required, as .zshrc prepends the MacPorts PATH
+# (PATH="/opt/local/bin:/opt/local/sbin:$PATH"), which places it at a higher
+# precedence than homebrew
+export PATH="$HOME/bin:/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
 
 echo "$(date '+%Y-%m-%d %H:%M') :: :: DARWIN_ZSHRC_ENDED" >> /tmp/shell-init.txt
