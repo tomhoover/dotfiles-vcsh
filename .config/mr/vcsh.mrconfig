@@ -25,6 +25,7 @@
 [$HOME/.config/vcsh/repo.d/dotfiles.git]
 checkout = vcsh clone 'https://github.com/tomhoover/dotfiles-vcsh.git' 'dotfiles'
 update = check origin && vcsh run "$MR_REPO" git pull "$@"
+skip = lazy
 fetch = vcsh dotfiles fetch --all --prune
 push =
     check origin    && vcsh dotfiles push origin master   || true
