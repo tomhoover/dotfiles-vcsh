@@ -64,7 +64,7 @@ fixups =
 
 [$HOME/.gnupg]
 checkout = git clone 'gitolite:gnupg.git' '.gnupg'
-skip = ! mycomputer
+skip = lazy
 fetch = fetchOrigin; fetchGitea; fetchLocalhost
 push  = pushAllOrigin; pushAllGitea; pushAllLocalhost
 fixups =
@@ -83,7 +83,7 @@ fixups =
 
 [$HOME/.ssh]
 checkout = git clone 'gitolite:ssh.git' '.ssh'
-skip = ! mycomputer
+skip = lazy
 fetch = fetchOrigin; fetchGitea; fetchLocalhost
 push  = pushAllOrigin; pushAllGitea; pushAllLocalhost
 fixups =

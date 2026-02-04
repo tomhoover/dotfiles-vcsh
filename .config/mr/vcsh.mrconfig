@@ -149,8 +149,7 @@ fixups =
     # vcsh private config receive.denyNonFastForwards true
 checkout = vcsh clone 'gitolite:private-vcsh.git' 'private'
 update = check origin && vcsh run "$MR_REPO" git pull "$@"
-#TODO
-skip = ! mycomputer && ! private
+skip = lazy
 fetch = vcsh private fetch --all --prune
 push =
     check origin    && vcsh private push --all origin    || true
@@ -163,8 +162,6 @@ fixups =
     [[ $hostname == ariel || $hostname == bethel ]] && ln -nsf "$HOME/.config/karabiner-`hostname -s`" "$HOME/.config/karabiner" || true
     [[ $hostname == ariel || $hostname == bethel ]] && launchctl kickstart -k gui/$(id -u)/org.pqrs.service.agent.karabiner_console_user_server|| true
     cd "$MR_REPO"
-    #TODO
-    vcsh private config remote.gitea.skipFetchAll true
     grep -q '\[remote "bethel"\]'    config && vcsh private remote remove bethel || true
     grep -q '\[remote "gitolite1"\]' config && vcsh private remote remove gitolite1 || true
     grep -q '\[remote "gitolite2"\]' config && vcsh private remote remove gitolite2 || true
@@ -180,3 +177,6 @@ fixups =
     [ `uname` = "Darwin" ] && defaults write com.googlecode.iterm2 PrefsCustomFolder -string "~/.config/iterm2" || true
     # Tell iTerm2 to use the custom preferences in the directory
     [ `uname` = "Darwin" ] && defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true || true
+    #TODO
+    vcsh private config remote.gitea.skipFetchAll true
+    vcsh private config remote.ironkey.skipFetchAll true
