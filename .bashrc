@@ -1,4 +1,8 @@
 # shellcheck disable=SC1090,SC1091
+
+# exit if non-interactive shell
+[[ $- != *i* ]] && return
+
 echo "$PATH" >> /tmp/shell-init.txt
 echo "$(date '+%Y-%m-%d %H:%M') :: BASHRC_LOADED" >> /tmp/shell-init.txt
 export BASHRC_LOADED=1
@@ -7,9 +11,6 @@ MYHOST=$(uname -n | sed 's/\..*//')     # alternative to $(hostname -s), as arch
 
 # keychain
 [ -r "$HOME"/.keychain/"$(uname -n)"-sh ] && source "$HOME"/.keychain/"$(uname -n)"-sh
-
-# exit if non-interactive shell
-[[ $- != *i* ]] && return
 
 # https://github.com/seebi/dircolors-solarized (so solarized colors are used when accessing machine with iTerm2/ssh)
 #eval $(dircolors $HOME/src/github.com/seebi/dircolors-solarized/dircolors.ansi-universal)
