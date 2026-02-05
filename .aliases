@@ -250,3 +250,7 @@ fi
 
 # mise x|exec
 alias x="mise x --"
+
+alias .git='git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
+
+alias cu='copier update --skip-tasks'
