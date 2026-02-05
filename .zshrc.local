@@ -420,7 +420,19 @@ if command -v register-python-argcomplete > /dev/null; then eval "$(register-pyt
 if command -v direnv > /dev/null; then eval "$(direnv hook zsh)"; fi
 
 # Only load Liquid Prompt in interactive shells, not from a script or from scp
-[[ $- = *i* ]] && source ~/.local/share/liquidprompt
+# [[ $- = *i* ]] && source ~/.local/share/liquidprompt
+
+# Use starship prompt if available, otherwise liquidprompt or customized grml prompt
+if command -v starship &> /dev/null; then
+    prompt off
+    eval "$(starship init zsh)"
+elif [ -f ~/.local/share/liquidprompt ]; then
+    source ~/.local/share/liquidprompt
+else
+    # Customize grml prompt: two lines, user in bold green
+    zstyle ':prompt:grml:left:items:user' pre '%B%F{green}'
+    zstyle ':prompt:grml:left:setup' items rc change-root user at host path vcs newline percent
+fi
 
 echo "$PATH" >> /tmp/shell-init.txt
 echo "$(date '+%Y-%m-%d %H:%M') :: ZSHRC_LOCAL_ENDED" >> /tmp/shell-init.txt

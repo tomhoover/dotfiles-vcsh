@@ -89,4 +89,11 @@ if command -v register-python-argcomplete > /dev/null; then eval "$(register-pyt
 if command -v direnv > /dev/null; then eval "$(direnv hook bash)"; fi
 
 # Only load Liquid Prompt in interactive shells, not from a script or from scp
-[[ $- = *i* ]] && source ~/.local/share/liquidprompt
+# [[ $- = *i* ]] && source ~/.local/share/liquidprompt
+
+# Use starship prompt if available, otherwise liquidprompt
+if command -v starship &> /dev/null; then
+    eval "$(starship init bash)"
+else
+    [ -f ~/.local/share/liquidprompt ] && source ~/.local/share/liquidprompt
+fi
