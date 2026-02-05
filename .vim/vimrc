@@ -44,6 +44,7 @@ Plug 'tmhedberg/SimpylFold'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
 Plug 'suy/vim-context-commentstring'
 Plug 'hashivim/vim-terraform'
 Plug 'vim-syntastic/syntastic'
@@ -261,8 +262,8 @@ command! TrimWhitespace call s:trim_whitespace()
 "
 " For example, here is my base indent configuration for most files. It sets a tabstop 
 " of 8 (for hard tab display), and most tabs / indentation shifts are 4, and they use spaces, not hard tabs.
-"set tabstop=8 softtabstop=4 shiftwidth=4 expandtab
-set tabstop=8 shiftwidth=4 expandtab
+set tabstop=8 softtabstop=4 shiftwidth=4 expandtab
+" set tabstop=8 shiftwidth=4 expandtab
 "
 " However, in some syntaxes that is wrong. For instance, I want 2 spaces in Javascript and YAML. 
 " And in Makefiles, space indent is a syntax error - there, I want hard tabs. You can set these things 
@@ -287,9 +288,9 @@ augroup numbertoggle
 augroup END
 
 " http://vim.wikia.com/wiki/Toggle_auto-indenting_for_code_paste
-nnoremap <F2> :set invpaste paste?<CR>
-set pastetoggle=<F2>
-set showmode
+" nnoremap <F2> :set invpaste paste?<CR>
+" set pastetoggle=<F2>
+" set showmode
 
 " http://vim.wikia.com/wiki/Modeline_magic
 set modeline
@@ -415,6 +416,56 @@ let g:terraform_fold_sections = 1
 let g:ycm_global_ycm_extra_conf='~/.vim/plugged/YouCompleteMe/.ycm_extra_conf.py'
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_python_binary_path = 'python'
+" let g:ycm_enable_semantic_highlighting=1
+" nnoremap <silent> <localleader>h <Plug>(YCMToggleInlayHints)
+
+" https://gist.github.com/asethwright/9c436d2a8a5b0f48e499
+" Cursor to yellow on insert mode
+" Blue on command/other mode
+" Note the use of hex codes (ie 3971ED)
+if exists('$TMUX')
+    " let &t_EI = "\<Esc>Ptmux;\<Esc>\033]Pl3971ED\033\\"
+    let &t_EI = "\<Esc>Ptmux;\<Esc>\033]Pl71ed39\033\\"
+    let &t_SI = "\<Esc>Ptmux;\<Esc>\033]PlFBA922\033\\"
+    silent !echo -ne "\<Esc>Ptmux;\<Esc>\033]Pl3971ED\033\\"
+    autocmd VimLeave * silent !echo -ne "\<Esc>Ptmux;\<Esc>\033]Pl3971ED\033\\"
+else
+    " let &t_EI = "\033]Pl3971ED\033\\"
+    let &t_EI = "\033]Pl71ed39\033\\"
+    let &t_SI = "\033]PlFBA922\033\\"
+    silent !echo -ne "\033]Pl3971ED\033\\"
+    autocmd VimLeave * silent !echo -ne "\033]Pl3971ED\033\\"
+endif
+
+" show invisible
+" https://www.reddit.com/r/vim/comments/4hoa6e/what_do_you_use_for_your_listchars/
+set list
+" set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
+" set listchars=tab:»·,trail:~,extends:>,precedes:<
+" set listchars=tab:▸\,trail:·,nbsp:␣,extends:»,precedes:«,eol:↲
+" set listchars=tab:│·,trail:·,extends:→
+set showbreak=↪\ 
+" set listchars=tab:→\ ,nbsp:␣,trail:•,extends:⟩,precedes:⟨,eol:↲
+" set listchars=tab:→\ ,nbsp:␣,trail:•,extends:⟩,precedes:⟨
+set listchars=tab:→\ ,nbsp:␣,trail:·,extends:⟩,precedes:⟨
+
+" set list listchars=tab:▸\ ,trail:·,precedes:←,extends:→,eol:↲,nbsp:␣
+" hi NonText ctermfg=16 guifg=#4a4a59
+" hi SpecialKey ctermfg=16 guifg=#4a4a59
+
+" Vim : Highlight the word TODO for every filetype
+" https://stackoverflow.com/questions/11709965/vim-highlight-the-word-todo-for-every-filetype
+augroup HighlightTODO
+    autocmd!
+    autocmd WinEnter,VimEnter * :silent! call matchadd('Todo', 'TODO\|FIXME', -1)
+augroup END
+
+" How to automatically close the quick fix window when leaving a file?
+" https://stackoverflow.com/questions/7476126/how-to-automatically-close-the-quick-fix-window-when-leaving-a-file
+aug QFClose
+  au!
+  au WinEnter * if winnr('$') == 1 && &buftype == "quickfix"|q|endif
+aug END
 
 """"" the following options are no longer needed, as they are included by default in the tpope/vim-sensible plugin """""
 
