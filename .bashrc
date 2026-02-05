@@ -59,8 +59,11 @@ export PATH=$HOME/.local/bin:$PATH
 
 # mise: https://github.com/jdx/mise
 eval "$(mise activate bash)"                        # this sets up interactive sessions
-# eval "$(mise completion bash)"
+eval "$(mise completion bash)"
 # export PATH=$HOME/.local/share/mise/shims:$PATH   # add mise shims to PATH in .profile, instead of .bashrc and .zshrc:
+
+# ruff
+eval "$(ruff generate-shell-completion bash)"
 
 # uv/uvx shell autocompletion
 eval "$(uv generate-shell-completion bash)"
