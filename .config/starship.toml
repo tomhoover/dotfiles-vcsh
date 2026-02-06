@@ -64,16 +64,15 @@ add_newline = false
 # format = "$symbol "
 # success_symbol = "[❯](bold green)"
 # error_symbol = "[❯](bold red)"
-error_symbol = "[✗](bold red)"
 # vimcmd_symbol = "[❮](bold green)"
 # vimcmd_visual_symbol = "[❮](bold yellow)"
 # vimcmd_replace_symbol = "[❮](bold purple)"
 # vimcmd_replace_one_symbol = "[❮](bold purple)"
 # disabled = false
 
-#  [character] Omarchy {{{
-#  error_symbol = "[✗](bold cyan)"
-#  success_symbol = "[❯](bold cyan)"
+# [character] Omarchy {{{
+# error_symbol = "[✗](bold cyan)"
+# success_symbol = "[❯](bold cyan)"
 # }}}
 
 # }}}
@@ -101,6 +100,8 @@ truncation_symbol = "…/"
 # }}}
 
 # }}}
+
+[directory.substitutions]
 
 [git_branch] # {{{
 # format = "on [$symbol$branch(:$remote_branch)]($style) "
@@ -169,8 +170,8 @@ disabled = false
 ahead      = "⇡${count} "
 diverged   = "⇕⇡${ahead_count}⇣${behind_count} "
 behind     = "⇣${count} "
-# conflicted = " "
-# up_to_date = " "
+conflicted = " "
+up_to_date = " "
 # untracked  = "? "
 # modified   = " "
 # stashed    = ""
@@ -193,7 +194,7 @@ disabled = false
 # threshold = 2
 # format = "[$symbol$shlvl]($style) "
 # symbol = "↕️  "
-symbol = "↕️"
+symbol = "↕️ "
 # repeat = false
 # repeat_offset = 0
 # style = "bold yellow"
@@ -426,8 +427,6 @@ disabled = false
 #     "deps.js",
 # ]
 # detect_folders = []
-# 
-# [directory.substitutions]
 # 
 # [direnv]
 # format = "[$symbol$loaded/$allowed]($style) "
