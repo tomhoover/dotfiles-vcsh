@@ -3,7 +3,7 @@ echo "$PATH" >> /tmp/shell-init.txt
 echo "$(date '+%Y-%m-%d %H:%M') :: PROFILE_LOADED" >> /tmp/shell-init.txt
 export PROFILE_LOADED=1
 
-MYHOST=$(uname -n | sed 's/\..*//')     # alternative to $(hostname -s), as arch does not install 'hostname' by default
+MYHOST=$(uname -n | sed -e 's/\..*//')     # alternative to $(hostname -s), as arch does not install 'hostname' by default
 
 export PATH=/usr/local/bin:/usr/local/sbin:"$PATH"
 

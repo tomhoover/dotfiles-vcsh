@@ -7,7 +7,7 @@ echo "$PATH" >> /tmp/shell-init.txt
 echo "$(date '+%Y-%m-%d %H:%M') :: BASHRC_LOADED" >> /tmp/shell-init.txt
 export BASHRC_LOADED=1
 
-# MYHOST=$(uname -n | sed 's/\..*//')     # alternative to $(hostname -s), as arch does not install 'hostname' by default
+# MYHOST=$(uname -n | sed -e 's/\..*//')     # alternative to $(hostname -s), as arch does not install 'hostname' by default
 
 # keychain
 [ -r "$HOME"/.keychain/"$(uname -n)"-sh ] && source "$HOME"/.keychain/"$(uname -n)"-sh
