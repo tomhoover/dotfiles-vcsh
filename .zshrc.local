@@ -91,6 +91,12 @@ if command -v direnv > /dev/null; then eval "$(direnv hook zsh)"; fi
 # Use starship prompt if available, otherwise liquidprompt or customized grml prompt
 if command -v starship &> /dev/null; then
     prompt off
+
+    # prevent empty line when opening terminal (https://github.com/starship/starship/issues/560)
+    #   used in conjunction with 'add_newline = false' in ~/.config/starship.toml
+    precmd() { precmd() { echo "" } }
+    alias clear="precmd() { precmd() { echo } } && clear"
+
     eval "$(starship init zsh)"
 elif [ -f ~/.local/share/liquidprompt ]; then
     source ~/.local/share/liquidprompt

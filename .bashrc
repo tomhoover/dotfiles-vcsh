@@ -96,6 +96,14 @@ if command -v direnv > /dev/null; then eval "$(direnv hook bash)"; fi
 
 # Use starship prompt if available, otherwise liquidprompt
 if command -v starship &> /dev/null; then
+    # prevent empty line when opening terminal (https://github.com/starship/starship/issues/560)
+    #   used in conjunction with 'add_newline = false' in ~/.config/starship.toml
+    # my_precmd() {
+    #         echo ''
+    #     }
+    # export PROMPT_COMMAND=my_precmd
+
+    # By defining starship after, PROMPT_COMMAND is wrapped by the init script
     eval "$(starship init bash)"
 else
     [ -f ~/.local/share/liquidprompt ] && source ~/.local/share/liquidprompt

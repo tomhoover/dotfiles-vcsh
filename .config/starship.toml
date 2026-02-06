@@ -47,6 +47,7 @@ format = '$all$directory$character'
 # scan_timeout = 30
 # command_timeout = 500
 # add_newline = true
+add_newline = false
 # follow_symlinks = true
 
 # Omarchy {{{
