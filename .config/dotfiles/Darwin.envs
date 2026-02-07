@@ -1,6 +1,8 @@
-echo "$PATH" >> /tmp/shell-init.txt
-echo "$(date '+%Y-%m-%d %H:%M') :: :: DARWIN_EXPORTS_LOADED" >> /tmp/shell-init.txt
-export DARWIN_EXPORTS_LOADED=1
+# shellcheck shell=sh
+
+echo "$PATH" >>/tmp/shell-init.txt
+echo "$(date '+%Y-%m-%d %H:%M') :: :: DARWIN_ENVS_LOADED" >>/tmp/shell-init.txt
+export DARWIN_ENVS_LOADED=1
 
 # instruct Homebrew to return to pre-4.0.0 behaviour by cloning the Homebrew/homebrew-core tap during installation
 # https://docs.brew.sh/Installation
@@ -10,4 +12,4 @@ export HOMEBREW_NO_INSTALL_FROM_API=1
 export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 export MANPATH="/opt/local/share/man:$MANPATH"
 
-echo "$(date '+%Y-%m-%d %H:%M') :: :: DARWIN_EXPORTS_ENDED" >> /tmp/shell-init.txt
+echo "$(date '+%Y-%m-%d %H:%M') :: :: DARWIN_ENVS_ENDED" >>/tmp/shell-init.txt

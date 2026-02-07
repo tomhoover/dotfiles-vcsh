@@ -1,16 +1,32 @@
-# shellcheck disable=SC1090,SC1091
+# shellcheck shell=bash
+# shellcheck disable=SC1090
+
+echo "$PATH" >>/tmp/shell-init.txt
+echo "$(date '+%Y-%m-%d %H:%M') :: BASHRC_LOADED" >>/tmp/shell-init.txt
+export BASHRC_LOADED=1
 
 # exit if non-interactive shell
 [[ $- != *i* ]] && return
 
-echo "$PATH" >> /tmp/shell-init.txt
-echo "$(date '+%Y-%m-%d %H:%M') :: BASHRC_LOADED" >> /tmp/shell-init.txt
-export BASHRC_LOADED=1
-
-# MYHOST=$(uname -n | sed -e 's/\..*//')     # alternative to $(hostname -s), as arch does not install 'hostname' by default
-
 # keychain
 [ -r "$HOME"/.keychain/"$(uname -n)"-sh ] && source "$HOME"/.keychain/"$(uname -n)"-sh
+
+# SHEL=$(basename $SHELL)
+SHEL=bash
+source ~/.config/dotfiles/init
+
+MYHOST=$(uname -n | sed -e 's/\..*//')     # alternative to $(hostname -s), as arch does not install 'hostname' by default
+
+[ -r ~/.config/dotfiles/"$(uname)".bashrc ] && source ~/.config/dotfiles/"$(uname)".bashrc
+[ -r ~/.config/dotfiles/"${MYHOST}".bashrc ] && source ~/.config/dotfiles/"${MYHOST}".bashrc
+
+# ----------
+
+# Increase Bash history size. Allow 32³ entries; the default is 500.
+export HISTSIZE='32768'
+export HISTFILESIZE="${HISTSIZE}"
+# Omit duplicates and commands that begin with a space from history.
+export HISTCONTROL='ignoreboth'
 
 # https://github.com/seebi/dircolors-solarized (so solarized colors are used when accessing machine with iTerm2/ssh)
 #eval $(dircolors $HOME/src/github.com/seebi/dircolors-solarized/dircolors.ansi-universal)
@@ -19,92 +35,34 @@ if [ -x /usr/bin/dircolors ]; then test -r ~/.dircolors && eval "$(dircolors -b 
 
 # enable bash-completion to work with git aliases
 # https://stackoverflow.com/questions/342969/how-do-i-get-bash-completion-to-work-with-aliases
-__git_complete g __git_main
+#TODO
+#__git_complete g __git_main
+#TODO
+# https://github.com/cykerway/complete-alias ??
 
-# Load the shell dotfiles, and then some:
-# * ~/.extra can be used for other settings you don’t want to commit.
-for file in ~/.{aliases,exports,functions,extra,SECRETS}; do
-    [ -r "$file" ] && [ -f "$file" ] && source "$file";
-done;
-
-for file in ~/.config/dotfiles/$(uname).{aliases,exports,functions,extra}; do
-    [ -r "$file" ] && [ -f "$file" ] && source "$file";
-done;
-
-for file in ~/.config/dotfiles/${MYHOST}.{aliases,exports,functions,extra}; do
-    [ -r "$file" ] && [ -f "$file" ] && source "$file";
-done;
-unset file;
-
-# rupa/z
-[ -r ~/.local/share/z.sh ] && source ~/.local/share/z.sh
-
-# ensure ~/.local/bin follows rbenv/pyenv/asdf/mise shims in $PATH (i.e. pipx installed packages are secondary to shims)
-export PATH=$HOME/.local/bin:$PATH
-
-# # rbenv
-# if command -v rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-
-# # pyenv: https://github.com/pyenv/pyenv
-# export PYENV_ROOT="$HOME/.pyenv"
-# command -v pyenv > /dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-# if command -v pyenv > /dev/null; then eval "$(pyenv init -)" && eval "$(pyenv virtualenv-init -)"; fi
-# # pyenv-virtualenv: https://github.com/pyenv/pyenv-virtualenv
-# # if command -v pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
-
-# # asdf: https://github.com/asdf-vm/asdf
-# . "$HOME/.asdf/asdf.sh"
-# . "$HOME/.asdf/completions/asdf.bash"
-# . "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/bashrc"
-
-# mise: https://github.com/jdx/mise
-eval "$(mise activate bash)"                        # this sets up interactive sessions
-eval "$(mise completion bash)"
-# export PATH=$HOME/.local/share/mise/shims:$PATH   # add mise shims to PATH in .profile, instead of .bashrc and .zshrc:
-
-# ruff
-eval "$(ruff generate-shell-completion bash)"
-
-# uv/uvx shell autocompletion
-eval "$(uv generate-shell-completion bash)"
-eval "$(uvx --generate-shell-completion bash)"
-
-# insert ~/bin into $PATH before rbenv/pyenv/asdf/mise shims
-# path=(~/bin $path)
-export PATH=$HOME/bin:$PATH
-
-# fuzzy finder
-# https://github.com/junegunn/fzf
-[ -f ~/.config/dotfiles/fzf.bash ] && source ~/.config/dotfiles/fzf.bash
-
-# acme.sh
-[ -f ~/.acme.sh/acme.sh.env ] && source ~/.acme.sh/acme.sh.env
-
-if command -v rg > /dev/null; then export FZF_DEFAULT_COMMAND='rg --files'; fi
-
-[ -r ~/.config/dotfiles/"$(uname)".bashrc ] && source ~/.config/dotfiles/"$(uname)".bashrc
-[ -r ~/.config/dotfiles/"${MYHOST}".bashrc ] && source ~/.config/dotfiles/"${MYHOST}".bashrc
-
-# enable pipx completion
-if command -v register-python-argcomplete > /dev/null; then eval "$(register-python-argcomplete pipx)"; fi
-
-# direnv: https://direnv.net
-if command -v direnv > /dev/null; then eval "$(direnv hook bash)"; fi
-
-# Only load Liquid Prompt in interactive shells, not from a script or from scp
-# [[ $- = *i* ]] && source ~/.local/share/liquidprompt
+# ----------
 
 # Use starship prompt if available, otherwise liquidprompt
-if command -v starship &> /dev/null; then
+if command -v starship &>/dev/null; then
     # prevent empty line when opening terminal (https://github.com/starship/starship/issues/560)
     #   used in conjunction with 'add_newline = false' in ~/.config/starship.toml
-    # my_precmd() {
-    #         echo ''
-    #     }
-    # export PROMPT_COMMAND=my_precmd
+    PROMPT_NEEDS_NEWLINE=false
+    my_precmd()
+                {
+        if [[ "$PROMPT_NEEDS_NEWLINE" == true ]]; then
+            echo
+        fi
+        PROMPT_NEEDS_NEWLINE=true
+    }
+    clear()
+            {
+        PROMPT_NEEDS_NEWLINE=false
+        command clear
+    }
+    export PROMPT_COMMAND=my_precmd
 
-    # By defining starship after, PROMPT_COMMAND is wrapped by the init script
-    eval "$(starship init bash)"
+    # shellcheck disable=SC2086
+    eval "$(starship init ${SHEL})"
 else
     [ -f ~/.local/share/liquidprompt ] && source ~/.local/share/liquidprompt
 fi

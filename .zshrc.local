@@ -1,8 +1,20 @@
+# shellcheck shell=bash
+# shellcheck disable=SC1090
+
 echo "$PATH" >> /tmp/shell-init.txt
 echo "$(date '+%Y-%m-%d %H:%M') :: ZSHRC_LOCAL_LOADED" >> /tmp/shell-init.txt
 export ZSHRC_LOCAL_LOADED=1
 
+# SHEL=$(basename $SHELL)
+SHEL=zsh
+source ~/.config/dotfiles/init
+
 # MYHOST=$(uname -n | sed -e 's/\..*//')     # alternative to $(hostname -s), as arch does not install 'hostname' by default
+
+[ -r ~/.config/dotfiles/"$(uname)".zshrc ] && source ~/.config/dotfiles/"$(uname)".zshrc
+[ -r ~/.config/dotfiles/"${MYHOST}".zshrc ] && source ~/.config/dotfiles/"${MYHOST}".zshrc
+
+# ----------
 
 # history
 HISTSIZE=100000
@@ -15,89 +27,19 @@ autoload -Uz compinit bashcompinit
 compinit
 bashcompinit
 
-# Load the shell dotfiles, and then some:
-# * ~/.extra can be used for other settings you don't want to commit.
-for file in ~/.{aliases,exports,functions,extra,SECRETS}; do
-    [ -r "$file" ] && [ -f "$file" ] && source "$file";
-done;
-
-for file in ~/.config/dotfiles/$(uname).{aliases,exports,functions,extra}; do
-    [ -r "$file" ] && [ -f "$file" ] && source "$file";
-done;
-
-for file in ~/.config/dotfiles/${MYHOST}.{aliases,exports,functions,extra}; do
-    [ -r "$file" ] && [ -f "$file" ] && source "$file";
-done;
-unset file;
-
-# rupa/z
-[ -r ~/.local/share/z.sh ] && source ~/.local/share/z.sh
-
-# ensure ~/.local/bin follows rbenv/pyenv/asdf/mise shims in $PATH (i.e. pipx installed packages are secondary to shims)
-export PATH=$HOME/.local/bin:$PATH
-
-# # rbenv
-# if command -v rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-
-# # pyenv: https://github.com/pyenv/pyenv
-# export PYENV_ROOT="$HOME/.pyenv"
-# command -v pyenv > /dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-# if command -v pyenv > /dev/null; then eval "$(pyenv init -)" && eval "$(pyenv virtualenv-init -)"; fi
-# # pyenv-virtualenv: https://github.com/pyenv/pyenv-virtualenv
-# # if command -v pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
-
-# # asdf: https://github.com/asdf-vm/asdf
-# [ -f ~/.asdf/asdf.sh ] && source "$HOME/.asdf/asdf.sh"
-# fpath=("${ASDF_DIR}"/completions $fpath)
-# [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
-
-# mise: https://github.com/jdx/mise
-eval "$(mise activate zsh)"                         # this sets up interactive sessions
-eval "$(mise completion zsh)"
-# export PATH=$HOME/.local/share/mise/shims:$PATH   # add mise shims to PATH in .profile, instead of .bashrc and .zshrc:
-
-# ruff
-eval "$(ruff generate-shell-completion zsh)"
-
-# uv/uvx shell autocompletion
-eval "$(uv generate-shell-completion zsh)"
-eval "$(uvx --generate-shell-completion zsh)"
-
-# insert ~/bin into $PATH before rbenv/pyenv/asdf/mise shims
-# path=(~/bin $path)
-export PATH=$HOME/bin:$PATH
-
-# fuzzy finder
-# https://github.com/junegunn/fzf
-[ -f ~/.config/dotfiles/fzf.zsh ] && source ~/.config/dotfiles/fzf.zsh
-
-# acme.sh
-[ -f ~/.acme.sh/acme.sh.env ] && source ~/.acme.sh/acme.sh.env
-
-if command -v rg > /dev/null; then export FZF_DEFAULT_COMMAND='rg --files'; fi
-
-# enable pipx completion
-if command -v register-python-argcomplete > /dev/null; then eval "$(register-python-argcomplete pipx)"; fi
-
-[ -r ~/.config/dotfiles/"$(uname)".zshrc ] && source ~/.config/dotfiles/"$(uname)".zshrc
-[ -r ~/.config/dotfiles/"${MYHOST}".zshrc ] && source ~/.config/dotfiles/"${MYHOST}".zshrc
-
-# direnv: https://direnv.net
-if command -v direnv > /dev/null; then eval "$(direnv hook zsh)"; fi
-
-# Only load Liquid Prompt in interactive shells, not from a script or from scp
-# [[ $- = *i* ]] && source ~/.local/share/liquidprompt
+# ----------
 
 # Use starship prompt if available, otherwise liquidprompt or customized grml prompt
+# shellcheck disable=SC1056,SC1072
 if command -v starship &> /dev/null; then
-    prompt off
-
     # prevent empty line when opening terminal (https://github.com/starship/starship/issues/560)
     #   used in conjunction with 'add_newline = false' in ~/.config/starship.toml
-    precmd() { precmd() { echo "" } }
+    # shellcheck disable=SC1009,SC1073,SC1083
+    precmd() { precmd() { echo } }
     alias clear="precmd() { precmd() { echo } } && clear"
 
-    eval "$(starship init zsh)"
+    prompt off
+    eval "$(starship init ${SHEL})"
 elif [ -f ~/.local/share/liquidprompt ]; then
     source ~/.local/share/liquidprompt
 else

@@ -1,0 +1,115 @@
+# shellcheck shell=bash
+# shellcheck disable=SC1090,SC2086
+
+echo "$PATH" >>/tmp/shell-init.txt
+echo "$(date '+%Y-%m-%d %H:%M') :: :: INIT_LOADED" >>/tmp/shell-init.txt
+export INIT_LOADED=1
+
+isdarwin()
+{
+    [ "$(uname -s)" = "Darwin" ]
+}
+
+islinux()
+{
+    [ "$(uname -s)" = "Linux" ]
+}
+
+isarch()
+{
+    if islinux && [ -f /etc/os-release ]; then
+        # shellcheck disable=SC1091
+        . /etc/os-release
+        # shellcheck disable=SC2078
+        [ "${ID}" = "arch" ] && return 0
+    fi
+    return 1
+}
+
+isdebian()
+{
+    if islinux && [ -f /etc/os-release ]; then
+        # shellcheck disable=SC1091
+        . /etc/os-release
+        # shellcheck disable=SC2078
+        [ "${ID}" = "debian" ] && return 0
+    fi
+    return 1
+}
+
+isomarchy()
+{
+    isarch && grep -q '\[omarchy\]' /etc/pacman.conf
+}
+
+# All the default Omarchy aliases and functions
+if isomarchy; then
+    source ~/.local/share/omarchy/default/bash/rc
+else
+    # if command -v mise &> /dev/null; then
+    #   eval "$(mise activate bash)"
+    # fi
+
+    # if command -v starship &> /dev/null; then
+    #   eval "$(starship init bash)"
+    # fi
+
+    if command -v zoxide &>/dev/null; then
+        eval "$(zoxide init ${SHEL})"
+    else
+        [ -r ~/.local/share/z.sh ] && source ~/.local/share/z.sh # rupa/z
+    fi
+
+    # if command -v try &> /dev/null; then
+    #   eval "$(try init ~/Work/tries)"
+    # fi
+
+    # if command -v fzf &> /dev/null; then
+    #   if [[ -f /usr/share/fzf/completion.${SHEL} ]]; then
+    #     source /usr/share/fzf/completion.${SHEL}
+    #   fi
+    #   if [[ -f /usr/share/fzf/key-bindings.${SHEL} ]]; then
+    #     source /usr/share/fzf/key-bindings.${SHEL}
+    #   fi
+    # fi
+
+    # fuzzy finder
+    # https://github.com/junegunn/fzf
+    [ -f ~/.config/dotfiles/fzf.${SHEL} ] && source ~/.config/dotfiles/fzf.${SHEL}
+fi
+
+# ensure ~/.local/bin follows rbenv/pyenv/asdf/mise shims in $PATH (i.e. pipx installed packages are secondary to shims)
+export PATH=$HOME/.local/bin:$PATH
+
+if command -v mise &>/dev/null; then  eval "$(mise activate ${SHEL})";   fi  # this sets up interactive sessions
+# export PATH=$HOME/.local/share/mise/shims:$PATH   # add mise shims to PATH in .profile, instead of .bashrc and .zshrc:
+
+# insert ~/bin into $PATH before rbenv/pyenv/asdf/mise shims
+export PATH=$HOME/bin:$PATH
+
+if command -v try    &>/dev/null; then  eval "$(try init ~/src/tries)";                    fi
+
+if command -v register-python-argcomplete &>/dev/null; then  eval "$(register-python-argcomplete pipx)";        fi  # enable pipx completion
+if command -v mise                        &>/dev/null; then  eval "$(mise completion ${SHEL})";                 fi
+if command -v ruff                        &>/dev/null; then  eval "$(ruff generate-shell-completion ${SHEL})";  fi
+if command -v uv                          &>/dev/null; then  eval "$(uv generate-shell-completion ${SHEL})";    fi
+if command -v uvx                         &>/dev/null; then  eval "$(uvx --generate-shell-completion ${SHEL})"; fi
+
+if command -v direnv &>/dev/null; then  eval "$(direnv hook ${SHEL})";                     fi
+
+# Load the shell dotfiles, and then some:
+# * ~/.extra can be used for other settings you don’t want to commit.
+for file in ~/.{aliases,functions,envs,extra,SECRETS}; do
+    [ -r "$file" ] && [ -f "$file" ] && source "$file"
+done
+
+for file in ~/.config/dotfiles/$(uname).{aliases,functions,envs,extra}; do
+    [ -r "$file" ] && [ -f "$file" ] && source "$file"
+done
+
+for file in ~/.config/dotfiles/${MYHOST}.{aliases,functions,envs,extra}; do
+    [ -r "$file" ] && [ -f "$file" ] && source "$file"
+done
+unset file
+
+echo "$(date '+%Y-%m-%d %H:%M') :: :: INIT_ENDED" >>/tmp/shell-init.txt
