@@ -80,10 +80,13 @@ add_newline = false
 [directory] # {{{
 # truncation_length = 3
 # truncate_to_repo = true
+truncate_to_repo = false
 # fish_style_pwd_dir_length = 0
 # use_logical_path = true
 # format = "[$path]($style)[$read_only]($read_only_style) "
 # repo_root_format = "[$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style) "
+repo_root_style = "bold purple"
+before_repo_root_style = "dimmed white"
 # style = "cyan bold"
 # disabled = false
 # read_only = "🔒"
@@ -100,8 +103,6 @@ truncation_symbol = "…/"
 # }}}
 
 # }}}
-
-[directory.substitutions]
 
 [git_branch] # {{{
 # format = "on [$symbol$branch(:$remote_branch)]($style) "
@@ -172,8 +173,8 @@ diverged   = "⇕⇡${ahead_count}⇣${behind_count} "
 behind     = "⇣${count} "
 conflicted = " "
 up_to_date = " "
-# untracked  = "? "
-# modified   = " "
+untracked  = "? "
+modified   = " "
 # stashed    = ""
 # staged     = ""
 # renamed    = ""
@@ -427,7 +428,9 @@ disabled = false
 #     "deps.js",
 # ]
 # detect_folders = []
-# 
+#
+# [directory.substitutions]
+#
 # [direnv]
 # format = "[$symbol$loaded/$allowed]($style) "
 # symbol = "direnv "
