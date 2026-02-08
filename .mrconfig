@@ -123,7 +123,10 @@ fixups =
     mkdir -p $HOME/.config/kitty
     ln -sf "$MR_REPO/diff.conf" $HOME/.config/kitty/diff.conf
     ln -sf "$MR_REPO/dracula.conf" $HOME/.config/kitty/dracula.conf
-    grep -q "include dracula.conf" ~/.config/kitty/kitty.conf || echo "include dracula.conf" >> ~/.config/kitty/kitty.conf
+    # not on omarchy
+    ! isomarchy && mkdir -p $HOME/.config/omarchy/current/theme
+    ! isomarchy && ln -sf "$MR_REPO/dracula.conf" $HOME/.config/omarchy/current/theme/kitty.conf
+    # grep -q "include dracula.conf" ~/.config/kitty/kitty.conf || echo "include dracula.conf" >> ~/.config/kitty/kitty.conf
 
 [$HOME/src/github.com/dracula/midnight-commander]
 checkout = git clone 'https://github.com/dracula/midnight-commander.git' 'midnight-commander'

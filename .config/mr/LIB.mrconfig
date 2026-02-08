@@ -38,7 +38,39 @@ lib =
         on tom@bethel
     }
     mylaptop() {
-        on tom@ariel || on tom@theophilus
+        on tom@ariel || on tom@manuel || on tom@theophilus
+    }
+    isdarwin()
+    {
+        [ "$(uname -s)" = "Darwin" ]
+    }
+    islinux()
+    {
+        [ "$(uname -s)" = "Linux" ]
+    }
+    isarch()
+    {
+        if islinux && [ -f /etc/os-release ]; then
+            # shellcheck disable=SC1091
+            . /etc/os-release
+            # shellcheck disable=SC2078
+            [ "${ID}" = "arch" ] && return 0
+        fi
+        return 1
+    }
+    isdebian()
+    {
+        if islinux && [ -f /etc/os-release ]; then
+            # shellcheck disable=SC1091
+            . /etc/os-release
+            # shellcheck disable=SC2078
+            [ "${ID}" = "debian" ] && return 0
+        fi
+        return 1
+    }
+    isomarchy()
+    {
+        isarch && grep -q '\[omarchy\]' /etc/pacman.conf
     }
     hass() {
         mylaptop || on tom@ha
