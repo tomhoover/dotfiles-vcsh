@@ -20,6 +20,8 @@
 !/.config/direnv/lib/*
 !/.config/dotfiles
 !/.config/dotfiles/*
+!/.config/ghostty
+!/.config/ghostty/config
 !/.config/git
 !/.config/git/attributes
 !/.config/git/config
