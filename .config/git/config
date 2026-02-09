@@ -10,7 +10,7 @@
     # thanks to Slipp D Thompson - https://stackoverflow.com/questions/1838873/visualizing-branch-topology-in-git/34467298#34467298
     #l = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset) - %C(bold green)(%ar)%C(reset)'
     #l = log --graph --abbrev-commit --decorate --format=format:'%C(blue)%h%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset) - %C(green)(%ar)%C(reset)'
-    l = log --graph --abbrev-commit --decorate --format=format:'%C(blue)%h%C(reset)%C(auto)%d%C(reset) %C(white)%s%C(reset) %C(dim white)[%an]%C(reset) %C(green)(%ar)%C(reset)'
+    l = log --max-count=45 --graph --abbrev-commit --decorate --format=format:'%C(blue)%h%C(reset)%C(auto)%d%C(reset) %C(white)%s%C(reset) %C(dim white)[%an]%C(reset) %C(green)(%ar)%C(reset)'
 
     #l = log --graph --oneline --decorate
     la = !git l --all
