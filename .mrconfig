@@ -20,6 +20,7 @@ include = cat $HOME/.config/mr/LIB.mrconfig || true
 
 [$HOME/.dotfiles]
 checkout = git clone 'https://github.com/tomhoover/dotfiles.git' '.dotfiles'
+skip = ! true
 fetch = fetchOrigin; fetchGitolite; fetchLocalhost
 push = pushOriginMaster; pushAllGitolite; pushAllLocalhost
 fixups =
@@ -33,6 +34,7 @@ fixups =
 
 [$HOME/bin]
 checkout = git clone 'https://github.com/tomhoover/bin.git' 'bin'
+skip = ! true
 fetch = fetchOrigin; fetchGitolite; fetchLocalhost
 push = pushOriginMaster; pushAllGitolite; pushAllLocalhost
 fixups =
