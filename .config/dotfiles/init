@@ -112,4 +112,10 @@ for file in ~/.config/dotfiles/${MYHOST}.{aliases,functions,envs,extra}; do
 done
 unset file
 
+# start ssh-agent & load key
+command -v keychain >/dev/null 2>&1 && eval "$(keychain --quiet --ignore-missing --eval id_rsa_"${MYHOST}" github_rsa id_rsa)"
+
+# keychain
+[ -r "$HOME"/.keychain/"$(uname -n)"-sh ] && source "$HOME"/.keychain/"$(uname -n)"-sh
+
 echo "$(date '+%Y-%m-%d %H:%M') :: :: INIT_ENDED" >>/tmp/shell-init.txt

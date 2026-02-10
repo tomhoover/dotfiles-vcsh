@@ -37,6 +37,8 @@ fetch = fetchOrigin; fetchGitolite; fetchLocalhost
 push = pushOriginMaster; pushAllGitolite; pushAllLocalhost
 fixups =
     chmod 755 $HOME/bin
+    mkdir -p $HOME/.local/bin
+    chmod go= $HOME/.local && chmod 755 $HOME/.local/bin
     cd "$MR_REPO"
     grep -q '\[remote "bethel"\]'    .git/config && git remote remove bethel    || true
     grep -q '\[remote "gitea"\]'     .git/config && git remote remove gitea     || true

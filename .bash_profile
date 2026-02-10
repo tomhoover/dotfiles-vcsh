@@ -1,4 +1,4 @@
-# shellcheck shell=sh
+# shellcheck shell=bash
 # shellcheck disable=SC1090
 
 echo "$PATH" >>/tmp/shell-init.txt

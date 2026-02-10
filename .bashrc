@@ -8,14 +8,14 @@ export BASHRC_LOADED=1
 # exit if non-interactive shell
 [[ $- != *i* ]] && return
 
-# keychain
-[ -r "$HOME"/.keychain/"$(uname -n)"-sh ] && source "$HOME"/.keychain/"$(uname -n)"-sh
+# # keychain
+# [ -r "$HOME"/.keychain/"$(uname -n)"-sh ] && source "$HOME"/.keychain/"$(uname -n)"-sh
 
 # SHEL=$(basename $SHELL)
 SHEL=bash
 source ~/.config/dotfiles/init
 
-MYHOST=$(uname -n | sed -e 's/\..*//')     # alternative to $(hostname -s), as arch does not install 'hostname' by default
+MYHOST=$(uname -n | sed -e 's/\..*//') # alternative to $(hostname -s), as arch does not install 'hostname' by default
 
 [ -r ~/.config/dotfiles/"$(uname)".bashrc ] && source ~/.config/dotfiles/"$(uname)".bashrc
 [ -r ~/.config/dotfiles/"${MYHOST}".bashrc ] && source ~/.config/dotfiles/"${MYHOST}".bashrc
@@ -44,25 +44,23 @@ if [ -x /usr/bin/dircolors ]; then test -r ~/.dircolors && eval "$(dircolors -b 
 
 # Use starship prompt if available, otherwise liquidprompt
 if command -v starship &>/dev/null; then
-    # prevent empty line when opening terminal (https://github.com/starship/starship/issues/560)
-    #   used in conjunction with 'add_newline = false' in ~/.config/starship.toml
+  # prevent empty line when opening terminal (https://github.com/starship/starship/issues/560)
+  #   used in conjunction with 'add_newline = false' in ~/.config/starship.toml
+  PROMPT_NEEDS_NEWLINE=false
+  my_precmd() {
+    if [[ "$PROMPT_NEEDS_NEWLINE" == true ]]; then
+      echo
+    fi
+    PROMPT_NEEDS_NEWLINE=true
+  }
+  clear() {
     PROMPT_NEEDS_NEWLINE=false
-    my_precmd()
-                {
-        if [[ "$PROMPT_NEEDS_NEWLINE" == true ]]; then
-            echo
-        fi
-        PROMPT_NEEDS_NEWLINE=true
-    }
-    clear()
-            {
-        PROMPT_NEEDS_NEWLINE=false
-        command clear
-    }
-    export PROMPT_COMMAND=my_precmd
+    command clear
+  }
+  export PROMPT_COMMAND=my_precmd
 
-    # shellcheck disable=SC2086
-    eval "$(starship init ${SHEL})"
+  # shellcheck disable=SC2086
+  eval "$(starship init ${SHEL})"
 else
-    [ -f ~/.local/share/liquidprompt ] && source ~/.local/share/liquidprompt
+  [ -f ~/.local/share/liquidprompt ] && source ~/.local/share/liquidprompt
 fi

@@ -6,5 +6,5 @@ export ZSHRC_PRE_LOADED=1
 # GRML_DISPLAY_BATTERY=1
 export NOPATHHELPER=1
 
-# keychain
-[ -r "$HOME"/.keychain/"$(uname -n)"-sh ] && source "$HOME"/.keychain/"$(uname -n)"-sh
+# # keychain
+# [ -r "$HOME"/.keychain/"$(uname -n)"-sh ] && source "$HOME"/.keychain/"$(uname -n)"-sh

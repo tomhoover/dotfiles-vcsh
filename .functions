@@ -364,5 +364,5 @@ function gmr() {
 }
 # grep dotfiles
 function gdot() {
-    grep -in "$@" ~/.profile ~/.bash_profile ~/.bashrc ~/.zshenv ~/.zprofile ~/.zshrc.pre ~/.zshrc ~/.zshrc.local ~/.config/dotfiles/* ~/.SECRETS ~/.aliases ~/.exports ~/.extra ~/.functions
+    grep -in "$@" ~/.profile ~/.bash_profile ~/.bashrc ~/.zshenv ~/.zprofile ~/.zshrc.pre ~/.zshrc ~/.zshrc.local ~/.config/dotfiles/* ~/.SECRETS ~/.aliases ~/.envs ~/.extra ~/.functions
 }
