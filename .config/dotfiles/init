@@ -5,18 +5,15 @@ echo "$PATH" >>/tmp/shell-init.txt
 echo "$(date '+%Y-%m-%d %H:%M') :: :: INIT_LOADED" >>/tmp/shell-init.txt
 export INIT_LOADED=1
 
-isdarwin()
-{
+isdarwin() { #{{{
     [ "$(uname -s)" = "Darwin" ]
-}
+} #}}}
 
-islinux()
-{
+islinux() { #{{{
     [ "$(uname -s)" = "Linux" ]
-}
+} #}}}
 
-isarch()
-{
+isarch() { #{{{
     if islinux && [ -f /etc/os-release ]; then
         # shellcheck disable=SC1091
         . /etc/os-release
@@ -24,10 +21,9 @@ isarch()
         [ "${ID}" = "arch" ] && return 0
     fi
     return 1
-}
+} #}}}
 
-isdebian()
-{
+isdebian() { #{{{
     if islinux && [ -f /etc/os-release ]; then
         # shellcheck disable=SC1091
         . /etc/os-release
@@ -35,12 +31,11 @@ isdebian()
         [ "${ID}" = "debian" ] && return 0
     fi
     return 1
-}
+} #}}}
 
-isomarchy()
-{
+isomarchy() { #{{{
     isarch && grep -q '\[omarchy\]' /etc/pacman.conf
-}
+} #}}}
 
 # All the default Omarchy aliases and functions
 if isomarchy; then
@@ -81,21 +76,21 @@ fi
 # ensure ~/.local/bin follows rbenv/pyenv/asdf/mise shims in $PATH (i.e. pipx installed packages are secondary to shims)
 export PATH=$HOME/.local/bin:$PATH
 
-if command -v mise &>/dev/null; then  eval "$(mise activate ${SHEL})";   fi  # this sets up interactive sessions
-# export PATH=$HOME/.local/share/mise/shims:$PATH   # add mise shims to PATH in .profile, instead of .bashrc and .zshrc:
+if command -v mise &>/dev/null; then eval "$(mise activate ${SHEL})"; fi # this sets up interactive sessions
+# export PATH=$HOME/.local/share/mise/shims:$PATH # add mise shims to PATH in .profile, instead of .bashrc and .zshrc:
 
 # insert ~/bin into $PATH before rbenv/pyenv/asdf/mise shims
 export PATH=$HOME/bin:$PATH
 
-if command -v try    &>/dev/null; then  eval "$(try init ~/src/tries)";                    fi
+if command -v try &>/dev/null; then eval "$(try init ~/src/tries)"; fi
 
-if command -v register-python-argcomplete &>/dev/null; then  eval "$(register-python-argcomplete pipx)";        fi  # enable pipx completion
-if command -v mise                        &>/dev/null; then  eval "$(mise completion ${SHEL})";                 fi
-if command -v ruff                        &>/dev/null; then  eval "$(ruff generate-shell-completion ${SHEL})";  fi
-if command -v uv                          &>/dev/null; then  eval "$(uv generate-shell-completion ${SHEL})";    fi
-if command -v uvx                         &>/dev/null; then  eval "$(uvx --generate-shell-completion ${SHEL})"; fi
+if command -v mise                        &>/dev/null; then eval "$(mise completion ${SHEL})"; fi
+if command -v register-python-argcomplete &>/dev/null; then eval "$(register-python-argcomplete pipx)"; fi # enable pipx completion
+if command -v ruff                        &>/dev/null; then eval "$(ruff generate-shell-completion ${SHEL})"; fi
+if command -v uv                          &>/dev/null; then eval "$(uv generate-shell-completion ${SHEL})"; fi
+if command -v uvx                         &>/dev/null; then eval "$(uvx --generate-shell-completion ${SHEL})"; fi
 
-if command -v direnv &>/dev/null; then  eval "$(direnv hook ${SHEL})";                     fi
+if command -v direnv &>/dev/null; then eval "$(direnv hook ${SHEL})"; fi
 
 # Load the shell dotfiles, and then some:
 # * ~/.extra can be used for other settings you don’t want to commit.
@@ -119,3 +114,5 @@ command -v keychain >/dev/null 2>&1 && eval "$(keychain --quiet --ignore-missing
 [ -r "$HOME"/.keychain/"$(uname -n)"-sh ] && source "$HOME"/.keychain/"$(uname -n)"-sh
 
 echo "$(date '+%Y-%m-%d %H:%M') :: :: INIT_ENDED" >>/tmp/shell-init.txt
+
+# vim: set tw=120 fdm=marker commentstring=#%s:

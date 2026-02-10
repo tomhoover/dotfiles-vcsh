@@ -44,23 +44,25 @@ if [ -x /usr/bin/dircolors ]; then test -r ~/.dircolors && eval "$(dircolors -b 
 
 # Use starship prompt if available, otherwise liquidprompt
 if command -v starship &>/dev/null; then
-  # prevent empty line when opening terminal (https://github.com/starship/starship/issues/560)
-  #   used in conjunction with 'add_newline = false' in ~/.config/starship.toml
-  PROMPT_NEEDS_NEWLINE=false
-  my_precmd() {
-    if [[ "$PROMPT_NEEDS_NEWLINE" == true ]]; then
-      echo
-    fi
-    PROMPT_NEEDS_NEWLINE=true
-  }
-  clear() {
-    PROMPT_NEEDS_NEWLINE=false
-    command clear
-  }
-  export PROMPT_COMMAND=my_precmd
+    if ! isomarchy; then
+      # prevent empty line when opening terminal (https://github.com/starship/starship/issues/560)
+      #   used in conjunction with 'add_newline = false' in ~/.config/starship.toml
+      PROMPT_NEEDS_NEWLINE=false
+      my_precmd() {
+        if [[ "$PROMPT_NEEDS_NEWLINE" == true ]]; then
+          echo
+        fi
+        PROMPT_NEEDS_NEWLINE=true
+      }
+      clear() {
+        PROMPT_NEEDS_NEWLINE=false
+        command clear
+      }
+      export PROMPT_COMMAND=my_precmd
 
-  # shellcheck disable=SC2086
-  eval "$(starship init ${SHEL})"
+      # shellcheck disable=SC2086
+      eval "$(starship init ${SHEL})"
+    fi
 else
   [ -f ~/.local/share/liquidprompt ] && source ~/.local/share/liquidprompt
 fi
