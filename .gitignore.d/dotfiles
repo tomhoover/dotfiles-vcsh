@@ -65,6 +65,7 @@
 !/.duplicacy
 /.duplicacy/*
 !/.duplicacy/filters
+!/.editorconfig
 !/.exports
 !/.functions
 !/.gitignore.d
