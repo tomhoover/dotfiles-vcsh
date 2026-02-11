@@ -39,38 +39,10 @@ isomarchy() { #{{{
 
 # All the default Omarchy aliases and functions
 if isomarchy; then
-    source ~/.local/share/omarchy/default/bash/rc
-else
-    # if command -v mise &> /dev/null; then
-    #   eval "$(mise activate bash)"
-    # fi
-
-    # if command -v starship &> /dev/null; then
-    #   eval "$(starship init bash)"
-    # fi
-
-    if command -v zoxide &>/dev/null; then
-        eval "$(zoxide init ${SHEL})"
-    else
-        [ -r ~/.local/share/z.sh ] && source ~/.local/share/z.sh # rupa/z
-    fi
-
-    # if command -v try &> /dev/null; then
-    #   eval "$(try init ~/Work/tries)"
-    # fi
-
-    # if command -v fzf &> /dev/null; then
-    #   if [[ -f /usr/share/fzf/completion.${SHEL} ]]; then
-    #     source /usr/share/fzf/completion.${SHEL}
-    #   fi
-    #   if [[ -f /usr/share/fzf/key-bindings.${SHEL} ]]; then
-    #     source /usr/share/fzf/key-bindings.${SHEL}
-    #   fi
-    # fi
-
-    # fuzzy finder
-    # https://github.com/junegunn/fzf
-    [ -f ~/.config/dotfiles/fzf.${SHEL} ] && source ~/.config/dotfiles/fzf.${SHEL}
+  #sed -i -e 's/\w*eval "$(starship init bash)"/  true/' .local/share/omarchy/default/bash/init
+  #sed -i -e 's/\w*eval "$(try init ~\/Work\/tries)"/  true/' .local/share/omarchy/default/bash/init
+  sed -i -Ee 's/(^source ~\/.local\/share\/omarchy\/default\/bash\/init)/# \1/' .local/share/omarchy/default/bash/rc
+  source ~/.local/share/omarchy/default/bash/rc
 fi
 
 # ensure ~/.local/bin follows rbenv/pyenv/asdf/mise shims in $PATH (i.e. pipx installed packages are secondary to shims)
@@ -83,6 +55,25 @@ if command -v mise &>/dev/null; then eval "$(mise activate ${SHEL})"; fi # this 
 export PATH=$HOME/bin:$PATH
 
 if command -v try &>/dev/null; then eval "$(try init ~/src/tries)"; fi
+
+if command -v zoxide &>/dev/null; then
+    eval "$(zoxide init ${SHEL})"
+else
+    [ -r ~/.local/share/z.sh ] && source ~/.local/share/z.sh # rupa/z
+fi
+
+if command -v fzf &> /dev/null; then
+  if [[ -f /usr/share/fzf/completion.${SHEL} ]]; then
+    source /usr/share/fzf/completion.${SHEL}
+  fi
+  if [[ -f /usr/share/fzf/key-bindings.${SHEL} ]]; then
+    source /usr/share/fzf/key-bindings.${SHEL}
+  fi
+fi
+
+# fuzzy finder
+# https://github.com/junegunn/fzf
+isdarwin && [ -f ~/.config/dotfiles/fzf.${SHEL} ] && source ~/.config/dotfiles/fzf.${SHEL}
 
 if command -v mise                        &>/dev/null; then eval "$(mise completion ${SHEL})"; fi
 if command -v register-python-argcomplete &>/dev/null; then eval "$(register-python-argcomplete pipx)"; fi # enable pipx completion
