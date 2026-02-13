@@ -188,6 +188,7 @@
     # pager = less -eiFRSX
     # pager = diff-so-fancy | less --tabs=4 -RFX
     pager = diff-so-fancy | less --tabs=4 -eiFRSX
+    # pager = delta
 
     # disabled per https://www.edwardthomson.com/blog/advent_day_1_gitattributes_for_text_files.html
     # autocrlf = input
@@ -230,6 +231,14 @@
     ; helper = osxkeychain
 ; }}}
 
+[delta] ; {{{
+    navigate = true    # use n and N to move between diff sections
+
+    # delta detects terminal colors automatically; set one of these to disable auto-detection
+    # dark = true
+    # light = true
+; }}}
+
 [diff] ; {{{
     # Detect copies as well as renames
     renames = copies
@@ -240,6 +249,10 @@
     autocorrect = 1
 ; }}}
 
+[hub] ; {{{
+    protocol = https
+; }}}
+
 [init] ; {{{
     defaultBranch = master
     templateDir = ~/.config/git/template
@@ -247,6 +260,7 @@
 
 [interactive] ; {{{
     diffFilter = diff-so-fancy --patch
+    # diffFilter = delta --color-only
 ; }}}
 
 [merge] ; {{{
@@ -255,6 +269,7 @@
     # Use the OS X graphical three-way merge tool for graphical merges.
     tool = p4merge
     ff = only
+    conflictStyle = zdiff3
 ; }}}
 
 [mergetool] ; {{{
@@ -330,5 +345,3 @@
 #    show = diff-highlight | less
 #    diff = diff-highlight | less
 ; }}}
-[hub]
-	protocol = https
