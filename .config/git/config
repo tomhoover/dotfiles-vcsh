@@ -242,6 +242,7 @@
 [diff] ; {{{
     # Detect copies as well as renames
     renames = copies
+    tool = vimdiff
 ; }}}
 
 [help] ; {{{
@@ -266,9 +267,9 @@
 [merge] ; {{{
     # Include summaries of merged commits in newly created merge commit messages
     log = true
-    # Use the OS X graphical three-way merge tool for graphical merges.
-    tool = p4merge
+
     ff = only
+    tool = p4merge
     conflictStyle = zdiff3
 ; }}}
 
