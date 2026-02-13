@@ -2,25 +2,25 @@
 
 # Warning: This config does not include keys that have an unset value
 
-# Omarchy {{{
+# Omarchy # {{{
 # add_newline = true
 # command_timeout = 200
 # format = "[$directory$git_branch$git_status]($style)$character"
-# 
+#
 # [character]
 # error_symbol = "[✗](bold cyan)"
 # success_symbol = "[❯](bold cyan)"
-# 
+#
 # [directory]
 # truncation_length = 2
 # truncation_symbol = "…/"
 # repo_root_style = "bold cyan"
 # repo_root_format = "[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style) "
-# 
+#
 # [git_branch]
 # format = "[$branch]($style) "
 # style = "italic cyan"
-# 
+#
 # [git_status]
 # format     = '[$all_status]($style)'
 # style      = "cyan"
@@ -50,14 +50,14 @@ right_format = "$cmd_duration"
 add_newline = false
 # follow_symlinks = true
 
-# Omarchy {{{
+# Omarchy # {{{
 #  add_newline = true
 # command_timeout = 200
 # format = "[$directory$git_branch$git_status]($style)$character"
 # }}}
 
 # [palettes]
-# 
+#
 # [profiles]
 
 [character] # {{{
@@ -70,11 +70,10 @@ add_newline = false
 # vimcmd_replace_one_symbol = "[❮](bold purple)"
 # disabled = false
 
-# [character] Omarchy {{{
+# [character] Omarchy # {{{
 # error_symbol = "[✗](bold cyan)"
 # success_symbol = "[❯](bold cyan)"
 # }}}
-
 # }}}
 
 [directory] # {{{
@@ -95,13 +94,12 @@ before_repo_root_style = "dimmed white"
 # home_symbol = "~"
 # use_os_path_sep = true
 
-# [directory] Omarchy {{{
+# [directory] Omarchy # {{{
 # truncation_length = 2
 truncation_symbol = "…/"
 # repo_root_style = "bold cyan"
 # repo_root_format = "[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style) "
 # }}}
-
 # }}}
 
 [git_branch] # {{{
@@ -117,11 +115,10 @@ format = "\\[[$symbol$branch(:$remote_branch)]($style)\\] "
 # ignore_bare_repo = false
 # disabled = false
 
-# [git_branch] Omarchy {{{
+# [git_branch] Omarchy # {{{
 # format = "[$branch]($style) "
 # style = "italic cyan"
 # }}}
-
 # }}}
 
 [git_commit] # {{{
@@ -165,7 +162,7 @@ disabled = false
 # disabled = false
 # use_git_executable = false
 
-# [git_status] Omarchy {{{
+# [git_status] Omarchy # {{{
 # format     = '[$all_status]($style)'
 # style      = "cyan"
 ahead      = "⇡${count} "
@@ -180,7 +177,17 @@ modified   = " "
 # renamed    = ""
 # deleted    = ""
 # }}}
+# }}}
 
+[hostname] # {{{
+# ssh_only = true
+# ssh_symbol = "🌐 "
+# trim_at = "."
+# detect_env_vars = []
+# format = "[$ssh_symbol$hostname]($style) in "
+# style = "green dimmed bold"
+# disabled = false
+disabled = true
 # }}}
 
 [localip] # {{{
@@ -188,7 +195,6 @@ modified   = " "
 # format = "[$localipv4]($style) "
 # style = "yellow bold"
 # disabled = true
-disabled = false
 # }}}
 
 [shlvl] # {{{
@@ -201,6 +207,16 @@ symbol = "↕️ "
 # style = "bold yellow"
 # disabled = true
 disabled = false
+# }}}
+
+[username] # {{{
+# detect_env_vars = []
+# format = "[$user]($style) in "
+# style_root = "red bold"
+# style_user = "yellow bold"
+# show_always = false
+# disabled = false
+disabled = true
 # }}}
 
 # [aws]
@@ -737,15 +753,6 @@ disabled = false
 # style = "bold yellow"
 # format = '\([$state]($style)\) '
 # disabled = true
-# 
-# [hostname]
-# ssh_only = true
-# ssh_symbol = "🌐 "
-# trim_at = "."
-# detect_env_vars = []
-# format = "[$ssh_symbol$hostname]($style) in "
-# style = "green dimmed bold"
-# disabled = false
 # 
 # [hostname.aliases]
 # 
@@ -1392,14 +1399,6 @@ disabled = false
 # detect_extensions = ["typ"]
 # detect_files = ["template.typ"]
 # detect_folders = []
-# 
-# [username]
-# detect_env_vars = []
-# format = "[$user]($style) in "
-# style_root = "red bold"
-# style_user = "yellow bold"
-# show_always = false
-# disabled = false
 # 
 # [username.aliases]
 # 
